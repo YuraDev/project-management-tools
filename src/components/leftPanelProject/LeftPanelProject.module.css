@@ -1,0 +1,25 @@
+.main{
+    width: 300px;
+    min-height: calc(100vh - 130px);
+
+    height: 100%;
+    box-sizing: border-box;
+    padding: 35px 15px;
+    /* border-left: 2px solid #f3f4f6; */
+    /* background-color: #f3f4f6; */
+
+    background-color: white;
+    border-right: 2px #f3f4f6 solid;
+    min-height: calc(100vh - 100px);
+}
+
+/* .field{
+    margin: 15px;
+    box-sizing: border-box;
+    border-radius: 16px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 22px 15px;
+} */

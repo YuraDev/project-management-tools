@@ -1,0 +1,12 @@
+.cardMain {
+    background-color: white;        /* bg-white */
+    color: black;                   /* text-black */
+    border-radius: 12px;            /* rounded-xl ≈ 0.75rem = 12px */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-md */
+    padding: 1rem;                  /* p-4 = 16px */
+    /* margin: 0.5rem;            */
+    width: 100%;                    /* w-full */
+    margin-bottom: 10px;
+}
+
+

@@ -1,0 +1,5 @@
+.formLayout{
+    background-color: #f9f9fb;
+    min-height: calc(100vh - 100px);
+    padding: 30px 36px 0;
+}
