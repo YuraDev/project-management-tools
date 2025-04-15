@@ -14,6 +14,7 @@ import { useProject } from "../../hooks/useProject";
 import AddMemberTwo from "../../modals/AddMember/AddMemberTwo";
 import FormDateInput from "../../ui/input/FormDateInput";
 import DateInput from "../../ui/input/DateInput";
+import CustomSelect, { sortOptions } from "../../ui/select/CustomSelect";
 
 const LeftPanelProject = () => {
     const { projectId } = useParams();
@@ -86,6 +87,8 @@ const LeftPanelProject = () => {
     const priorityFilter = useProjectControlStore((state) => state.priorityFilter);
     const setPriorityFilter = useProjectControlStore((state) => state.setPriorityFilter);
     
+    const sortValue = useProjectControlStore((state) => state.sortValue);
+    const setSortValue = useProjectControlStore((state) => state.setSortValue);
 
     return(
         <div className={styles.main}>
@@ -124,6 +127,9 @@ const LeftPanelProject = () => {
                     <CheckBoxStatus status={"low"} setStatusFilter={setPriorityFilter}/>
                     <CheckBoxStatus status={"medium"} setStatusFilter={setPriorityFilter}/>
                     <CheckBoxStatus status={"high"} setStatusFilter={setPriorityFilter}/>
+                </div>
+                <div>
+                    <CustomSelect value={sortValue} onChange={setSortValue} options={sortOptions}/>
                 </div>
             </div>
             {/* { addMembersActive && <AddMemberTwo initiallyAsignedMembers={initiallyAsignedMembers} exitAction={() => setAddMembersActive(false)} assignedMembers={usersFilter} handleFilterUser={handleFilterUser} /> } */}

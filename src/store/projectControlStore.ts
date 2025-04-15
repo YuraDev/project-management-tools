@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { Task, TaskPriority, TaskStatus } from "../types/task";
 import { Project, ProjectStatus } from "../types/project";
 import { User } from "../types/user";
+import { SortOption } from "../ui/select/CustomSelect";
 
 export type TestAndProjectStatuses = TaskStatus | ProjectStatus;
 
@@ -29,6 +30,8 @@ interface ProjectControlState {
     setEndDateFilterr: (value: string) => void;
     priorityFilter: TaskPriority[];
     setPriorityFilter: (value: TaskPriority) => void;
+    sortValue: SortOption;
+    setSortValue: (value: SortOption) => void;
 }
 
 export const useProjectControlStore = create<ProjectControlState>((set, get) => ({
@@ -79,4 +82,6 @@ export const useProjectControlStore = create<ProjectControlState>((set, get) => 
             set({ priorityFilter: [...currentPriorities, value] })
         }
     },
+    sortValue: "none",
+    setSortValue: (value) => set({ sortValue: value }),
 }));

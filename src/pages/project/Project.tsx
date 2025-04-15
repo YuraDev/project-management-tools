@@ -89,36 +89,67 @@ const Project = () => {
     //   (usersFilter.length === 0 || usersFilter.some(user => task.assignedMembers?.includes(user.id)))
     // ) || [];
 
+    const sortValue = useProjectControlStore((state) => state.sortValue);
+
+
     const startDateFilter = useProjectControlStore((state) => state.startDateFilter);
     const endDateFilter = useProjectControlStore((state) => state.endDateFilter);
     const priorityFilter = useProjectControlStore((state) => state.priorityFilter);
 
+    const controlPanelFilters = (status: TaskStatus): Task[] => {
+      return projectTasks?.filter(task => 
+        task.status === status &&
+        (usersFilter.length === 0 || usersFilter.some(user => task.assignedMembers?.includes(user.id))) &&
+        (!task.startDate || startDateFilter === "" || task.startDate >= startDateFilter) &&
+        (!task.endDate || endDateFilter === "" || task.endDate <= endDateFilter) &&
+        (!priorityFilter.length || priorityFilter.includes(task.priority))
+      ) || [];
+    };
+    const controlPanelSort = (tasks: Task[]): Task[] => {
+      const returnTime = (date: string) => new Date(date || "").getTime();
+      const sortCollection = {
+        ["Start date dec"]: () => [...tasks].sort( (a, b) => returnTime(b.startDate as string) - returnTime(a.startDate as string) ),
+        ["Start date inc"]: () => [...tasks].sort( (a, b) => returnTime(a.startDate as string) - returnTime(b.startDate as string) ),
+        ["End date dec"]: () => [...tasks].sort( (a, b) => returnTime(b.endDate as string) - returnTime(a.endDate as string) ),
+        ["End date inc"]: () => [...tasks].sort( (a, b) => returnTime(a.endDate as string) - returnTime(b.endDate as string) ),
+        ["none"]: () => tasks,
+      };
+      return sortValue && sortCollection[sortValue] ? sortCollection[sortValue]() : tasks;
+    }
 
 
-    const todoTasks = projectTasks?.filter(task => 
-      task.status === "todo" &&
-      (usersFilter.length === 0 || usersFilter.some(user => task.assignedMembers?.includes(user.id))) &&
-      (!task.startDate || startDateFilter === "" || task.startDate >= startDateFilter) &&
-      (!task.endDate || endDateFilter === "" || task.endDate <= endDateFilter) &&
-      (!priorityFilter.length || priorityFilter.includes(task.priority))
-    ) || [];
+    // const todoTasks = controlPanelFilters("todo");
+    // const inProgressTasks = controlPanelFilters("in_progress");
+    // const doneTasks = controlPanelFilters("done");
+
+    const todoTasks = controlPanelSort(controlPanelFilters("todo"));
+    const inProgressTasks = controlPanelSort(controlPanelFilters("in_progress"));
+    const doneTasks = controlPanelSort(controlPanelFilters("done"));
+
+    // const todoTasks = projectTasks?.filter(task => 
+    //   task.status === "todo" &&
+    //   (usersFilter.length === 0 || usersFilter.some(user => task.assignedMembers?.includes(user.id))) &&
+    //   (!task.startDate || startDateFilter === "" || task.startDate >= startDateFilter) &&
+    //   (!task.endDate || endDateFilter === "" || task.endDate <= endDateFilter) &&
+    //   (!priorityFilter.length || priorityFilter.includes(task.priority))
+    // ) || [];
   
 
-    const inProgressTasks = projectTasks?.filter(task =>
-      task.status === "in_progress" &&
-      (usersFilter.length === 0 || usersFilter.some(user => task.assignedMembers?.includes(user.id))) &&
-      (!task.startDate || startDateFilter === "" || task.startDate >= startDateFilter) &&
-      (!task.endDate || endDateFilter === "" || task.endDate <= endDateFilter) &&
-      (!priorityFilter.length || priorityFilter.includes(task.priority))
-    ) || [];
+    // const inProgressTasks = projectTasks?.filter(task =>
+    //   task.status === "in_progress" &&
+    //   (usersFilter.length === 0 || usersFilter.some(user => task.assignedMembers?.includes(user.id))) &&
+    //   (!task.startDate || startDateFilter === "" || task.startDate >= startDateFilter) &&
+    //   (!task.endDate || endDateFilter === "" || task.endDate <= endDateFilter) &&
+    //   (!priorityFilter.length || priorityFilter.includes(task.priority))
+    // ) || [];
     
-    const doneTasks = projectTasks?.filter(task =>
-      task.status === "done" &&
-      (usersFilter.length === 0 || usersFilter.some(user => task.assignedMembers?.includes(user.id))) &&
-      (!task.startDate || startDateFilter === "" || task.startDate >= startDateFilter) &&
-      (!task.endDate || endDateFilter === "" || task.endDate <= endDateFilter) &&
-      (!priorityFilter.length || priorityFilter.includes(task.priority))
-    ) || [];
+    // const doneTasks = projectTasks?.filter(task =>
+    //   task.status === "done" &&
+    //   (usersFilter.length === 0 || usersFilter.some(user => task.assignedMembers?.includes(user.id))) &&
+    //   (!task.startDate || startDateFilter === "" || task.startDate >= startDateFilter) &&
+    //   (!task.endDate || endDateFilter === "" || task.endDate <= endDateFilter) &&
+    //   (!priorityFilter.length || priorityFilter.includes(task.priority))
+    // ) || [];
 
 
     // const todoTasks = projectTasks?.filter((task) => task.status === "todo"
