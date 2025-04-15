@@ -12,6 +12,8 @@ interface ProjectControlState {
     selectedTask: Task | null;
     setSelectedTask: (task: Task) => void;
     clearSelectedTask: () => void;
+    isAddMembersActive: boolean;
+    setIsAddMembersActive: (value: boolean) => void;
     isRightPanelActive: boolean;
     setIsRightPanelActive: (value: boolean) => void;
     isLeftPanelActive: boolean;
@@ -40,6 +42,8 @@ export const useProjectControlStore = create<ProjectControlState>((set, get) => 
     selectedTask: null,
     setSelectedTask: (task) => set({ selectedTask: task }),
     clearSelectedTask: () => set({ selectedTask: null }),
+    isAddMembersActive: false,
+    setIsAddMembersActive: (value) => set({ isAddMembersActive: value }),
     isRightPanelActive: false,
     setIsRightPanelActive: (value) => set({ isRightPanelActive: value }),
     isLeftPanelActive: false,

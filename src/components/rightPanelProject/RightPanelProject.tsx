@@ -5,29 +5,19 @@ import TaskEdit from "../taskEdit/TaskEdit";
 import styles from "./RightPanelProject.module.css";
 
 const RightPanelPorject = () => {
-
     const selectedTask = useProjectControlStore((state) => state.selectedTask);
     const isEditTaskActive = useProjectControlStore((state) => state.isEditTaskActive);
     const isAddTaskActive = useProjectControlStore((state) => state.isAddTaskActive);
 
     return(
         <div className={styles.main}>
-            {/* { selectedTask && (
-                isAddTaskActive 
-                    ? <TaskAdd/> 
-                    : isEditTaskActive 
-                    ? <TaskEdit/>
-                    : <TaskDetails/>
-            )} */}
-
-
             {
                 isAddTaskActive 
                     ? <TaskAdd/>
                     : selectedTask && (
                         isEditTaskActive
-                        ? <TaskEdit/>
-                        : <TaskDetails/>
+                            ? <TaskEdit/>
+                            : <TaskDetails/>
                     )
             }
         </div>
