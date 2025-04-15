@@ -22,7 +22,8 @@ interface ProjectControlState {
     statusFilter: TestAndProjectStatuses[];
     setStatusFilter: (value: TestAndProjectStatuses) => void;
     usersFilter: User[];
-    setUserFilter: (value: User[]) => void;
+    // setUserFilter: (value: User[]) => void;
+    setUserFilter: (value: User) => void;
 }
 
 export const useProjectControlStore = create<ProjectControlState>((set, get) => ({
@@ -59,5 +60,16 @@ export const useProjectControlStore = create<ProjectControlState>((set, get) => 
     //         set({ usersFilter: [...currentUsers, value] })
     //     }
     // },
-    setUserFilter: (value) => set({ usersFilter: value }),
+
+    // setUserFilter: (value) => set({ usersFilter: value }),
+
+    setUserFilter: (chosenUser) => {
+        const currentUsers = get().usersFilter;
+        const isAlreadyFiltered = currentUsers.some((u) => u.id === chosenUser.id);
+        if ( isAlreadyFiltered ) {
+            set({ usersFilter: currentUsers.filter((el) => el.id != chosenUser.id) });
+        } else {
+            set({ usersFilter: [...currentUsers, chosenUser] })
+        }
+    },
 }));

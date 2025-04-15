@@ -73,11 +73,12 @@ const Project = () => {
 
 
 
-    const todoTasks = projectTasks?.filter(task =>
+    const todoTasks = projectTasks?.filter(task => 
       task.status === "todo" &&
       (usersFilter.length === 0 || usersFilter.some(user => task.assignedMembers?.includes(user.id)))
     ) || [];
-    
+  
+
     const inProgressTasks = projectTasks?.filter(task =>
       task.status === "in_progress" &&
       (usersFilter.length === 0 || usersFilter.some(user => task.assignedMembers?.includes(user.id)))

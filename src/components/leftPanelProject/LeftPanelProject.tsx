@@ -12,6 +12,7 @@ import { useProjectUsers } from "../../hooks/useProjectUsers";
 import { useParams } from "react-router-dom";
 import { useProject } from "../../hooks/useProject";
 import AddMemberTwo from "../../modals/AddMember/AddMemberTwo";
+import FormDateInput from "../../ui/input/FormDateInput";
 
 const LeftPanelProject = () => {
     const { projectId } = useParams();
@@ -48,6 +49,7 @@ const LeftPanelProject = () => {
 
     const selectedTask = useProjectControlStore((state) => state.selectedTask);
 
+    const usersFilter = useProjectControlStore((state) => state.usersFilter);
 
 
 
@@ -58,10 +60,22 @@ const LeftPanelProject = () => {
     }
 
     const setUserFilter = useProjectControlStore((state) => state.setUserFilter);
-    useEffect(() => {
-        // console.log("assignedMembers: ", assignedMembers);
-        setUserFilter(assignedMembers);
-    }, [assignedMembers]);
+    // useEffect(() => {
+    //     // console.log("assignedMembers: ", assignedMembers);
+    //     setUserFilter(assignedMembers);
+    // }, [assignedMembers]);
+
+
+    // const handlerFilterUser = (chosenUser: User) => {
+    //     // @ts-ignore
+    //     setUserFilter((prev: User[]) => {
+    //         if ( prev.find((u) => u.id === chosenUser.id) ) {
+    //             return prev.filter((u) => u.id !== chosenUser.id);
+    //         } else {
+    //             return [...prev, chosenUser];
+    //         }
+    //     })
+    // }
 
     return(
         <div className={styles.main}>
@@ -76,12 +90,30 @@ const LeftPanelProject = () => {
                     <CheckBoxStatus status={"done"} setStatusFilter={setStatusFilter}/>
                 </div>
                 <div>
-                    <AsignMembers users={assignedMembers} setAddMembersActive={setAddMembersActive} maxIcons={3} iconSize={24}/>
+                    {/* <AsignMembers users={assignedMembers} setAddMembersActive={setAddMembersActive} maxIcons={3} iconSize={24}/> */}
+
+                    <AsignMembers 
+                    users={usersFilter} 
+                    setAddMembersActive={setAddMembersActive} 
+                    maxIcons={3} iconSize={24}
+                    />
+
+                </div>
+                <div>
+                    <h3>Date</h3>
                 </div>
             </div>
-            { addMembersActive && <AddMemberTwo initiallyAsignedMembers={initiallyAsignedMembers} exitAction={() => setAddMembersActive(false)} assignedMembers={assignedMembers} setAssignedMembers={setAssignedMembers} /> }
             {/* { addMembersActive && <AddMemberTwo initiallyAsignedMembers={initiallyAsignedMembers} exitAction={() => setAddMembersActive(false)} assignedMembers={usersFilter} handleFilterUser={handleFilterUser} /> } */}
+            {/* { addMembersActive && <AddMemberTwo initiallyAsignedMembers={initiallyAsignedMembers} exitAction={() => setAddMembersActive(false)} assignedMembers={assignedMembers} setAssignedMembers={setAssignedMembers} /> } */}
 
+            { addMembersActive && 
+            <AddMemberTwo 
+            initiallyAsignedMembers={initiallyAsignedMembers} 
+            exitAction={() => setAddMembersActive(false)} 
+            selectedUsers={usersFilter} 
+            handlerFilterUser={setUserFilter} 
+            /> 
+            }
 
         </div>
     )
