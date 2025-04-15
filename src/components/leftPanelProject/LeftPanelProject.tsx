@@ -82,6 +82,9 @@ const LeftPanelProject = () => {
     const setStartDateFilter = useProjectControlStore((state) => state.setStartDateFilter);
     const endDateFilter = useProjectControlStore((state) => state.endDateFilter);
     const setEndDateFilterr = useProjectControlStore((state) => state.setEndDateFilterr);
+
+    const priorityFilter = useProjectControlStore((state) => state.priorityFilter);
+    const setPriorityFilter = useProjectControlStore((state) => state.setPriorityFilter);
     
 
     return(
@@ -116,6 +119,12 @@ const LeftPanelProject = () => {
                         <DateInput value={endDateFilter} onChange={setEndDateFilterr} />
                     </label>
                 </div>
+                <h3>Priority</h3>
+                <div style={{display: "flex", justifyContent: "space-between"}}>
+                    <CheckBoxStatus status={"low"} setStatusFilter={setPriorityFilter}/>
+                    <CheckBoxStatus status={"medium"} setStatusFilter={setPriorityFilter}/>
+                    <CheckBoxStatus status={"high"} setStatusFilter={setPriorityFilter}/>
+                </div>
             </div>
             {/* { addMembersActive && <AddMemberTwo initiallyAsignedMembers={initiallyAsignedMembers} exitAction={() => setAddMembersActive(false)} assignedMembers={usersFilter} handleFilterUser={handleFilterUser} /> } */}
             {/* { addMembersActive && <AddMemberTwo initiallyAsignedMembers={initiallyAsignedMembers} exitAction={() => setAddMembersActive(false)} assignedMembers={assignedMembers} setAssignedMembers={setAssignedMembers} /> } */}
@@ -126,7 +135,7 @@ const LeftPanelProject = () => {
             exitAction={() => setAddMembersActive(false)} 
             selectedUsers={usersFilter} 
             handlerFilterUser={setUserFilter} 
-            /> 
+            />
             }
 
         </div>

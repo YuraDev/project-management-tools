@@ -1,11 +1,11 @@
 import { ProjectStatus } from "../../types/project";
-import { TaskStatus } from "../../types/task";
+import { TaskPriority, TaskStatus } from "../../types/task";
 import { Role } from "../../types/user";
 import styles from "./FormSelect.module.css";
 
 interface FormSelectProps {
     name: string, 
-    value: Role | ProjectStatus | TaskStatus,
+    value: Role | ProjectStatus | TaskStatus | TaskPriority,
     onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void,
     options: Role[] | ProjectStatus[] | TaskStatus[],
 }

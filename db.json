@@ -165,7 +165,8 @@
       ],
       "status": "todo",
       "startDate": "2025-04-20",
-      "endDate": "2025-04-25"
+      "endDate": "2025-04-25",
+      "priority": "low"
     },
     {
       "id": "2",
@@ -179,7 +180,8 @@
       ],
       "status": "in_progress",
       "startDate": "2025-04-15",
-      "endDate": "2025-04-20"
+      "endDate": "2025-04-20",
+      "priority": "high"
     },
     {
       "id": "3",
@@ -190,7 +192,10 @@
         "1",
         "9"
       ],
-      "status": "done"
+      "status": "done",
+      "startDate": "",
+      "endDate": "",
+      "priority": "low"
     }
   ]
 }

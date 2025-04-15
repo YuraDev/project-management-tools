@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Task, TaskStatus } from "../types/task";
+import { Task, TaskPriority, TaskStatus } from "../types/task";
 import { Project, ProjectStatus } from "../types/project";
 import { User } from "../types/user";
 
@@ -27,6 +27,8 @@ interface ProjectControlState {
     setStartDateFilter: (value: string) => void;
     endDateFilter: string;
     setEndDateFilterr: (value: string) => void;
+    priorityFilter: TaskPriority[];
+    setPriorityFilter: (value: TaskPriority) => void;
 }
 
 export const useProjectControlStore = create<ProjectControlState>((set, get) => ({
@@ -67,5 +69,14 @@ export const useProjectControlStore = create<ProjectControlState>((set, get) => 
     setStartDateFilter: (value) => set({ startDateFilter: value }),
     endDateFilter: "",
     setEndDateFilterr: (value) => set({ endDateFilter: value }),
-
+    priorityFilter: [],
+    setPriorityFilter: (value) => {
+        const currentPriorities = get().priorityFilter;
+        const isAlreadyFiltered = currentPriorities.includes(value);
+        if ( isAlreadyFiltered ) {
+            set({ priorityFilter: currentPriorities.filter((el) => el != value) });
+        } else {
+            set({ priorityFilter: [...currentPriorities, value] })
+        }
+    },
 }));

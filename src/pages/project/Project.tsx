@@ -91,6 +91,7 @@ const Project = () => {
 
     const startDateFilter = useProjectControlStore((state) => state.startDateFilter);
     const endDateFilter = useProjectControlStore((state) => state.endDateFilter);
+    const priorityFilter = useProjectControlStore((state) => state.priorityFilter);
 
 
 
@@ -98,18 +99,25 @@ const Project = () => {
       task.status === "todo" &&
       (usersFilter.length === 0 || usersFilter.some(user => task.assignedMembers?.includes(user.id))) &&
       (!task.startDate || startDateFilter === "" || task.startDate >= startDateFilter) &&
-      (!task.endDate || endDateFilter === "" || task.endDate <= endDateFilter)
+      (!task.endDate || endDateFilter === "" || task.endDate <= endDateFilter) &&
+      (!priorityFilter.length || priorityFilter.includes(task.priority))
     ) || [];
   
 
     const inProgressTasks = projectTasks?.filter(task =>
       task.status === "in_progress" &&
-      (usersFilter.length === 0 || usersFilter.some(user => task.assignedMembers?.includes(user.id)))
+      (usersFilter.length === 0 || usersFilter.some(user => task.assignedMembers?.includes(user.id))) &&
+      (!task.startDate || startDateFilter === "" || task.startDate >= startDateFilter) &&
+      (!task.endDate || endDateFilter === "" || task.endDate <= endDateFilter) &&
+      (!priorityFilter.length || priorityFilter.includes(task.priority))
     ) || [];
     
     const doneTasks = projectTasks?.filter(task =>
       task.status === "done" &&
-      (usersFilter.length === 0 || usersFilter.some(user => task.assignedMembers?.includes(user.id)))
+      (usersFilter.length === 0 || usersFilter.some(user => task.assignedMembers?.includes(user.id))) &&
+      (!task.startDate || startDateFilter === "" || task.startDate >= startDateFilter) &&
+      (!task.endDate || endDateFilter === "" || task.endDate <= endDateFilter) &&
+      (!priorityFilter.length || priorityFilter.includes(task.priority))
     ) || [];
 
 

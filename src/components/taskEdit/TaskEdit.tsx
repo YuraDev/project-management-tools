@@ -25,6 +25,7 @@ const TaskEdit = () => {
         status: selectedTask?.status || "todo",
         startDate: selectedTask?.startDate || "",
         endDate: selectedTask?.endDate || "", 
+        priority: selectedTask?.priority || "none",
     });
     const [assignedMembers, setAssignedMembers] = useState<string[]>(selectedTask?.assignedMembers || []);
     const [addMembersActive, setAddMembersActive] = useState<boolean>(false);
@@ -59,6 +60,7 @@ const TaskEdit = () => {
                 status: formData.status,
                 startDate: formData.startDate,
                 endDate: formData.endDate,
+                priority: formData.priority,
             });
         } else { alert("Please fill all the requered fields!"); }
     };
@@ -80,6 +82,9 @@ const TaskEdit = () => {
             </label>
             <label>To:
                 <FormDateInput name={"endDate"} value={formData.endDate} onChange={handleChange} />
+            </label>
+            <label>Priority
+                <FormSelect name={"priority"} value={formData.priority} onChange={handleChange} options={["low", "medium", "high", "none"]}/>
             </label>
             <FormButtonSubmit text={"Save chenges"}/>
             { addMembersActive && <AddMember exitAction={() => setAddMembersActive(false)} assignedMembers={assignedMembers} setAssignedMembers={setAssignedMembers} /> }
