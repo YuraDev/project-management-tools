@@ -13,6 +13,7 @@ import { useParams } from "react-router-dom";
 import { useProject } from "../../hooks/useProject";
 import AddMemberTwo from "../../modals/AddMember/AddMemberTwo";
 import FormDateInput from "../../ui/input/FormDateInput";
+import DateInput from "../../ui/input/DateInput";
 
 const LeftPanelProject = () => {
     const { projectId } = useParams();
@@ -77,6 +78,12 @@ const LeftPanelProject = () => {
     //     })
     // }
 
+    const startDateFilter = useProjectControlStore((state) => state.startDateFilter);
+    const setStartDateFilter = useProjectControlStore((state) => state.setStartDateFilter);
+    const endDateFilter = useProjectControlStore((state) => state.endDateFilter);
+    const setEndDateFilterr = useProjectControlStore((state) => state.setEndDateFilterr);
+    
+
     return(
         <div className={styles.main}>
             <div onClick={() => setIsLeftPanelActive(false)}><AlignJustify size={28}/></div>
@@ -92,7 +99,8 @@ const LeftPanelProject = () => {
                 <div>
                     {/* <AsignMembers users={assignedMembers} setAddMembersActive={setAddMembersActive} maxIcons={3} iconSize={24}/> */}
 
-                    <AsignMembers 
+                    <AsignMembers
+                    uniqueText={"Select members"}
                     users={usersFilter} 
                     setAddMembersActive={setAddMembersActive} 
                     maxIcons={3} iconSize={24}
@@ -101,6 +109,12 @@ const LeftPanelProject = () => {
                 </div>
                 <div>
                     <h3>Date</h3>
+                    <label>From
+                        <DateInput value={startDateFilter} onChange={setStartDateFilter} />
+                    </label>
+                    <label>To
+                        <DateInput value={endDateFilter} onChange={setEndDateFilterr} />
+                    </label>
                 </div>
             </div>
             {/* { addMembersActive && <AddMemberTwo initiallyAsignedMembers={initiallyAsignedMembers} exitAction={() => setAddMembersActive(false)} assignedMembers={usersFilter} handleFilterUser={handleFilterUser} /> } */}

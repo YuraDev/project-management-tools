@@ -22,8 +22,11 @@ interface ProjectControlState {
     statusFilter: TestAndProjectStatuses[];
     setStatusFilter: (value: TestAndProjectStatuses) => void;
     usersFilter: User[];
-    // setUserFilter: (value: User[]) => void;
     setUserFilter: (value: User) => void;
+    startDateFilter: string;
+    setStartDateFilter: (value: string) => void;
+    endDateFilter: string;
+    setEndDateFilterr: (value: string) => void;
 }
 
 export const useProjectControlStore = create<ProjectControlState>((set, get) => ({
@@ -51,18 +54,6 @@ export const useProjectControlStore = create<ProjectControlState>((set, get) => 
         }
     },
     usersFilter: [],
-    // setUserFilter: (value) => {
-    //     const currentUsers = get().usersFilter;
-    //     const isAlreadyFiltered = currentUsers.includes(value);
-    //     if ( isAlreadyFiltered ) {
-    //         set({ usersFilter: currentUsers.filter((el) => el != value) });
-    //     } else {
-    //         set({ usersFilter: [...currentUsers, value] })
-    //     }
-    // },
-
-    // setUserFilter: (value) => set({ usersFilter: value }),
-
     setUserFilter: (chosenUser) => {
         const currentUsers = get().usersFilter;
         const isAlreadyFiltered = currentUsers.some((u) => u.id === chosenUser.id);
@@ -72,4 +63,9 @@ export const useProjectControlStore = create<ProjectControlState>((set, get) => 
             set({ usersFilter: [...currentUsers, chosenUser] })
         }
     },
+    startDateFilter: "",
+    setStartDateFilter: (value) => set({ startDateFilter: value }),
+    endDateFilter: "",
+    setEndDateFilterr: (value) => set({ endDateFilter: value }),
+
 }));

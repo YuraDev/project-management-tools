@@ -12,6 +12,7 @@ import FormSelect from "../../ui/select/FormSelect";
 import FormButtonSubmit from "../../ui/button/FormButtonSubmit";
 import CustomForm from "../../ui/form/CustomForm";
 import RightPanelHeader from "../rightPanelHeader/RightPanelHeader";
+import FormDateInput from "../../ui/input/FormDateInput";
 
 const TaskEdit = () => {
     const selectedTask = useProjectControlStore((state) => state.selectedTask);
@@ -22,6 +23,8 @@ const TaskEdit = () => {
         title: selectedTask?.title || "",
         description: selectedTask?.description || "",
         status: selectedTask?.status || "todo",
+        startDate: selectedTask?.startDate || "",
+        endDate: selectedTask?.endDate || "", 
     });
     const [assignedMembers, setAssignedMembers] = useState<string[]>(selectedTask?.assignedMembers || []);
     const [addMembersActive, setAddMembersActive] = useState<boolean>(false);
@@ -53,7 +56,9 @@ const TaskEdit = () => {
                 title: formData.title,
                 description: formData.description,
                 assignedMembers: assignedMembers,
-                status: formData.status
+                status: formData.status,
+                startDate: formData.startDate,
+                endDate: formData.endDate,
             });
         } else { alert("Please fill all the requered fields!"); }
     };
@@ -69,6 +74,12 @@ const TaskEdit = () => {
             <AsignMembers users={users || []} setAddMembersActive={setAddMembersActive} maxIcons={1}/>
             <label>Status:
                 <FormSelect name={"status"} value={formData.status} onChange={handleChange} options={["todo", "in_progress", "done"]}/>
+            </label>
+            <label>From:
+                <FormDateInput name={"startDate"} value={formData.startDate} onChange={handleChange} />
+            </label>
+            <label>To:
+                <FormDateInput name={"endDate"} value={formData.endDate} onChange={handleChange} />
             </label>
             <FormButtonSubmit text={"Save chenges"}/>
             { addMembersActive && <AddMember exitAction={() => setAddMembersActive(false)} assignedMembers={assignedMembers} setAssignedMembers={setAssignedMembers} /> }

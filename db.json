@@ -163,7 +163,9 @@
         "3",
         "2"
       ],
-      "status": "todo"
+      "status": "todo",
+      "startDate": "2025-04-20",
+      "endDate": "2025-04-25"
     },
     {
       "id": "2",
@@ -175,7 +177,9 @@
         "5",
         "7"
       ],
-      "status": "in_progress"
+      "status": "in_progress",
+      "startDate": "2025-04-15",
+      "endDate": "2025-04-20"
     },
     {
       "id": "3",

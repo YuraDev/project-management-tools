@@ -73,9 +73,32 @@ const Project = () => {
 
 
 
+    // const todoTasks = projectTasks?.filter(task => 
+    //   task.status === "todo" &&
+    //   (usersFilter.length === 0 || usersFilter.some(user => task.assignedMembers?.includes(user.id)))
+    // ) || [];
+  
+
+    // const inProgressTasks = projectTasks?.filter(task =>
+    //   task.status === "in_progress" &&
+    //   (usersFilter.length === 0 || usersFilter.some(user => task.assignedMembers?.includes(user.id)))
+    // ) || [];
+    
+    // const doneTasks = projectTasks?.filter(task =>
+    //   task.status === "done" &&
+    //   (usersFilter.length === 0 || usersFilter.some(user => task.assignedMembers?.includes(user.id)))
+    // ) || [];
+
+    const startDateFilter = useProjectControlStore((state) => state.startDateFilter);
+    const endDateFilter = useProjectControlStore((state) => state.endDateFilter);
+
+
+
     const todoTasks = projectTasks?.filter(task => 
       task.status === "todo" &&
-      (usersFilter.length === 0 || usersFilter.some(user => task.assignedMembers?.includes(user.id)))
+      (usersFilter.length === 0 || usersFilter.some(user => task.assignedMembers?.includes(user.id))) &&
+      (!task.startDate || startDateFilter === "" || task.startDate >= startDateFilter) &&
+      (!task.endDate || endDateFilter === "" || task.endDate <= endDateFilter)
     ) || [];
   
 

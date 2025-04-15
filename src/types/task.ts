@@ -7,4 +7,6 @@ export interface Task {
     description: string,
     assignedMembers: string[],
     status: TaskStatus,
+    startDate?: string,
+    endDate?: string,
 }
