@@ -15,6 +15,7 @@ import AddMemberTwo from "../../modals/AddMember/AddMemberTwo";
 import FormDateInput from "../../ui/input/FormDateInput";
 import DateInput from "../../ui/input/DateInput";
 import CustomSelect, { sortOptions } from "../../ui/select/CustomSelect";
+import { TaskPriority, TaskStatus } from "../../types/task";
 
 const LeftPanelProject = () => {
     const { projectId } = useParams();
@@ -98,9 +99,9 @@ const LeftPanelProject = () => {
             <div>
                 <h3>Status</h3>
                 <div style={{display: "flex", justifyContent: "space-between"}}>
-                    <CheckBoxStatus status={"todo"} setStatusFilter={setStatusFilter}/>
-                    <CheckBoxStatus status={"in_progress"} setStatusFilter={setStatusFilter}/>
-                    <CheckBoxStatus status={"done"} setStatusFilter={setStatusFilter}/>
+                    <CheckBoxStatus<TaskStatus> status={"todo"} setStatusFilter={setStatusFilter}/>
+                    <CheckBoxStatus<TaskStatus> status={"in_progress"} setStatusFilter={setStatusFilter}/>
+                    <CheckBoxStatus<TaskStatus> status={"done"} setStatusFilter={setStatusFilter}/>
                 </div>
                 <div>
                     {/* <AsignMembers users={assignedMembers} setAddMembersActive={setAddMembersActive} maxIcons={3} iconSize={24}/> */}
@@ -124,9 +125,9 @@ const LeftPanelProject = () => {
                 </div>
                 <h3>Priority</h3>
                 <div style={{display: "flex", justifyContent: "space-between"}}>
-                    <CheckBoxStatus status={"low"} setStatusFilter={setPriorityFilter}/>
-                    <CheckBoxStatus status={"medium"} setStatusFilter={setPriorityFilter}/>
-                    <CheckBoxStatus status={"high"} setStatusFilter={setPriorityFilter}/>
+                    <CheckBoxStatus<TaskPriority> status={"low"} setStatusFilter={setPriorityFilter}/>
+                    <CheckBoxStatus<TaskPriority>  status={"medium"} setStatusFilter={setPriorityFilter}/>
+                    <CheckBoxStatus<TaskPriority>  status={"high"} setStatusFilter={setPriorityFilter}/>
                 </div>
                 <div>
                     <CustomSelect value={sortValue} onChange={setSortValue} options={sortOptions}/>

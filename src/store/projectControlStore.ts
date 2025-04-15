@@ -51,22 +51,16 @@ export const useProjectControlStore = create<ProjectControlState>((set, get) => 
     statusFilter: [],
     setStatusFilter: (value) => {
         const currentStatuses = get().statusFilter;
-        const isAlreadyFiltered = currentStatuses.includes(value);
-        if ( isAlreadyFiltered ) {
-            set({ statusFilter: currentStatuses.filter((el) => el != value) });
-        } else {
-            set({ statusFilter: [...currentStatuses, value] })
-        }
+        currentStatuses.includes(value)
+        ? set({ statusFilter: currentStatuses.filter((el) => el != value) })
+        : set({ statusFilter: [...currentStatuses, value] })
     },
     usersFilter: [],
     setUserFilter: (chosenUser) => {
         const currentUsers = get().usersFilter;
-        const isAlreadyFiltered = currentUsers.some((u) => u.id === chosenUser.id);
-        if ( isAlreadyFiltered ) {
-            set({ usersFilter: currentUsers.filter((el) => el.id != chosenUser.id) });
-        } else {
-            set({ usersFilter: [...currentUsers, chosenUser] })
-        }
+        currentUsers.some((u) => u.id === chosenUser.id)
+        ? set({ usersFilter: currentUsers.filter((el) => el.id != chosenUser.id) })
+        : set({ usersFilter: [...currentUsers, chosenUser] });
     },
     startDateFilter: "",
     setStartDateFilter: (value) => set({ startDateFilter: value }),
@@ -75,12 +69,9 @@ export const useProjectControlStore = create<ProjectControlState>((set, get) => 
     priorityFilter: [],
     setPriorityFilter: (value) => {
         const currentPriorities = get().priorityFilter;
-        const isAlreadyFiltered = currentPriorities.includes(value);
-        if ( isAlreadyFiltered ) {
-            set({ priorityFilter: currentPriorities.filter((el) => el != value) });
-        } else {
-            set({ priorityFilter: [...currentPriorities, value] })
-        }
+        currentPriorities.includes(value)
+        ? set({ priorityFilter: currentPriorities.filter((el) => el != value) })
+        : set({ priorityFilter: [...currentPriorities, value] })
     },
     sortValue: "none",
     setSortValue: (value) => set({ sortValue: value }),

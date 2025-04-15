@@ -8,13 +8,14 @@ interface StatusTextProps {
 
 const statusLabels: { [key in TaskStatus | ProjectStatus | TaskPriority ]: string } = {
     todo: "Todo",
-    planned: "Planned",
     in_progress: "In progress",
-    completed: "Completed",
     done: "Done",
+    planned: "Planned",
+    completed: "Completed",
     low: "Low",
     medium: "Medium",
     high: "High",
+    none: "None",
 }
 const statusClasses: { [key in TaskStatus | ProjectStatus | TaskPriority]: string } = {
     todo: styles.blue,
@@ -25,6 +26,7 @@ const statusClasses: { [key in TaskStatus | ProjectStatus | TaskPriority]: strin
     low: styles.green,
     medium: styles.yellow,
     high: styles.red,
+    none: styles.gray,
 }
 
 const StatusText = ({ status }: StatusTextProps) => {

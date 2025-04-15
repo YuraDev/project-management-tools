@@ -3,17 +3,18 @@ import { TaskPriority, TaskStatus } from "../../types/task";
 import { Role } from "../../types/user";
 import styles from "./FormSelect.module.css";
 
-interface FormSelectProps {
+type SelectOption = Role | ProjectStatus | TaskStatus | TaskPriority;
+
+interface FormSelectProps<T extends SelectOption> {
     name: string, 
-    value: Role | ProjectStatus | TaskStatus | TaskPriority,
+    value: T | undefined,
     onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void,
-    options: Role[] | ProjectStatus[] | TaskStatus[],
+    options: T[],
 }
 
-const FormSelect = ({ name, value, onChange, options }: FormSelectProps) => {
+const FormSelect = <T extends SelectOption,>({ name, value, onChange, options }: FormSelectProps<T>) => {
     return <select name={name} value={value} onChange={onChange} className={styles.customSelect}>
-            {/* todo - add one more field for user view */}
-            { options.map((option) => <option value={option} key={option}>{option}</option>) }
+        { options.map((option) => <option value={option} key={option}>{option}</option>) }
     </select>
 }
 

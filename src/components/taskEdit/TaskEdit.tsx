@@ -1,6 +1,6 @@
 import { useProjectControlStore } from "../../store/projectControlStore";
 import { useState } from "react";
-import { Task } from "../../types/task";
+import { Task, TaskPriority } from "../../types/task";
 import AddMember from "../../modals/AddMember/AddMember";
 import { useTaskUsers } from "../../hooks/useTaskUsers";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -78,13 +78,13 @@ const TaskEdit = () => {
                 <FormSelect name={"status"} value={formData.status} onChange={handleChange} options={["todo", "in_progress", "done"]}/>
             </label>
             <label>From:
-                <FormDateInput name={"startDate"} value={formData.startDate} onChange={handleChange} />
+                <FormDateInput name={"startDate"} value={formData.startDate || ""} onChange={handleChange} />
             </label>
             <label>To:
-                <FormDateInput name={"endDate"} value={formData.endDate} onChange={handleChange} />
+                <FormDateInput name={"endDate"} value={formData.endDate || ""} onChange={handleChange} />
             </label>
             <label>Priority
-                <FormSelect name={"priority"} value={formData.priority} onChange={handleChange} options={["low", "medium", "high", "none"]}/>
+                <FormSelect<TaskPriority> name={"priority"} value={formData.priority} onChange={handleChange} options={["low", "medium", "high", "none"]}/>
             </label>
             <FormButtonSubmit text={"Save chenges"}/>
             { addMembersActive && <AddMember exitAction={() => setAddMembersActive(false)} assignedMembers={assignedMembers} setAssignedMembers={setAssignedMembers} /> }

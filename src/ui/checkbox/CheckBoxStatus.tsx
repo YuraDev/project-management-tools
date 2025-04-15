@@ -4,11 +4,13 @@ import { TaskPriority, TaskStatus } from "../../types/task";
 import StatusText from "../statusText/StatusText";
 import styles from "./CheckBoxStatus.module.css";
 
-interface CheckBoxStatusProps {
-    status: TestAndProjectStatuses | TaskStatus | TaskPriority,
-    setStatusFilter: (value: TestAndProjectStatuses | TaskStatus | TaskPriority) => void,
+type AvaibleTypes = TestAndProjectStatuses | TaskStatus | TaskPriority;
+interface CheckBoxStatusProps<T extends AvaibleTypes> {
+    status: T,
+    setStatusFilter: (value: T) => void,
 }
-const CheckBoxStatus = ({ status, setStatusFilter }: CheckBoxStatusProps) => {
+
+const CheckBoxStatus = <T extends AvaibleTypes,>({ status, setStatusFilter }: CheckBoxStatusProps<T>) => {
     return( 
         <div className={styles.checkboxBlock}>
             <input 

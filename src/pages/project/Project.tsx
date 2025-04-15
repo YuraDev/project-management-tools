@@ -58,36 +58,7 @@ const Project = () => {
       }
     });
 
-    // if (isProjectLoading || isProjectUsersLoading || isProjectTasksLoading) {
-    //     return <div>Loading...</div>;
-    // }
-    // if (isProjectError || isProjectUsersError || isProjectTasksError) {
-    //     return <div>Error!</div>;
-    // }
 
-
-
-    // const todoTasks = projectTasks?.filter((task) => task.status === "todo") || [];
-    // const inProgressTasks = projectTasks?.filter((task) => task.status === "in_progress") || [];
-    // const doneTasks = projectTasks?.filter((task) => task.status === "done") || [];
-
-
-
-    // const todoTasks = projectTasks?.filter(task => 
-    //   task.status === "todo" &&
-    //   (usersFilter.length === 0 || usersFilter.some(user => task.assignedMembers?.includes(user.id)))
-    // ) || [];
-  
-
-    // const inProgressTasks = projectTasks?.filter(task =>
-    //   task.status === "in_progress" &&
-    //   (usersFilter.length === 0 || usersFilter.some(user => task.assignedMembers?.includes(user.id)))
-    // ) || [];
-    
-    // const doneTasks = projectTasks?.filter(task =>
-    //   task.status === "done" &&
-    //   (usersFilter.length === 0 || usersFilter.some(user => task.assignedMembers?.includes(user.id)))
-    // ) || [];
 
     const sortValue = useProjectControlStore((state) => state.sortValue);
 
@@ -102,7 +73,7 @@ const Project = () => {
         (usersFilter.length === 0 || usersFilter.some(user => task.assignedMembers?.includes(user.id))) &&
         (!task.startDate || startDateFilter === "" || task.startDate >= startDateFilter) &&
         (!task.endDate || endDateFilter === "" || task.endDate <= endDateFilter) &&
-        (!priorityFilter.length || priorityFilter.includes(task.priority))
+        (!priorityFilter.length || task.priority && priorityFilter.includes(task.priority))
       ) || [];
     };
     const controlPanelSort = (tasks: Task[]): Task[] => {
