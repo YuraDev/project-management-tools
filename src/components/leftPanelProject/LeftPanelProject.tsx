@@ -30,10 +30,12 @@ const LeftPanelProject = () => {
     const setPriorityFilter = useProjectControlStore((state) => state.setPriorityFilter);
     const sortValue = useProjectControlStore((state) => state.sortValue);
     const setSortValue = useProjectControlStore((state) => state.setSortValue);
+    const setIsRightPanelActive = useProjectControlStore((state) => state.setIsRightPanelActive);
 
     const handleAddTaskOpen = () => {
         setIsEditTaskActive(false);
         setIsAddTaskActive(true);
+        setIsRightPanelActive(true);
     }
 
     return(
@@ -68,15 +70,15 @@ const LeftPanelProject = () => {
                 <label>Sort by
                     <CustomSelect value={sortValue} onChange={setSortValue} options={sortOptions}/>
                 </label>
-            { isAddMembersActive && 
-            <AddMemberTwo 
-            initiallyAsignedMembers={initiallyAsignedMembers} 
-            exitAction={() => setIsAddMembersActive(false)} 
-            selectedUsers={usersFilter} 
-            handlerFilterUser={setUserFilter} 
-            />
+            {      
+                isAddMembersActive && 
+                <AddMemberTwo 
+                    initiallyAsignedMembers={initiallyAsignedMembers} 
+                    exitAction={() => setIsAddMembersActive(false)} 
+                    selectedUsers={usersFilter} 
+                    handlerFilterUser={setUserFilter} 
+                />
             }
-
         </div>
     )
 }

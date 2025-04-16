@@ -263,11 +263,7 @@ const Project = () => {
 </DragDropContext>
 
           {
-            ( 
-              isAddTaskActive 
-              ||
-              (selectedTask !== null && isRightPanelActive)
-            ) 
+            isRightPanelActive && ( isAddTaskActive || selectedTask !== null )
             && <RightPanelPorject/>
           }
 

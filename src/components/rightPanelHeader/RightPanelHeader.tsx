@@ -3,7 +3,7 @@ import styles from "./RightPanelHeader.module.css";
 
 interface RightPanelHeaderProps {
     taskTitle: string,
-    setIsEditTaskActive: (value: boolean) => void,
+    setIsEditTaskActive?: (value: boolean) => void,
     setIsRightPanelActive: (value: boolean) => void,
 }
 
@@ -11,7 +11,7 @@ const RightPanelHeader = ({ taskTitle, setIsEditTaskActive, setIsRightPanelActiv
     return <div className={styles.titleBlock}>
         <h1><b>{taskTitle}</b></h1>
         <div className={styles.controlIcons}>
-            <Settings size={30} onClick={() => setIsEditTaskActive(false)}/>
+            { setIsEditTaskActive && <Settings size={30} onClick={() => setIsEditTaskActive(false)}/> }
             <X size={34} onClick={() => setIsRightPanelActive(false)}/>
         </div>
     </div>
