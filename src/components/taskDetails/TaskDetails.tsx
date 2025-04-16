@@ -7,10 +7,10 @@ import RightPanelHeader from "../rightPanelHeader/RightPanelHeader";
 
 const TaskDetails = () => {
     const selectedTask = useProjectControlStore((state) => state.selectedTask);
-    const { data: asignedTaskUsers } = useTaskUsers(selectedTask?.assignedMembers || []);
     const setIsRightPanelActive = useProjectControlStore((state) => state.setIsRightPanelActive);
     const setIsEditTaskActive = useProjectControlStore((state) => state.setIsEditTaskActive);
     const setIsAddTaskActive = useProjectControlStore((state) => state.setIsAddTaskActive);
+    const { data: asignedTaskUsers } = useTaskUsers(selectedTask?.assignedMembers || []);
 
     const hanldleEditOpen = () => {
         setIsAddTaskActive(false);
@@ -23,10 +23,8 @@ const TaskDetails = () => {
             <h2><b>Id:</b> {selectedTask?.id}</h2>
             <h2><b>Description:</b> {selectedTask?.description}</h2>
             <h2><b>Status:</b> <StatusText status={selectedTask?.status ?? "todo"}/></h2>
-            <div>
-                <h2><b>Assigned members:</b> 
-                <UserIconCollection users={asignedTaskUsers || []} size={30}/></h2>
-            </div>
+            <h2><b>Assigned members:</b></h2>
+            <UserIconCollection users={asignedTaskUsers || []} size={30} maxIcons={6}/>
         </div>
     )
 }

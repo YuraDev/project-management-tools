@@ -8,12 +8,14 @@ type AvaibleTypes = TestAndProjectStatuses | TaskStatus | TaskPriority;
 interface CheckBoxStatusProps<T extends AvaibleTypes> {
     status: T,
     setStatusFilter: (value: T) => void,
+    checked?: boolean,
 }
 
-const CheckBoxStatus = <T extends AvaibleTypes,>({ status, setStatusFilter }: CheckBoxStatusProps<T>) => {
+const CheckBoxStatus = <T extends AvaibleTypes,>({ status, setStatusFilter, checked = false }: CheckBoxStatusProps<T>) => {
     return( 
         <div className={styles.checkboxBlock}>
             <input 
+                checked={checked}
                 type={"checkbox"} 
                 name="status" value={status} 
                 style={{marginRight: 4}} 

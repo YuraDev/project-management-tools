@@ -34,6 +34,7 @@ interface ProjectControlState {
     setPriorityFilter: (value: TaskPriority) => void;
     sortValue: SortOption;
     setSortValue: (value: SortOption) => void;
+    clearFiltersAndSorts: () => void;
 }
 
 export const useProjectControlStore = create<ProjectControlState>((set, get) => ({
@@ -79,4 +80,16 @@ export const useProjectControlStore = create<ProjectControlState>((set, get) => 
     },
     sortValue: "none",
     setSortValue: (value) => set({ sortValue: value }),
+    clearFiltersAndSorts: () => {
+        set({ 
+            selectedTask: null,
+            isAddMembersActive: false,
+            statusFilter: [] ,
+            usersFilter: [],
+            startDateFilter: "",
+            endDateFilter: "",
+            priorityFilter: [],
+            sortValue: "none",
+        });
+    }
 }));

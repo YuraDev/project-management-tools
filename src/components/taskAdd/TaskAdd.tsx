@@ -26,7 +26,6 @@ const TaskAdd = () => {
     const [addMembersActive, setAddMembersActive] = useState<boolean>(false);
 
     const setIsRightPanelActive = useProjectControlStore((state) => state.setIsRightPanelActive);
-    const setIsEditTaskActive = useProjectControlStore((state) => state.setIsEditTaskActive);
 
     const { data: users } = useTaskUsers(assignedMembers);
 

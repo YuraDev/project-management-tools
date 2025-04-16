@@ -20,6 +20,7 @@ const LeftPanelProject = () => {
     const setIsLeftPanelActive = useProjectControlStore((state) => state.setIsLeftPanelActive);
     const setIsEditTaskActive = useProjectControlStore((state) => state.setIsEditTaskActive);
     const setIsAddTaskActive = useProjectControlStore((state) => state.setIsAddTaskActive);
+    const statusFilter = useProjectControlStore((state) => state.statusFilter);
     const setStatusFilter = useProjectControlStore((state) => state.setStatusFilter);
     const usersFilter = useProjectControlStore((state) => state.usersFilter);
     const setUserFilter = useProjectControlStore((state) => state.setUserFilter);
@@ -27,6 +28,7 @@ const LeftPanelProject = () => {
     const setStartDateFilter = useProjectControlStore((state) => state.setStartDateFilter);
     const endDateFilter = useProjectControlStore((state) => state.endDateFilter);
     const setEndDateFilterr = useProjectControlStore((state) => state.setEndDateFilterr);
+    const priorityFilter = useProjectControlStore((state) => state.priorityFilter);
     const setPriorityFilter = useProjectControlStore((state) => state.setPriorityFilter);
     const sortValue = useProjectControlStore((state) => state.sortValue);
     const setSortValue = useProjectControlStore((state) => state.setSortValue);
@@ -44,16 +46,16 @@ const LeftPanelProject = () => {
             <CustomButton text={"Add task"} onClick={() => handleAddTaskOpen()} customStyles={{width: "100%", marginTop: 35}}/>
                 <label>Status
                     <div style={{display: "flex", justifyContent: "space-between"}}>
-                        <CheckBoxStatus<TaskStatus> status={"todo"} setStatusFilter={setStatusFilter}/>
-                        <CheckBoxStatus<TaskStatus> status={"in_progress"} setStatusFilter={setStatusFilter}/>
-                        <CheckBoxStatus<TaskStatus> status={"done"} setStatusFilter={setStatusFilter}/>
+                        <CheckBoxStatus<TaskStatus> status={"todo"} checked={statusFilter.includes("todo")} setStatusFilter={setStatusFilter}/>
+                        <CheckBoxStatus<TaskStatus> status={"in_progress"} checked={statusFilter.includes("in_progress")} setStatusFilter={setStatusFilter}/>
+                        <CheckBoxStatus<TaskStatus> status={"done"} checked={statusFilter.includes("done")} setStatusFilter={setStatusFilter}/>
                     </div>
                 </label>
                 <label>Priority
                     <div style={{display: "flex", justifyContent: "space-between"}}>
-                        <CheckBoxStatus<TaskPriority> status={"low"} setStatusFilter={setPriorityFilter}/>
-                        <CheckBoxStatus<TaskPriority>  status={"medium"} setStatusFilter={setPriorityFilter}/>
-                        <CheckBoxStatus<TaskPriority>  status={"high"} setStatusFilter={setPriorityFilter}/>
+                        <CheckBoxStatus<TaskPriority> status={"low"}  checked={priorityFilter.includes("low")} setStatusFilter={setPriorityFilter}/>
+                        <CheckBoxStatus<TaskPriority>  status={"medium"} checked={priorityFilter.includes("medium")} setStatusFilter={setPriorityFilter}/>
+                        <CheckBoxStatus<TaskPriority>  status={"high"} checked={priorityFilter.includes("high")} setStatusFilter={setPriorityFilter}/>
                     </div>
                 </label>
                 
