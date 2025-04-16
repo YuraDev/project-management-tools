@@ -5,9 +5,10 @@ interface FormTextInputProps {
     value: string,
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
     required?: boolean,
+    placeholder?: string,
 }
 
-const FormTextInput = ({ name, value , onChange, required }: FormTextInputProps) => {
+const FormTextInput = ({ name, value , onChange, required, placeholder}: FormTextInputProps) => {
     return <input 
         name={name} 
         value={value} 
@@ -15,6 +16,7 @@ const FormTextInput = ({ name, value , onChange, required }: FormTextInputProps)
         required={required}
         type="text" 
         className={styles.cunstomInput}
+        placeholder={placeholder}
     />
 }
 

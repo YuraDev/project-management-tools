@@ -6,7 +6,7 @@ interface FormPasswordInputProps {
     value: string,
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
     required?: boolean,
-    placeholder: string,
+    placeholder?: string,
     showPassword: boolean,
     setShowPassword: React.Dispatch<React.SetStateAction<boolean>>,
 }

@@ -1,0 +1,17 @@
+.mainOverlay{
+    height: calc(100vh - 200px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 100px;
+}
+
+.formAuth{
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 400px;
+    padding: 32px;
+    border: 3px purple solid;
+    border-radius: 12px;
+}
