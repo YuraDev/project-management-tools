@@ -35,6 +35,8 @@ interface ProjectControlState {
     sortValue: SortOption;
     setSortValue: (value: SortOption) => void;
     clearFiltersAndSorts: () => void;
+    isProjectSettingsActive: boolean;
+    setIsProjectSettingsActive: () => void;
 }
 
 export const useProjectControlStore = create<ProjectControlState>((set, get) => ({
@@ -91,5 +93,7 @@ export const useProjectControlStore = create<ProjectControlState>((set, get) => 
             priorityFilter: [],
             sortValue: "none",
         });
-    }
+    },
+    isProjectSettingsActive: false,
+    setIsProjectSettingsActive: () => set({ isProjectSettingsActive: !get().isProjectSettingsActive }),
 }));

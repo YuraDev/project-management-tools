@@ -4,7 +4,7 @@ import { useProjectTasks } from "../../hooks/useProjectTasks";
 import { useProjectControlStore } from "../../store/projectControlStore";
 import RightPanelPorject from "../../components/rightPanelProject/RightPanelProject";
 import { Task, TaskStatus } from "../../types/task";
-import { AlignJustify } from "lucide-react";
+import { AlignJustify, Settings } from "lucide-react";
 import LeftPanelProject from "../../components/leftPanelProject/LeftPanelProject";
 import { DropResult } from "@hello-pangea/dnd";
 import { updateTask } from "../../services/taskApi";

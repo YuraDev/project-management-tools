@@ -23,6 +23,8 @@ const TaskDetails = () => {
             <h2><b>Id:</b> {selectedTask?.id}</h2>
             <h2><b>Description:</b> {selectedTask?.description}</h2>
             <h2><b>Status:</b> <StatusText status={selectedTask?.status ?? "todo"}/></h2>
+            { selectedTask?.startDate && <h2><b>Start date:</b> {selectedTask?.startDate}</h2> }
+            { selectedTask?.endDate && <h2><b>End date:</b> {selectedTask?.endDate}</h2> }
             <h2><b>Assigned members:</b></h2>
             <UserIconCollection users={asignedTaskUsers || []} size={30} maxIcons={6}/>
         </div>

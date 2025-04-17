@@ -63,7 +63,6 @@ const EditUser = () => {
         };
         editUserMutation.mutate(initialData);
     }
-
     const handleDelete = async () => {
         if (window.confirm("Ви впевнені, що хочете видалити цього користувача?")) {
             deleteUserMutation.mutate(userId || "");

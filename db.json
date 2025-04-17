@@ -114,17 +114,18 @@
     },
     {
       "id": "2",
-      "title": "car project",
-      "description": "project for car sharing",
-      "startDate": "2025-04-25",
-      "endDate": "2025-09-25",
+      "title": "2",
+      "description": "second project",
+      "startDate": "2025-04-18",
+      "endDate": "2025-04-19",
       "assignedMembers": [
-        "5",
+        "1",
         "4",
-        "7",
-        "1"
+        "5",
+        "10"
       ],
-      "status": "planned"
+      "status": "planned",
+      "name": "2"
     }
   ],
   "tasks": [

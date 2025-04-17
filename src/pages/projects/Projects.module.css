@@ -16,6 +16,9 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
     cursor: pointer;
     transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .element:hover{
@@ -33,3 +36,17 @@
     font-size: 14px;
     color: #4A5568;
 }
+
+
+.settingIconWrapper {
+    display: inline-block; /* Щоб обертаючий div не займав всю ширину */
+  }
+  
+  .settingsIcon {
+    cursor: pointer;
+    transition: color 0.3s ease; /* Для плавної зміни кольору */
+  }
+  
+  .settingIconWrapper:hover .settingsIcon {
+    color: purple; /* Змінюємо колір іконки при наведенні */
+  }

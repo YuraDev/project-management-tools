@@ -11,3 +11,9 @@
 .main label{
     margin-top: 20px;
 }
+
+.headerLeftPanel{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
