@@ -1,5 +1,5 @@
 import { User } from "../../types/user";
-import UserIconCollection from "../usersIconsCollection/usersIconsCollection";
+import UserIconCollection from "../usersIconsCollection/UsersIconsCollection";
 import styles from "./AsignMembers.module.css";
 
 interface AsignMembersProps {
@@ -14,18 +14,7 @@ interface AsignMembersProps {
 const AsignMembers = ({ users, setAddMembersActive, maxIcons, iconSize, uniqueText }: AsignMembersProps) => {
     
     return <div className={styles.asignBlock}>
-        {/* <label>
-            Assigned Members:
-            <div className={styles.assignedMembers}>
-                <button type="button" onClick={() => setAddMembersActive(true)}>＋ Add Member</button>
-            </div>
-        </label>
-        { users  && <UserIconCollection users={users} maxIcons={maxIcons}/> } */}
-
-
-        <label>
-            Assigned Members:
-        </label>
+        <label>Assigned Members:</label>
         <div className={styles.assignedMembers}>
             <button type="button" onClick={() => setAddMembersActive(true)}>{uniqueText ? uniqueText : "＋ Add Member"}</button>
         </div>

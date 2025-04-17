@@ -1,4 +1,4 @@
-import { UserMinus, UserPlus } from "lucide-react";
+import { UserMinus, UserPen, UserPlus } from "lucide-react";
 import CustomUserIcon from "../../ui/icons/CustomUserIcon";
 import styles from "./People.module.css";
 import React, { useEffect, useState } from "react";
@@ -6,8 +6,11 @@ import { useUser } from "../../hooks/useUser";
 import { useReservedUsers } from "../../hooks/useReservedUsers";
 import { useUserStore } from "../../store/userStore";
 import { updateReservedMembers } from "../../services/userApi";
+import { useNavigate } from "react-router-dom";
 
 const People = () => {
+    const navigate = useNavigate();
+
     const [searchTerm, setSearchTerm] = useState<string>("");
     const [shouldSearch, setShouldSearch] = useState<boolean>(false);
     const [debouncerTimer, setDebouncerTimer] = useState(null);
@@ -27,8 +30,7 @@ const People = () => {
     }, [shouldSearch, searchTerm, refetch]);
 
 
-    if ( isLoading ) return <h3>Is logading</h3>
-    if ( isError ) return <h3>Error!</h3>
+
 
     const handleSearchInput = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(event.target.value);
@@ -56,16 +58,13 @@ const People = () => {
                 id: currentUser.id,
                 reservedMembers: [...currentUser.reservedMembers, userId],
             });
-            
-            const updatedAuthUser = {
+            setUser({
                 id: updatedUser.id,
                 name: updatedUser.name,
                 username: updatedUser.username,
                 role: updatedUser.role,
                 reservedMembers: updatedUser.reservedMembers,
-            };
-            setUser(updatedAuthUser);
-
+            });
         } catch(error) {
             console.error("Error reserving user:", error);
         }
@@ -73,26 +72,27 @@ const People = () => {
 
     const handleRemoveReservedUser = async (userId: string) => {
         if (!currentUser) return;
-        const updatedReservedMembers = currentUser.reservedMembers.filter((id) => id !== userId);
         try {
+            const updatedReservedMembers = currentUser.reservedMembers.filter((id) => id !== userId);
             const updatedUser = await updateReservedMembers({
                 id: currentUser.id,
                 reservedMembers: updatedReservedMembers,
             });
-            const updatedAuthUser = {
+            setUser({
                 id: updatedUser.id,
                 name: updatedUser.name,
                 username: updatedUser.username,
                 role: updatedUser.role,
                 reservedMembers: updatedUser.reservedMembers,
-            };
-            setUser(updatedAuthUser);
+            });
         } catch(error) {
             console.error("Error reserving user:", error);
         }
     }
 
-
+    if ( isLoading ) return <h3>Is logading</h3>
+    if ( isError ) return <h3>Error!</h3>
+    
     return(
         <div className={styles.main}>
             <div>
@@ -106,16 +106,11 @@ const People = () => {
                 />
                 {
                     searchedUser &&
-                    <div>
                         <div className={styles.searchElement}>
-                        {/* @ts-ignore */}
                             <CustomUserIcon title={searchedUser.name}/>
-                            {/* @ts-ignore */}
                             <h3>{searchedUser.name}</h3>
                             <UserPlus size={36} onClick={() => handleReserveUser(searchedUser.id)}/>
                         </div>
-                    </div>
-
                 }
             </div>
             <ul className={styles.list}>
@@ -124,7 +119,10 @@ const People = () => {
                         <li key={user.id} className={styles.element}>
                             <CustomUserIcon title={user.name}/>
                             <h3>{user.name}</h3>
-                            <UserMinus size={36} onClick={() => handleRemoveReservedUser(user.id)}/>
+                            <div style={{display: "flex", gap: 24}}>
+                                <UserPen size={36} onClick={() => navigate(`/edit/user/${user.id}`)}/>
+                                <UserMinus size={36} onClick={() => handleRemoveReservedUser(user.id)}/>
+                            </div>
                         </li>
                     )
                 }

@@ -7,11 +7,12 @@ interface UserIconProps {
     icon?: string,
     totaly?: boolean,
     size?: number,
+    fontSize?: number,
 }
 
-const CustomUserIcon: React.FC<UserIconProps> = ({ title, icon, totaly, size=36 }) => {
+const CustomUserIcon: React.FC<UserIconProps> = ({ title, icon, totaly, size=36, fontSize = 18 }) => {
     return(
-        <div className={`${styles.iconBlock} ${totaly && styles.smallerText}`} style={{ width: size, height: size }}>
+        <div className={`${styles.iconBlock} ${totaly && styles.smallerText}`} style={{ width: size, height: size, fontSize: fontSize }}>
             { totaly ? title : title[0] } 
         </div>
     )

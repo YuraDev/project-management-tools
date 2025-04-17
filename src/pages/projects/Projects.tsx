@@ -5,10 +5,11 @@ import { useProjectControlStore } from "../../store/projectControlStore";
 import { Project } from "../../types/project";
 
 const Projects = () => {
+    const { data: projects, isLoading, isError } = useProjects();
+
     const selectedProject = useProjectControlStore((state) => state.selectedProject);
     const clearFiltersAndSorts = useProjectControlStore((state) => state.clearFiltersAndSorts);
     const setSelectedProject = useProjectControlStore((state) => state.setSelectedProject);
-    const { data: projects, isLoading, isError } = useProjects();
 
     const handleChoseProject = (chosenProject: Project) => {
         if (chosenProject.id !== selectedProject?.id)

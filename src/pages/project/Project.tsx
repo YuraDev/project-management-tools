@@ -9,7 +9,6 @@ import LeftPanelProject from "../../components/leftPanelProject/LeftPanelProject
 import { DropResult } from "@hello-pangea/dnd";
 import { updateTask } from "../../services/taskApi";
 import KanbanBoard from "../../components/kanbanBoard/KanbanbBoard";
-import { useEffect } from "react";
 
 const Project = () => {
     const { projectId } = useParams();
@@ -17,7 +16,6 @@ const Project = () => {
 
     const selectedTask = useProjectControlStore((state) => state.selectedTask);
     const setSelectedTask = useProjectControlStore((state) => state.setSelectedTask);
-    const clearSelectedTask = useProjectControlStore((state) => state.clearSelectedTask);
     const isRightPanelActive = useProjectControlStore((state) => state.isRightPanelActive);
     const setIsRightPanelActive = useProjectControlStore((state) => state.setIsRightPanelActive);
     const isLeftPanelActive = useProjectControlStore((state) => state.isLeftPanelActive);
@@ -100,11 +98,7 @@ const Project = () => {
 
     const gridTemplateColumns =  `repeat(${visibleColumnsCount}, 1fr)`;
 
-    useEffect(() => {
-      if (projectId !== selectedTask?.projectId)
-        clearSelectedTask();
-    }, []);
-
+    
     return(
         <div style={{display: "flex"}}>
           {

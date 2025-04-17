@@ -8,6 +8,7 @@ import ProtectedRoute from '../../hooks/route/protectedRoute';
 import Project from '../../pages/project/Project';
 import CreateProject from '../../pages/createProject/CreateProject';
 import CreateUser from '../../pages/createUser/CreateUser';
+import EditUser from '../../pages/editUser/EditUser';
 
 const RouteLayout = () => {
 
@@ -24,6 +25,7 @@ const RouteLayout = () => {
             <Route path="/create" element={<ProtectedRoute element={<Create/>}/>} />
             <Route path="/create/project" element={<ProtectedRoute element={<CreateProject/>}/>} />
             <Route path="/create/user" element={<ProtectedRoute element={<CreateUser/>}/>} />
+            <Route path="/edit/user/:userId" element={<ProtectedRoute element={<EditUser/>}/>} />
         </Routes>
   )
 }
