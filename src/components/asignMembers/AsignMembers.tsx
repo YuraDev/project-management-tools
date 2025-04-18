@@ -12,7 +12,6 @@ interface AsignMembersProps {
 }
 
 const AsignMembers = ({ users, setAddMembersActive, maxIcons, iconSize, uniqueText }: AsignMembersProps) => {
-    
     return <div className={styles.asignBlock}>
         <label>Assigned Members:</label>
         <div className={styles.assignedMembers}>

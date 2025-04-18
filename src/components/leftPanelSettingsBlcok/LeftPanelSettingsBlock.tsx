@@ -96,7 +96,7 @@ const LeftPanelSettingsBlock = () => {
 
     
     return(
-        <>
+        <div className={styles.leftPanelChildSettings}>
             <label>ID: 
                 <div className={styles.displayInputLike}>{project?.id}</div>
             </label>
@@ -117,11 +117,11 @@ const LeftPanelSettingsBlock = () => {
             </label>
             <AsignMembers users={asignedMembers} setAddMembersActive={setIsAddMembersActive} maxIcons={2}/>
             <div className={styles.buttonBlock}>
-                <CustomButton text={"Save changes"} onClick={() => handleEdit()}/>
+                <CustomButton text={"Save changes"} onClick={() => handleEdit()} />
                 <CustomButton text={"Delete project"} onClick={() => handleDelete()} customStyles={{backgroundColor: "#D10000"}}/>
             </div>
             { isAddMembersActive && <AddMemberTwo initiallyAsignedMembers={users} exitAction={() => setIsAddMembersActive(false)} selectedUsers={asignedMembers} handlerFilterUser={handleAsignUserClick}/> }
-        </>
+        </div>
     )
 }
 

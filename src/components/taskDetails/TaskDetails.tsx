@@ -1,6 +1,6 @@
 import { useTaskUsers } from "../../hooks/useTaskUsers";
 import { useProjectControlStore } from "../../store/projectControlStore";
-import UserIconCollection from "../usersIconsCollection/usersIconsCollection";
+import UserIconCollection from "../usersIconsCollection/UsersIconsCollection";
 import styles from "./TaskDetails.module.css";
 import StatusText from "../../ui/statusText/StatusText";
 import RightPanelHeader from "../rightPanelHeader/RightPanelHeader";

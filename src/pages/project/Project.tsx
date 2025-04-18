@@ -103,7 +103,7 @@ const Project = () => {
         <div style={{display: "flex"}}>
           {
             isLeftPanelActive 
-            ? <LeftPanelProject/>
+            ? <div style={{lineHeight: "normal",}}><LeftPanelProject/></div>
             : <div style={{padding: "35px 0 0 15px"}} onClick={() => setIsLeftPanelActive(true)}><AlignJustify size={28}/></div>
           }
           <KanbanBoard

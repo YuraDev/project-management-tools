@@ -1,6 +1,10 @@
 .customSubmitButton {
-    padding: 10px 16px;
+    /* padding: 10px 16px; */
+    height: 40px;
     /* background-color: #7c3aed; */
+    padding: 10px 0;
+    /* box-sizing: border-box; */
+    /* padding: 10px 0; */
     background-color: purple;
     color: white;
     border: none;

@@ -13,6 +13,7 @@ import { useProjectControlStore } from "../../store/projectControlStore";
 import AsignMembers from "../asignMembers/AsignMembers";
 import FormSelect from "../../ui/select/FormSelect";
 import FormButtonSubmit from "../../ui/button/FormButtonSubmit";
+import styles from "../rightPanelProject/RightPanelProject.module.css";
 
 const TaskAdd = () => {
     const { projectId } = useParams();
@@ -63,8 +64,10 @@ const TaskAdd = () => {
 
 
     return(
-        <CustomForm onSubmit={handleSubmit} customStyles={{ margin: 15, minHeight: "calc(100vh - 130px)" }}>
+        <CustomForm onSubmit={handleSubmit} customStyles={{ margin: 15, height: "calc(100vh - 130px)" }}>
             <RightPanelHeader taskTitle={"Add task"} setIsRightPanelActive={setIsRightPanelActive}/>
+            <div className={styles.rightPanelChild}>
+
             <label>Title
                 <FormTextInput name="title"  value={formData.title} onChange={handleChange} required />
             </label>
@@ -75,8 +78,9 @@ const TaskAdd = () => {
             <label>Status:
                 <FormSelect name="status" value={formData.status} onChange={handleChange} options={["todo", "in_progress", "done"]}/>
             </label>
-            <FormButtonSubmit text={"Save chenges"}/>
+            <FormButtonSubmit text={"Save chenges"} customStyles={{width: "100%", marginTop: 16}}/>
             { addMembersActive && <AddMember exitAction={() => setAddMembersActive(false)} assignedMembers={assignedMembers} setAssignedMembers={setAssignedMembers} /> }
+            </div>
         </CustomForm>
     )
 }

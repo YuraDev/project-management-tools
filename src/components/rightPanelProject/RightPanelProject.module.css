@@ -16,3 +16,20 @@
     box-sizing: border-box;
     flex: 1;
 } */
+
+.rightPanelChild{
+    /* height: calc(100vh - 100px - 70px - 30px - 20px - 100px); */
+    height: calc(100vh - 100px - 30px - 50px - 45px);
+    overflow-y: auto;
+    /* margin-top: 20px; */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+
+.rightPanelChild::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge */
+}
+
+.rightPanelChild label{
+    margin-top: 16px;
+}

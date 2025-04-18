@@ -17,8 +17,8 @@ const LeftPanelProject = () => {
             </div>
             {
                 isProjectSettingsActive
-                ? <LeftPanelSettings/>
-                : <LeftPanelInfoBlock/>
+                ? <div style={{lineHeight: "normal"}}><LeftPanelSettings/></div>
+                : <div style={{lineHeight: "normal"}}><LeftPanelInfoBlock/></div>
             }
         </div>
     )

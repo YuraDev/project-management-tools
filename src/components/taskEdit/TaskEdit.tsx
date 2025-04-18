@@ -14,6 +14,7 @@ import CustomForm from "../../ui/form/CustomForm";
 import RightPanelHeader from "../rightPanelHeader/RightPanelHeader";
 import FormDateInput from "../../ui/input/FormDateInput";
 import CustomButton from "../../ui/button/CustomButton";
+import styles from "./TaskEdit.module.css";
 
 const TaskEdit = () => {
 
@@ -84,13 +85,29 @@ const TaskEdit = () => {
     }
 
     return(
-        <CustomForm onSubmit={handleSubmitEdit} customStyles={{ margin: 15, minHeight: "calc(100vh - 130px)" }}>
+        <CustomForm onSubmit={handleSubmitEdit} customStyles={{ margin: 15, minHeight: "calc(100vh - 130px)", gap: 0 }}>
+        {/* <CustomForm onSubmit={handleSubmitEdit} customStyles={{ margin: 15, minHeight: "calc(100vh - 100px - 30px - 50px - 45px)" }}> */}
             <RightPanelHeader taskTitle={selectedTask?.title || ""} setIsEditTaskActive={setIsEditTaskActive} setIsRightPanelActive={setIsRightPanelActive}/>
+            <div className={styles.rightPanelChildEdit}>
             <label>Title
                 <FormTextInput name={"title"} value={formData.title} onChange={handleChange} required/>
             </label>
             <label>Description:
-                <FormTextarea name={"description"} value={formData.description} onChange={handleChange} />                </label>
+                <FormTextarea name={"description"} value={formData.description} onChange={handleChange} />                
+            </label>
+
+            <label>Title
+                <FormTextInput name={"title"} value={formData.title} onChange={handleChange} required/>
+            </label>
+            <label>Description:
+                <FormTextarea name={"description"} value={formData.description} onChange={handleChange} />                
+            </label>
+            <label>Title
+                <FormTextInput name={"title"} value={formData.title} onChange={handleChange} required/>
+            </label>
+            <label>Description:
+                <FormTextarea name={"description"} value={formData.description} onChange={handleChange} />                
+            </label>
             <AsignMembers users={users || []} setAddMembersActive={setAddMembersActive} maxIcons={1}/>
             <label>Status:
                 <FormSelect name={"status"} value={formData.status} onChange={handleChange} options={["todo", "in_progress", "done"]}/>
@@ -104,9 +121,9 @@ const TaskEdit = () => {
             <label>Priority
                 <FormSelect<TaskPriority> name={"priority"} value={formData.priority} onChange={handleChange} options={["low", "medium", "high", "none"]}/>
             </label>
-            <FormButtonSubmit text={"Save chenges"}/>
-            <CustomButton text={"Delete task"} onClick={() => handleDelete()} customStyles={{backgroundColor: "#D10000"}}/>
-            { addMembersActive && <AddMember exitAction={() => setAddMembersActive(false)} assignedMembers={assignedMembers} setAssignedMembers={setAssignedMembers} /> }
+            <FormButtonSubmit text={"Save chenges"} customStyles={{height: 40}}/>
+            <CustomButton text={"Delete task"} onClick={() => handleDelete()} customStyles={{backgroundColor: "#D10000", height: 40}}/> { addMembersActive && <AddMember exitAction={() => setAddMembersActive(false)} assignedMembers={assignedMembers} setAssignedMembers={setAssignedMembers} /> }
+            </div>
         </CustomForm>
     )
 }
