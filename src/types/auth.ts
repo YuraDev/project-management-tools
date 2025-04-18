@@ -1,11 +1,11 @@
-import { User } from "./user";
+import { Role, User } from "./user";
 
 
 export interface AuthUserStore {
     id: string,
     name: string,
     username: string,
-    role: string,
+    role: Role,
     reservedMembers: string[],
 }
 

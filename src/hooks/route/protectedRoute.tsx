@@ -1,14 +1,25 @@
 import { JSX } from "react";
 import { useAuth } from "../../layouts/authProvider/AuthProvider";
 import { Navigate } from "react-router-dom";
+import { Role } from "../../types/user";
+import { useUserAccess } from "../../layouts/authProvider/UseUserAccess";
 
-interface ProtectedRoute {
+interface ProtectedRouteProps {
     element: JSX.Element,
+    allowedRoles?: Role[];
 }
 
-const ProtectedRoute = ({ element }: ProtectedRoute) => {
+const ProtectedRoute = ({ element, allowedRoles }: ProtectedRouteProps) => {
     const { isAuthenticated } = useAuth();
-    return isAuthenticated ? element : <Navigate to={"/login"} replace/>
-}
-
+    const { role } = useUserAccess();
+  
+    if (!isAuthenticated) return <Navigate to="/login" replace />;
+  
+    if (allowedRoles && (!role || !allowedRoles.includes(role))) {
+      return <Navigate to="/" replace />;
+    }
+  
+    return element;
+};
+  
 export default ProtectedRoute;

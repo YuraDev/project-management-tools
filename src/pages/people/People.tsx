@@ -17,7 +17,7 @@ const People = () => {
 
     const currentUser = useUserStore((state) => state.currentUser);
     const setUser = useUserStore((state) => state.setLoggedInUser);
-    
+
     // change for reserved users of the user
     const { data: users, isLoading, isError } = useReservedUsers(currentUser?.reservedMembers ?? []);
     const { data: searchedUser, refetch } = useUser(searchTerm, { enabled: false }); // call manually
@@ -28,8 +28,6 @@ const People = () => {
             setShouldSearch(false);
         }
     }, [shouldSearch, searchTerm, refetch]);
-
-
 
 
     const handleSearchInput = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -120,7 +118,7 @@ const People = () => {
                             <CustomUserIcon title={user.name}/>
                             <h3>{user.name}</h3>
                             <div style={{display: "flex", gap: 24}}>
-                                <UserPen size={36} onClick={() => navigate(`/edit/user/${user.id}`)}/>
+                                { currentUser?.role === "admin" && <UserPen size={36} onClick={() => navigate(`/edit/user/${user.id}`)}/> }
                                 <UserMinus size={36} onClick={() => handleRemoveReservedUser(user.id)}/>
                             </div>
                         </li>

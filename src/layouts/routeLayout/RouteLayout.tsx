@@ -22,11 +22,10 @@ const RouteLayout = () => {
             <Route path="/people" element={<ProtectedRoute element={<People/>}/>} />
             <Route path="/projects" element={<ProtectedRoute element={<Projects/>}/>} />
             <Route path="/projects/:projectId" element={<ProtectedRoute element={<Project/>}/>} />
-            <Route path="/projects/:projectId/settings" element={<ProtectedRoute element={<Project/>}/>} />
-            <Route path="/create" element={<ProtectedRoute element={<Create/>}/>} />
-            <Route path="/create/project" element={<ProtectedRoute element={<CreateProject/>}/>} />
-            <Route path="/create/user" element={<ProtectedRoute element={<CreateUser/>}/>} />
-            <Route path="/edit/user/:userId" element={<ProtectedRoute element={<EditUser/>}/>} />
+            <Route path="/create" element={<ProtectedRoute element={<Create/>} allowedRoles={["admin", "manager"]}/>} />
+            <Route path="/create/project" element={<ProtectedRoute element={<CreateProject/>} allowedRoles={["admin", "manager"]}/>} />
+            <Route path="/create/user" element={<ProtectedRoute element={<CreateUser/>} allowedRoles={["admin"]}/>} />
+            <Route path="/edit/user/:userId" element={<ProtectedRoute element={<EditUser/>} allowedRoles={["admin"]}/>} />
         </Routes>
   )
 }

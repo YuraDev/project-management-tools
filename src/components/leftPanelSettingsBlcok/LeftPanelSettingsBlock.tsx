@@ -16,6 +16,7 @@ import { useUsers } from "../../hooks/useUsers";
 import CustomButton from "../../ui/button/CustomButton";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteProject, updateProject } from "../../services/projectApi";
+import { useUserStore } from "../../store/userStore";
 
 const LeftPanelSettingsBlock = () => {
 
@@ -25,6 +26,7 @@ const LeftPanelSettingsBlock = () => {
     const { data: projectMembers } = useProjectUsers(projectId || "");
     //  todo - change for personal seves + active prohject users
     const { data: users } = useUsers();
+    const currentUser = useUserStore((state) => state.currentUser);
 
     const [formData, setFormData] = useState({
         title: project?.title || "",
@@ -118,7 +120,7 @@ const LeftPanelSettingsBlock = () => {
             <AsignMembers users={asignedMembers} setAddMembersActive={setIsAddMembersActive} maxIcons={2}/>
             <div className={styles.buttonBlock}>
                 <CustomButton text={"Save changes"} onClick={() => handleEdit()} />
-                <CustomButton text={"Delete project"} onClick={() => handleDelete()} customStyles={{backgroundColor: "#D10000"}}/>
+                { currentUser?.role === "admin" && <CustomButton text={"Delete project"} onClick={() => handleDelete()} customStyles={{backgroundColor: "#D10000"}}/> }
             </div>
             { isAddMembersActive && <AddMemberTwo initiallyAsignedMembers={users} exitAction={() => setIsAddMembersActive(false)} selectedUsers={asignedMembers} handlerFilterUser={handleAsignUserClick}/> }
         </div>
