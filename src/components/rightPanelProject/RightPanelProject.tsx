@@ -1,10 +1,11 @@
+import { memo } from "react";
 import { useProjectControlStore } from "../../store/projectControlStore";
 import TaskAdd from "../taskAdd/TaskAdd";
 import TaskDetails from "../taskDetails/TaskDetails";
 import TaskEdit from "../taskEdit/TaskEdit";
 import styles from "./RightPanelProject.module.css";
 
-const RightPanelPorject = () => {
+const RightPanelProject = memo(() => {
     const selectedTask = useProjectControlStore((state) => state.selectedTask);
     const isEditTaskActive = useProjectControlStore((state) => state.isEditTaskActive);
     const isAddTaskActive = useProjectControlStore((state) => state.isAddTaskActive);
@@ -22,6 +23,6 @@ const RightPanelPorject = () => {
             }
         </div>
     )
-}
+})
 
-export default RightPanelPorject;
+export default RightPanelProject;

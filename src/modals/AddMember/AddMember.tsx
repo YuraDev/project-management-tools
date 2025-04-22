@@ -12,7 +12,7 @@ interface AddMemberProps {
     setAssignedMembers: React.Dispatch<React.SetStateAction<string[]>>,
 }
 
-const AddMember: React.FC<AddMemberProps> = ({ initiallyAsignedMembers, exitAction, assignedMembers, setAssignedMembers }) => {
+const AddMember: React.FC<AddMemberProps> = React.memo(({ initiallyAsignedMembers, exitAction, assignedMembers, setAssignedMembers }) => {
 
     let { data: users, isLoading, isError } = useUsers();
 
@@ -57,6 +57,6 @@ const AddMember: React.FC<AddMemberProps> = ({ initiallyAsignedMembers, exitActi
             </div>
         </div>
     )
-}
+});
 
 export default AddMember;

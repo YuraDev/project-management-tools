@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom"
-import AddMemberTwo from "../../modals/AddMember/AddMemberTwo"
 import { TaskPriority, TaskStatus } from "../../types/task"
 import CustomButton from "../../ui/button/CustomButton"
 import CheckBoxStatus from "../../ui/checkbox/CheckBoxStatus"
@@ -8,7 +7,11 @@ import CustomSelect, { sortOptions } from "../../ui/select/CustomSelect"
 import AsignMembers from "../asignMembers/AsignMembers"
 import { useProjectUsers } from "../../hooks/useProjectUsers"
 import { useProjectControlStore } from "../../store/projectControlStore"
-import styles from "../leftPanelProject/LeftPanelProject.module.css";
+import styles from "../leftPanelProject/LeftPanelProject.module.css"
+import { useCallback } from "react"
+import { lazy, Suspense } from "react"
+
+const AddMemberTwo = lazy(() => import("../../modals/AddMember/AddMemberTwo"));
 
 const LeftPanelInfoBlock = () => {
     const { projectId } = useParams();
@@ -32,11 +35,11 @@ const LeftPanelInfoBlock = () => {
     const setIsAddTaskActive = useProjectControlStore((state) => state.setIsAddTaskActive);
     const setIsRightPanelActive = useProjectControlStore((state) => state.setIsRightPanelActive);
         
-    const handleAddTaskOpen = () => {
+    const handleAddTaskOpen = useCallback(() => {
         setIsEditTaskActive(false);
         setIsAddTaskActive(true);
         setIsRightPanelActive(true);
-    }
+    }, [setIsEditTaskActive, setIsAddTaskActive, setIsRightPanelActive]);
 
     return(
         <div className={styles.leftPanelChild}>
@@ -69,13 +72,16 @@ const LeftPanelInfoBlock = () => {
                     <CustomSelect value={sortValue} onChange={setSortValue} options={sortOptions}/>
                 </label>
             {      
-                isAddMembersActive && 
-                <AddMemberTwo 
-                    initiallyAsignedMembers={initiallyAsignedMembers} 
-                    exitAction={() => setIsAddMembersActive(false)} 
-                    selectedUsers={usersFilter} 
-                    handlerFilterUser={setUserFilter} 
-                />
+                isAddMembersActive && (
+                    <Suspense fallback={null}>
+                        <AddMemberTwo 
+                            initiallyAsignedMembers={initiallyAsignedMembers} 
+                            exitAction={() => setIsAddMembersActive(false)} 
+                            selectedUsers={usersFilter} 
+                            handlerFilterUser={setUserFilter} 
+                        />
+                    </Suspense>
+                )
             }
         </div>
     )

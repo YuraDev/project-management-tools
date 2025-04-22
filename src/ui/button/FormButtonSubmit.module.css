@@ -1,10 +1,6 @@
 .customSubmitButton {
-    /* padding: 10px 16px; */
     height: 40px;
-    /* background-color: #7c3aed; */
     padding: 10px 0;
-    /* box-sizing: border-box; */
-    /* padding: 10px 0; */
     background-color: purple;
     color: white;
     border: none;
@@ -15,7 +11,6 @@
   }
   
 .customSubmitButton:hover {
-    /* background-color: #6d28d9; */
     background-color: rgba(128, 0, 128, 0.832);
 }
   

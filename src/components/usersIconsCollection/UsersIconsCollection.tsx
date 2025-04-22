@@ -9,9 +9,7 @@ interface UserIconCollectionProps {
 }
 
 const UserIconCollection = ({ users, size=34, maxIcons=4 }: UserIconCollectionProps) => {
-    // const visibleUsers = users?.slice(0, 3) || 0;
-    // const hiddenUsers = (users?.length || 0) - 3;
-    const visibleUsers = users?.slice(0, maxIcons) || 0;
+    const visibleUsers = users.slice(0, maxIcons);
     const hiddenUsers = (users?.length || 0) - maxIcons;
 
     return(

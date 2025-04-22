@@ -1,5 +1,5 @@
 import { useProjectControlStore } from "../../store/projectControlStore";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Task, TaskPriority } from "../../types/task";
 import AddMember from "../../modals/AddMember/AddMember";
 import { useTaskUsers } from "../../hooks/useTaskUsers";
@@ -16,13 +16,12 @@ import FormDateInput from "../../ui/input/FormDateInput";
 import CustomButton from "../../ui/button/CustomButton";
 import styles from "./TaskEdit.module.css";
 
-const TaskEdit = () => {
+const TaskEdit = React.memo(() => {
 
     const selectedTask = useProjectControlStore((state) => state.selectedTask);
     const setIsRightPanelActive = useProjectControlStore((state) => state.setIsRightPanelActive);
     const setIsEditTaskActive = useProjectControlStore((state) => state.setIsEditTaskActive);
     const clearSelectedTask = useProjectControlStore((state) => state.clearSelectedTask);
-
     
     const [formData, setFormData] = useState<Omit<Task, "id" | "projectId" | "assignedMembers">>({
         title: selectedTask?.title || "",
@@ -58,23 +57,21 @@ const TaskEdit = () => {
 
     const handleSubmitEdit = (event: React.FormEvent) => {
         event.preventDefault();
-        if (
-            formData.title !== "" &&
-            formData.description !== "" &&
-            selectedTask
-        ) {
-            editTaskMutation.mutate({
-                id: selectedTask?.id,
-                projectId: selectedTask?.projectId,
-                title: formData.title,
-                description: formData.description,
-                assignedMembers: assignedMembers,
-                status: formData.status,
-                startDate: formData.startDate,
-                endDate: formData.endDate,
-                priority: formData.priority,
-            });
-        } else { alert("Please fill all the requered fields!"); }
+        if (!selectedTask?.id) 
+            return;
+        if ( !formData.title || !formData.description )
+            alert("Please fill all the requered fields!");
+        editTaskMutation.mutate({
+            id: selectedTask.id,
+            projectId: selectedTask.projectId,
+            title: formData.title,
+            description: formData.description,
+            assignedMembers: assignedMembers,
+            status: formData.status,
+            startDate: formData.startDate,
+            endDate: formData.endDate,
+            priority: formData.priority,
+        });
     };
 
     const handleDelete = async () => {
@@ -86,22 +83,8 @@ const TaskEdit = () => {
 
     return(
         <CustomForm onSubmit={handleSubmitEdit} customStyles={{ margin: 15, minHeight: "calc(100vh - 130px)", gap: 0 }}>
-        {/* <CustomForm onSubmit={handleSubmitEdit} customStyles={{ margin: 15, minHeight: "calc(100vh - 100px - 30px - 50px - 45px)" }}> */}
             <RightPanelHeader taskTitle={selectedTask?.title || ""} setIsEditTaskActive={setIsEditTaskActive} setIsRightPanelActive={setIsRightPanelActive}/>
             <div className={styles.rightPanelChildEdit}>
-            <label>Title
-                <FormTextInput name={"title"} value={formData.title} onChange={handleChange} required/>
-            </label>
-            <label>Description:
-                <FormTextarea name={"description"} value={formData.description} onChange={handleChange} />                
-            </label>
-
-            <label>Title
-                <FormTextInput name={"title"} value={formData.title} onChange={handleChange} required/>
-            </label>
-            <label>Description:
-                <FormTextarea name={"description"} value={formData.description} onChange={handleChange} />                
-            </label>
             <label>Title
                 <FormTextInput name={"title"} value={formData.title} onChange={handleChange} required/>
             </label>
@@ -126,6 +109,6 @@ const TaskEdit = () => {
             </div>
         </CustomForm>
     )
-}
+});
 
 export default TaskEdit;

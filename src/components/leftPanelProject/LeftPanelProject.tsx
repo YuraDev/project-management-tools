@@ -1,9 +1,11 @@
 import { AlignJustify, Settings } from "lucide-react";
 import { useProjectControlStore } from "../../store/projectControlStore";
 import styles from "./LeftPanelProject.module.css";
-import LeftPanelInfoBlock from "../leftPanelInfoBlock/LeftPanelInfoBlock";
-import LeftPanelSettings from "../leftPanelSettingsBlcok/LeftPanelSettingsBlock";
 import { useUserStore } from "../../store/userStore";
+import { lazy, Suspense } from "react";
+
+const LeftPanelInfoBlock = lazy(() => import("../leftPanelInfoBlock/LeftPanelInfoBlock"));
+const LeftPanelSettings = lazy(() => import("../leftPanelSettingsBlcok/LeftPanelSettingsBlock"));
 
 const LeftPanelProject = () => {
     const setIsLeftPanelActive = useProjectControlStore((state) => state.setIsLeftPanelActive);
@@ -15,13 +17,16 @@ const LeftPanelProject = () => {
         <div className={styles.main}>
             <div className={styles.headerLeftPanel}>
                 <div onClick={() => setIsLeftPanelActive(false)}><AlignJustify size={28}/></div>
-                { currentUser?.role !== "member" && <div onClick={() => setIsProjectSettingsActive()}><Settings size={28}/></div> }
+                { currentUser?.role !== "member" && <div onClick={setIsProjectSettingsActive}><Settings size={28}/></div> }
             </div>
+            {/* todo - not sure is necessary lazy loading */}
+            <Suspense> 
             {
                 isProjectSettingsActive
-                ? <div style={{lineHeight: "normal"}}><LeftPanelSettings/></div>
-                : <div style={{lineHeight: "normal"}}><LeftPanelInfoBlock/></div>
+                ? <LeftPanelSettings/>
+                : <LeftPanelInfoBlock/>
             }
+            </Suspense>
         </div>
     )
 }

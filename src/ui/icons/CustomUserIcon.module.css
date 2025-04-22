@@ -1,20 +1,16 @@
 .iconBlock{
-    /* width: 36px;
-    height: 36px; */
     border-radius: 50%;
-    /* border: 1px black solid; */
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
     background: purple;
     font-weight: bold;
-    /* font-size: 20px; */
     text-transform: capitalize;
     cursor: pointer;
 }
 
 .smallerText {
-  font-size: 16px; /* на 4px менше */
+  font-size: 16px;
   background-color: gray;
 }

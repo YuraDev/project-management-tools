@@ -1,5 +1,6 @@
 import { Settings, X } from "lucide-react";
 import styles from "./RightPanelHeader.module.css";
+import { memo } from "react";
 
 interface RightPanelHeaderProps {
     taskTitle: string,
@@ -7,7 +8,7 @@ interface RightPanelHeaderProps {
     setIsRightPanelActive: (value: boolean) => void,
 }
 
-const RightPanelHeader = ({ taskTitle, setIsEditTaskActive, setIsRightPanelActive }: RightPanelHeaderProps) => {
+const RightPanelHeader = memo(({ taskTitle, setIsEditTaskActive, setIsRightPanelActive }: RightPanelHeaderProps) => {
     return <div className={styles.titleBlock}>
         <h1><b>{taskTitle}</b></h1>
         <div className={styles.controlIcons}>
@@ -15,6 +16,6 @@ const RightPanelHeader = ({ taskTitle, setIsEditTaskActive, setIsRightPanelActiv
             <X size={34} onClick={() => setIsRightPanelActive(false)}/>
         </div>
     </div>
-}
+})
 
 export default RightPanelHeader;

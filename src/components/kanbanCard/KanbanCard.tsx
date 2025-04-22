@@ -1,8 +1,6 @@
 import { useTaskUsers } from "../../hooks/useTaskUsers";
-import { useProjectControlStore } from "../../store/projectControlStore";
 import { Task } from "../../types/task";
-// @ts-ignore
-import UserIconCollection from "../usersIconsCollection/usersIconsCollection";
+import UserIconCollection from "../usersIconsCollection/UsersIconsCollection";
 import styles from "./Kanban.module.css";
 
 interface KanbanCardProps {
@@ -12,7 +10,6 @@ interface KanbanCardProps {
 
 const KanbanCard = ({ task, handleOnTaskClick }: KanbanCardProps) => {
     const { data: users } = useTaskUsers(task.assignedMembers);
-
     return(
         <div className={styles.cardMain  + " w-full"} onClick={() => handleOnTaskClick(task)}>
             <h3 className="text-lg font-semibold">{task.title}</h3>

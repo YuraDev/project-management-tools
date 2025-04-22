@@ -2,9 +2,9 @@ import { useParams } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useProjectTasks } from "../../hooks/useProjectTasks";
 import { useProjectControlStore } from "../../store/projectControlStore";
-import RightPanelPorject from "../../components/rightPanelProject/RightPanelProject";
+import RightPanelProject from "../../components/rightPanelProject/RightPanelProject";
 import { Task, TaskStatus } from "../../types/task";
-import { AlignJustify, Settings } from "lucide-react";
+import { AlignJustify } from "lucide-react";
 import LeftPanelProject from "../../components/leftPanelProject/LeftPanelProject";
 import { DropResult } from "@hello-pangea/dnd";
 import { updateTask } from "../../services/taskApi";
@@ -116,7 +116,7 @@ const Project = () => {
             doneTasks={doneTasks}
           />
           {
-            isRightPanelActive && ( isAddTaskActive || selectedTask !== null ) && <RightPanelPorject/>
+            isRightPanelActive && ( isAddTaskActive || selectedTask !== null ) && <RightPanelProject/>
           }
         </div>
     )

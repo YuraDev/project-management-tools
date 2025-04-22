@@ -21,10 +21,8 @@ const FormPasswordInput = ({ name, value , onChange, required, placeholder, show
             required={required}
             type={showPassword ? "text" : "password"}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm pr-10"
-            // className={styles.cunstomInput} 
         />
         <button
-            // type="button"
             onClick={() => setShowPassword((prev) => !prev)}
             className="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-gray-700"
         >

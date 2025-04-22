@@ -3,7 +3,7 @@ import { useProject } from "../../hooks/useProject";
 import { useProjectControlStore } from "../../store/projectControlStore";
 import FormTextarea from "../../ui/textArea/FormTextarea";
 import FormDateInput from "../../ui/input/FormDateInput";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import FormTextInput from "../../ui/input/FormTextInput";
 import FormSelect from "../../ui/select/FormSelect";
 import { ProjectStatus } from "../../types/project";
@@ -54,40 +54,32 @@ const LeftPanelSettingsBlock = () => {
         }
     });
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = event.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
-    };
+    }, []);
 
-    const handleAsignUserClick = (chosenUser: User) => {
+    const handleAsignUserClick = useCallback((chosenUser: User) => {
         setAsignedMembers((prev) => {
             const isAdded = prev.find((u) => u.id === chosenUser.id);
             return isAdded
             ? prev.filter((u) => u.id !== chosenUser.id)
             : [...prev, chosenUser];
         })
-    }
+    }, []);
 
     const handleEdit = async () => {
-        let initialData = {
-            id: project?.id || "",
-            title: project?.title || "",
-            description: project?.description || "",
-            startDate: project?.startDate || "",
-            endDate: project?.endDate || "member",
-            assignedMembers: project?.assignedMembers || [],
-            status: project?.status || "planned",
+        if (!project) return null;
+        let data = {
+            id: project.id ,
+            title: formData.title || project.title,
+            description: formData.description || project.description,
+            startDate: formData.startDate || project.startDate,
+            endDate: formData.endDate || project.endDate,
+            assignedMembers: asignedMembers.map((m) => m.id),
+            status: formData.status || project.status,
         };
-        initialData = {
-            ...initialData,
-            ...(formData.title !== "" && { name: formData.title }),
-            ...({ description: formData.description }),
-            ...({ startDate: formData.startDate }),
-            ...({ endDate: formData.endDate }),
-            ...({ status: formData.status }),
-            ...({ assignedMembers: asignedMembers.map((m) => m.id) }),
-        };
-        editProjectMutation.mutate(initialData);
+        editProjectMutation.mutate(data);
     }
     const handleDelete = async () => {
         if (window.confirm("Ви впевнені, що хочете видалити даний проект?")) {

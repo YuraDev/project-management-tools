@@ -1,3 +1,4 @@
+import React from "react";
 import { User } from "../../types/user";
 import UserIconCollection from "../usersIconsCollection/UsersIconsCollection";
 import styles from "./AsignMembers.module.css";
@@ -11,7 +12,7 @@ interface AsignMembersProps {
     iconSize?: number,
 }
 
-const AsignMembers = ({ users, setAddMembersActive, maxIcons, iconSize, uniqueText }: AsignMembersProps) => {
+const AsignMembers = React.memo(({ users, setAddMembersActive, maxIcons, iconSize, uniqueText }: AsignMembersProps) => {
     return <div className={styles.asignBlock}>
         <label>Assigned Members:</label>
         <div className={styles.assignedMembers}>
@@ -19,6 +20,6 @@ const AsignMembers = ({ users, setAddMembersActive, maxIcons, iconSize, uniqueTe
         </div>
         { users  && <UserIconCollection users={users} maxIcons={maxIcons} size={iconSize}/> }
     </div>
-}
+});
 
 export default AsignMembers;
