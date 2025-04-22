@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import React, { useState } from "react"
+import React, { useCallback, useState } from "react"
 import { login } from "../../services/loginApi";
 import { useAuth } from "../../layouts/authProvider/AuthProvider";
 import { useNavigate } from "react-router-dom";
@@ -38,20 +38,16 @@ const Login = () => {
         }
     })
 
-    const [formData, setFormData] = useState({
-        username: "",
-        password: ""
-    });
+    const [formData, setFormData] = useState({ username: "", password: "" });
     const [showPassword, setShowPassword] = useState<boolean>(false);
 
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = event.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
-    };
+    }, []);
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        console.log("handlesubmit")
         event.preventDefault();
         mutation.mutate({ username: formData.username, password: formData.password });
     }

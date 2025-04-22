@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { register } from "../../services/loginApi";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthFormLayout from "../../layouts/authFormLayout/AuthFormLayout";
 import FormTextInput from "../../ui/input/FormTextInput";
@@ -31,31 +31,28 @@ const Register = () => {
     });
     const [showPassword, setShowPassword] = useState<boolean>(false);
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = event.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
-    };
+    }, []);
 
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        if (
-            formData.name !== "" &&
-            formData.username !== "" &&
-            formData.password !== "" &&
-            formData.repeatedPassword !== ""
-        ) {
-            if ( formData.password !== formData.repeatedPassword ) {
-                alert("Password fields are different!");
-                return;
-            }
-            mutation.mutate({ 
-                name: formData.name, 
-                username: formData.username, 
-                password: formData.password, 
-                role: "member", 
-                reservedMembers: [] 
-            });
+        if ( !formData.name || !formData.username || !formData.password || !formData.repeatedPassword ) {
+            alert("Password fields are different!");
+            return;
         }
+        if ( formData.password !== formData.repeatedPassword ) {
+            alert("Passwords do not match!");
+            return;
+        }
+        mutation.mutate({ 
+            name: formData.name, 
+            username: formData.username, 
+            password: formData.password, 
+            role: "member", 
+            reservedMembers: [] 
+        });
     }
 
     

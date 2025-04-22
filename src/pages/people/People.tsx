@@ -13,7 +13,7 @@ const People = () => {
 
     const [searchTerm, setSearchTerm] = useState<string>("");
     const [shouldSearch, setShouldSearch] = useState<boolean>(false);
-    const [debouncerTimer, setDebouncerTimer] = useState(null);
+    const [debouncerTimer, setDebouncerTimer] = useState<number | null>(null);
 
     const currentUser = useUserStore((state) => state.currentUser);
     const setUser = useUserStore((state) => state.setLoggedInUser);
@@ -36,7 +36,6 @@ const People = () => {
         const timer = setTimeout(() => {
             setShouldSearch(true);
         }, 2000);
-        // @ts-ignore
         setDebouncerTimer(timer);
     }
 
@@ -88,8 +87,8 @@ const People = () => {
         }
     }
 
-    if ( isLoading ) return <h3>Is logading</h3>
-    if ( isError ) return <h3>Error!</h3>
+    if ( isLoading ) return <h3>Loading...</h3>
+    if ( isError ) return <h3>Failed to fetch users!</h3>
     
     return(
         <div className={styles.main}>

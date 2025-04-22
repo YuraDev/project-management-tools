@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createUser } from "../../services/userApi";
 import { Role } from "../../types/user";
@@ -35,27 +35,23 @@ const CreateUser = () => {
         }
     });
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = event.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
-    };
+    }, []);
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
         const { name, username, password ,repeatedPassword, role } = formData;
-        if (
-            name !== "" && username !== "" &&
-            password !== "" && repeatedPassword !== ""
-        ) {
-            if ( password === repeatedPassword ) {
-                console.log("formData", formData);
-                mutation.mutate({ name, username, password, role, reservedMembers: [] });
-            } else {
-                alert("Password field should be the same!");
-            }
-        } else {
-            alert("Please fill all the fields.")
+        if ( !name || !username || !password || !repeatedPassword) {
+            alert("Please fill all the fields.");
+            return;
         }
+        if ( password !== repeatedPassword ) {
+            alert("Passwords do not match!");
+            return;
+        }
+        mutation.mutate({ name, username, password, role, reservedMembers: [] });
     };
 
     return(
@@ -86,7 +82,7 @@ const CreateUser = () => {
                 <label>Status:
                     <FormSelect name={"role"} value={formData.role} onChange={handleChange} options={["member", "manager", "admin"]}/>
                 </label>
-                <FormButtonSubmit text={"Create Project"}/>
+                <FormButtonSubmit text={"Create user"}/>
             </CustomForm>
         </FormLayout>
     )

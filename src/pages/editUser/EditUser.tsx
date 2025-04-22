@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useUser } from "../../hooks/useUser";
 import FormTextInput from "../../ui/input/FormTextInput";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import FormPasswordInput from "../../ui/input/FormPasswordInput";
 import { Role } from "../../types/user";
 import CustomUserIcon from "../../ui/icons/CustomUserIcon";
@@ -18,11 +18,11 @@ const EditUser = () => {
     const {data: user} = useUser(userId || "");
 
     const [formData, setFormData] = useState({
-        name: user?.name || "",
-        username: user?.username || "",
-        password: user?.password || "",
+        name: "",
+        username: "",
+        password: "",
         repeatedPassword: "",
-        role: user?.role || "member",
+        role: "member" as Role,
     });
     const [showPassword, setShowPassword] = useState<boolean>(false);
 
@@ -40,26 +40,21 @@ const EditUser = () => {
         }
     });
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = event.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
-    };
+    }, []);
 
     const handleEdit = async () => {
+        if ( !user ) return;
+        if ( formData.password !== formData.repeatedPassword ) {
+            alert("Passwords do not match!");
+            return;
+        }
         let initialData = {
-            id: user?.id || "",
-            name: user?.name || "",
-            username: user?.username || "",
-            password: user?.password || "",
-            role: user?.role || "member",
-            reservedMembers: user?.reservedMembers || [],
-        };
-        initialData = {
-            ...initialData,
-            ...(formData.name !== "" && { name: formData.name }),
-            ...(formData.username !== "" && { username: formData.username }),
-            ...({ role: formData.role }),
-            ...(formData.password === formData.repeatedPassword && formData.password !== "" && { password: formData.password }),
+            id: user.id,
+            reservedMembers: user.reservedMembers,
+            ...formData,
         };
         editUserMutation.mutate(initialData);
     }
@@ -73,11 +68,11 @@ const EditUser = () => {
     useEffect(() => {
         if (user)
             setFormData({
-                name: user.name || "",
-                username: user.username || "",
-                password: user.password || "",
-                repeatedPassword: formData.repeatedPassword,
-                role: user.role || "member",
+                name: user.name,
+                username: user.username,
+                password: user.password,
+                repeatedPassword: "",
+                role: user.role,
             });
     }, [user]);
 

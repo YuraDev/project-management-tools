@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import AddMember from "../../modals/AddMember/AddMember";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createProject } from "../../services/projectApi";
@@ -34,27 +34,19 @@ const CreateProject = () => {
     });
     const { data: users } = useTaskUsers(assignedMembers);
     
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = event.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
-    };
+    }, []);
     
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        if (
-            formData.title !== "" &&
-            formData.startDate !== "" &&
-            formData.endDate !== ""
-        ) {
-            mutation.mutate({
-                title: formData.title,
-                description: formData.description,
-                startDate: formData.startDate,
-                endDate: formData.endDate,
-                assignedMembers: assignedMembers,
-                status: formData.status
-            });
-        } else { alert("Please fill all the requered fields!"); }
+        if ( !formData.title || !formData.startDate || !formData.endDate)
+            alert("Please fill all the requered fields!");
+        mutation.mutate({
+            ...formData,
+            assignedMembers: assignedMembers,
+        });
     };
 
     return (

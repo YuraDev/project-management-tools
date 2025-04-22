@@ -64,13 +64,8 @@ const TaskEdit = React.memo(() => {
         editTaskMutation.mutate({
             id: selectedTask.id,
             projectId: selectedTask.projectId,
-            title: formData.title,
-            description: formData.description,
             assignedMembers: assignedMembers,
-            status: formData.status,
-            startDate: formData.startDate,
-            endDate: formData.endDate,
-            priority: formData.priority,
+            ...formData,
         });
     };
 
