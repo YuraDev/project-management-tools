@@ -1,0 +1,47 @@
+.main{
+    position: fixed;
+    right: 0;
+    top: 100px;
+    /* padding: 20px; */
+    display: flex;
+    flex-direction: column;
+
+    align-items: end;
+    justify-content: center;
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px #E2E8F0 solid;
+    box-shadow:  0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.exitBlock{
+    /* width: 240px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 8px;
+    border-radius: 8px; */
+    padding: 12px 8px;
+    justify-self: end;
+    align-self: flex-end;
+}
+
+.item{
+    width: 240px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 8px;
+    border-radius: 8px;
+}
+
+.item:hover{
+    background-color: #f5f3ff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+}
+
+.item h2{
+    font-size: 18px;
+}

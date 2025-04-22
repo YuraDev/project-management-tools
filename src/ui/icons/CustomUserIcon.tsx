@@ -8,11 +8,12 @@ interface UserIconProps {
     totaly?: boolean,
     size?: number,
     fontSize?: number,
+    onClick?: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
-const CustomUserIcon: React.FC<UserIconProps> = ({ title, icon, totaly, size=36, fontSize = 18 }) => {
+const CustomUserIcon: React.FC<UserIconProps> = ({ title, icon, totaly, size=36, fontSize = 18, onClick }) => {
     return(
-        <div className={`${styles.iconBlock} ${totaly && styles.smallerText}`} style={{ width: size, height: size, fontSize: fontSize }}>
+        <div className={`${styles.iconBlock} ${totaly && styles.smallerText}`} style={{ width: size, height: size, fontSize: fontSize }} onClick={() => onClick && onClick((prev) => !prev)}>
             { totaly ? title : title[0] } 
         </div>
     )
