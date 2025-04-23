@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect } from "react";
 import styles from "./AddMember.module.css";
-import { useUsers } from "../../hooks/useUsers";
 import CustomUserIcon from "../../ui/icons/CustomUserIcon";
 import { SquarePlus } from "lucide-react";
 import { User } from "../../types/user";
+import { useUsers } from "../../hooks/users/useUsers";
 
 interface AddMemberProps {
 // todo - change for initiallyAssignedMembers

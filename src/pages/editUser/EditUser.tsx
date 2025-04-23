@@ -1,5 +1,4 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useUser } from "../../hooks/useUser";
 import FormTextInput from "../../ui/input/FormTextInput";
 import { useCallback, useEffect, useState } from "react";
 import FormPasswordInput from "../../ui/input/FormPasswordInput";
@@ -10,6 +9,7 @@ import CustomButton from "../../ui/button/CustomButton";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteUser, updateUser } from "../../services/userApi";
 import FormSelect from "../../ui/select/FormSelect";
+import { useUser } from "../../hooks/users/useUser";
 
 const EditUser = () => {
     const { userId } = useParams();

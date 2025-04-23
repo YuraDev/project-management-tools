@@ -1,5 +1,5 @@
 import styles from './App.module.css';
-import Header from './components/header/Header';
+import Header from './components/header/header/Header';
 import RouteLayout from './layouts/routeLayout/RouteLayout';
 
 function App() {

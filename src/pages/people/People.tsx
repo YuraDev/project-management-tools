@@ -2,11 +2,11 @@ import { UserMinus, UserPen, UserPlus } from "lucide-react";
 import CustomUserIcon from "../../ui/icons/CustomUserIcon";
 import styles from "./People.module.css";
 import React, { useEffect, useState } from "react";
-import { useUser } from "../../hooks/useUser";
-import { useReservedUsers } from "../../hooks/useReservedUsers";
 import { useUserStore } from "../../store/userStore";
 import { updateReservedMembers } from "../../services/userApi";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../../hooks/users/useUser";
+import { useReservedUsers } from "../../hooks/users/useReservedUsers";
 
 const People = () => {
     const navigate = useNavigate();

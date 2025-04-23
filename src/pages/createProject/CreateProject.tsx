@@ -2,7 +2,6 @@ import React, { useCallback, useState } from "react";
 import AddMember from "../../modals/AddMember/AddMember";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createProject } from "../../services/projectApi";
-import { useTaskUsers } from "../../hooks/useTaskUsers";
 import { Project } from "../../types/project";
 import FormTextInput from "../../ui/input/FormTextInput";
 import FormSelect from "../../ui/select/FormSelect";
@@ -12,8 +11,11 @@ import FormTextarea from "../../ui/textArea/FormTextarea";
 import FormButtonSubmit from "../../ui/button/FormButtonSubmit";
 import CustomForm from "../../ui/form/CustomForm";
 import FormLayout from "../../layouts/formLayout/FormLayout";
+import { useTaskUsers } from "../../hooks/task/useTaskUsers";
+import { useNavigate } from "react-router-dom";
 
 const CreateProject = () => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState<Omit<Project, "id">>({
         title: "",
         description: "",
@@ -41,12 +43,15 @@ const CreateProject = () => {
     
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        if ( !formData.title || !formData.startDate || !formData.endDate)
+        if ( !formData.title ) {
             alert("Please fill all the requered fields!");
+            return;
+        }
         mutation.mutate({
             ...formData,
             assignedMembers: assignedMembers,
         });
+        navigate("/projects");
     };
 
     return (

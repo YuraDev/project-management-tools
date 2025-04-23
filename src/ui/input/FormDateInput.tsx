@@ -7,7 +7,7 @@ interface FormDateInputProps {
     required?: boolean,
 }
 
-const FormDateInput = ({ name, value , onChange, required }: FormDateInputProps) => {
+const FormDateInput = ({ name, value , onChange, required = false }: FormDateInputProps) => {
     return <input 
         name={name} 
         value={value} 

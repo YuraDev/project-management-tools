@@ -1,14 +1,14 @@
 import { useParams } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useProjectTasks } from "../../hooks/useProjectTasks";
+import { useProjectTasks } from "../../hooks/project/useProjectTasks";
 import { useProjectControlStore } from "../../store/projectControlStore";
-import RightPanelProject from "../../components/rightPanelProject/RightPanelProject";
 import { Task, TaskStatus } from "../../types/task";
 import { AlignJustify } from "lucide-react";
-import LeftPanelProject from "../../components/leftPanelProject/LeftPanelProject";
+import LeftPanelProject from "../../components/leftPanel/leftPanelProject/LeftPanelProject";
 import { DropResult } from "@hello-pangea/dnd";
 import { updateTask } from "../../services/taskApi";
-import KanbanBoard from "../../components/kanbanBoard/KanbanbBoard";
+import KanbanBoard from "../../components/kanban/kanbanBoard/KanbanbBoard";
+import RightPanelProject from "../../components/rightPanel/rightPanelProject/RightPanelProject";
 
 const Project = () => {
     const { projectId } = useParams();

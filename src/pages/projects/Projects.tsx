@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
-import { useProjects } from "../../hooks/useProjects";
 import styles from "./Projects.module.css";
 import { useProjectControlStore } from "../../store/projectControlStore";
 import { Project } from "../../types/project";
+import { useProjects } from "../../hooks/project/useProjects";
 
 const Projects = () => {
     const { data: projects, isLoading, isError } = useProjects();
