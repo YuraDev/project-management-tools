@@ -10,3 +10,31 @@
 }
 
 
+/* .text {
+    word-break: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical;
+  } */
+
+
+
+.title {
+    word-break: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* максимум 1 рядок */
+    -webkit-box-orient: vertical;
+  }
+  
+  .description {
+    word-break: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* максимум 2 рядки */
+    -webkit-box-orient: vertical;
+  }

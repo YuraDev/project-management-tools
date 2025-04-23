@@ -25,7 +25,7 @@ const TaskDetails = React.memo(() => {
         <div className={styles.main}>
             <RightPanelHeader taskTitle={selectedTask.title} setIsEditTaskActive={hanldleEditOpen} setIsRightPanelActive={setIsRightPanelActive}/>
             <h2><b>Id:</b> {selectedTask.id}</h2>
-            <h2><b>Description:</b> {selectedTask.description}</h2>
+            <h2 className={styles.description}><b>Description:</b> {selectedTask.description}</h2>
             <h2><b>Status:</b> <StatusText status={selectedTask.status}/></h2>
             <h2><b>Start date:</b> {selectedTask.startDate}</h2>
             <h2><b>End date:</b> {selectedTask.endDate}</h2>

@@ -219,17 +219,7 @@
       "assignedMembers": [
         "1"
       ],
-      "status": "done"
-    },
-    {
-      "id": "7",
-      "projectId": "3",
-      "title": "4",
-      "description": "4",
-      "assignedMembers": [
-        "3"
-      ],
-      "status": "todo"
+      "status": "in_progress"
     },
     {
       "id": "8",
@@ -240,10 +230,46 @@
       ],
       "title": "5",
       "description": "5",
-      "status": "done",
+      "status": "in_progress",
       "startDate": "2025-04-30",
       "endDate": "",
       "priority": "high"
+    },
+    {
+      "id": "9",
+      "projectId": "3",
+      "assignedMembers": [],
+      "title": "34",
+      "description": "34",
+      "status": "in_progress",
+      "startDate": "",
+      "endDate": "",
+      "priority": "none"
+    },
+    {
+      "id": "10",
+      "projectId": "3",
+      "assignedMembers": [
+        "6",
+        "5"
+      ],
+      "title": "444444444444444444444444444444444444444444444444444444444",
+      "description": "gegd444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444",
+      "status": "todo",
+      "startDate": "",
+      "endDate": "",
+      "priority": "none"
+    },
+    {
+      "id": "11",
+      "projectId": "1",
+      "assignedMembers": [],
+      "title": "ts",
+      "description": "ddsds",
+      "status": "todo",
+      "startDate": "",
+      "endDate": "",
+      "priority": "none"
     }
   ]
 }

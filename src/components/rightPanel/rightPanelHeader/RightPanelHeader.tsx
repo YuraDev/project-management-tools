@@ -10,7 +10,7 @@ interface RightPanelHeaderProps {
 
 const RightPanelHeader = memo(({ taskTitle, setIsEditTaskActive, setIsRightPanelActive }: RightPanelHeaderProps) => {
     return <div className={styles.titleBlock}>
-        <h1><b>{taskTitle}</b></h1>
+        <h1>{taskTitle}</h1>
         <div className={styles.controlIcons}>
             { setIsEditTaskActive && <Settings size={30} onClick={() => setIsEditTaskActive(false)}/> }
             <X size={34} onClick={() => setIsRightPanelActive(false)}/>
