@@ -1,7 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import styles from "./LeftPanelSettingsBlock.module.css";
 import { useUserStore } from "../../../store/userStore";
-import { useUsers } from "../../../hooks/users/useUsers";
 import { useProject } from "../../../hooks/project/useProject";
 import { useProjectUsers } from "../../../hooks/project/useProjectUsers";
 import { useCallback, useState } from "react";
@@ -17,16 +16,16 @@ import { ProjectStatus } from "../../../types/project";
 import AsignMembers from "../../asignMembers/AsignMembers";
 import CustomButton from "../../../ui/button/CustomButton";
 import AddMemberTwo from "../../../modals/AddMember/AddMemberTwo";
+import { useReservedUsers } from "../../../hooks/users/useReservedUsers";
 
 const LeftPanelSettingsBlock = () => {
-
     const navigate = useNavigate();
     const { projectId } = useParams();
+
+    const currentUser = useUserStore((state) => state.currentUser);
+    const { data: initiallyAssignedMembers } = useReservedUsers(currentUser?.reservedMembers || []);
     const { data: project } = useProject(projectId || "");
     const { data: projectMembers } = useProjectUsers(projectId || "");
-    //  todo - change for personal seves + active prohject users
-    const { data: users } = useUsers();
-    const currentUser = useUserStore((state) => state.currentUser);
 
     const [formData, setFormData] = useState({
         title: project?.title || "",
@@ -72,12 +71,8 @@ const LeftPanelSettingsBlock = () => {
         if (!project) return null;
         let data = {
             id: project.id ,
-            title: formData.title || project.title,
-            description: formData.description || project.description,
-            startDate: formData.startDate || project.startDate,
-            endDate: formData.endDate || project.endDate,
             assignedMembers: asignedMembers.map((m) => m.id),
-            status: formData.status || project.status,
+            ...formData
         };
         editProjectMutation.mutate(data);
     }
@@ -114,7 +109,7 @@ const LeftPanelSettingsBlock = () => {
                 <CustomButton text={"Save changes"} onClick={() => handleEdit()} />
                 { currentUser?.role === "admin" && <CustomButton text={"Delete project"} onClick={() => handleDelete()} customStyles={{backgroundColor: "#D10000"}}/> }
             </div>
-            { isAddMembersActive && <AddMemberTwo initiallyAssignedMembers={users} exitAction={() => setIsAddMembersActive(false)} selectedUsers={asignedMembers} handlerFilterUser={handleAsignUserClick}/> }
+            { isAddMembersActive && <AddMemberTwo initiallyAssignedMembers={initiallyAssignedMembers} exitAction={() => setIsAddMembersActive(false)} selectedUsers={asignedMembers} handlerFilterUser={handleAsignUserClick}/> }
         </div>
     )
 }
