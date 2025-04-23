@@ -23,8 +23,11 @@ const LeftPanelSettingsBlock = () => {
     const { projectId } = useParams();
 
     const currentUser = useUserStore((state) => state.currentUser);
-    const { data: initiallyAssignedMembers } = useReservedUsers(currentUser?.reservedMembers || []);
     const { data: project } = useProject(projectId || "");
+    const { data: initiallyAssignedMembers } = useReservedUsers([
+        ...currentUser?.reservedMembers || [], 
+        ...project?.assignedMembers || [],
+    ]);
     const { data: projectMembers } = useProjectUsers(projectId || "");
 
     const [formData, setFormData] = useState({
