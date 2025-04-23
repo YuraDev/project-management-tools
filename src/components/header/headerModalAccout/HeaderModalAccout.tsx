@@ -26,23 +26,25 @@ const HeaderModalAccout = () => {
     }
     
     return (
-        <div className={styles.main}>
-            <div className={styles.exitBlock} style={{justifyContent: "end"}} onClick={() => setHeaderModalActive(!headerModalActive)}>
-                <X size={24}/>
-            </div>
-            <div className={styles.item} onClick={() => handleCopy(currentUser?.id ?? "")}>
-                <h2>id:</h2>
-                <h2>{currentUser?.id}</h2>
-            </div>
-            <div className={styles.item} onClick={handleLogout}>
-                <h2>Logout</h2>
-                <LogOut size={20}/>
-            </div>
-            {hasCopied && (
-                <div className={styles.copyAlert}>
-                    Copied!
+        <div className={styles.overlay}  onClick={() => setHeaderModalActive(false)}>
+            <div className={styles.main} onClick={(event) => event.stopPropagation()}>
+                <div className={styles.exitBlock} style={{justifyContent: "end"}} onClick={() => setHeaderModalActive(!headerModalActive)}>
+                    <X size={24}/>
                 </div>
-            )}
+                <div className={styles.item} onClick={() => handleCopy(currentUser?.id ?? "")}>
+                    <h2>id:</h2>
+                    <h2>{currentUser?.id}</h2>
+                </div>
+                <div className={styles.item} onClick={handleLogout}>
+                    <h2>Logout</h2>
+                    <LogOut size={20}/>
+                </div>
+                {hasCopied && (
+                    <div className={styles.copyAlert}>
+                        Copied!
+                    </div>
+                )}
+            </div>
         </div>
     )
 }

@@ -2,12 +2,10 @@ import { NavLink } from "react-router-dom";
 import styles from "./Projects.module.css";
 import { useProjectControlStore } from "../../store/projectControlStore";
 import { Project } from "../../types/project";
-import { useProjects } from "../../hooks/project/useProjects";
 import { useUserProjects } from "../../hooks/users/useUserProjects";
 import { useUserStore } from "../../store/userStore";
 
 const Projects = () => {
-    // const { data: projects, isLoading, isError } = useProjects();
     const currentUser = useUserStore((state) => state.currentUser);
     const { data: projects, isLoading, isError } = useUserProjects(currentUser?.id || "");
 
