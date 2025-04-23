@@ -7,7 +7,7 @@ import { useUsers } from "../../hooks/users/useUsers";
 
 interface AddMemberProps {
 // todo - change for initiallyAssignedMembers
-initiallyAssignedMembers?: User[],
+    initiallyAssignedMembers?: User[],
     exitAction: () => void,
     assignedMembers: string[],
     setAssignedMembers: React.Dispatch<React.SetStateAction<string[]>>,

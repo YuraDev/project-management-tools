@@ -141,6 +141,19 @@
         "7"
       ],
       "status": "planned"
+    },
+    {
+      "id": "4",
+      "title": "fourth project",
+      "description": "#4",
+      "startDate": "",
+      "endDate": "",
+      "assignedMembers": [
+        "5",
+        "7",
+        "4"
+      ],
+      "status": "in_progress"
     }
   ],
   "tasks": [

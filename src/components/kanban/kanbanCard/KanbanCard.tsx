@@ -11,18 +11,11 @@ interface KanbanCardProps {
 const KanbanCard = ({ task, handleOnTaskClick }: KanbanCardProps) => {
     const { data: users } = useTaskUsers(task.assignedMembers);
     return(
-        // <div className={styles.cardMain  + " w-full"} onClick={() => handleOnTaskClick(task)}>
         <div className={styles.cardMain  + " w-full"} onClick={() => handleOnTaskClick(task)}>
-<h3 className={`text-lg font-semibold ${styles.title}`}>
-  {task.title}
-</h3>            
-{/* <p className="text-sm text-gray-600 ">{task.description}</p> */}
-            {/* <p  className={`text-sm text-gray-600 ${styles.text}`}>
-{task.description}</p> */}
-
-<p className={`text-sm text-gray-600 ${styles.description}`}>
-  {task.description}
-</p>
+            <h3 className={`text-lg font-semibold ${styles.title}`}>{task.title}</h3>            
+             <p className={`text-sm text-gray-600 ${styles.description}`}>
+                {task.description}
+            </p>
             { users && <UserIconCollection size={24} users={users}/> }
         </div>
     )

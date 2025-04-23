@@ -1,5 +1,4 @@
 import React, { useCallback, useState } from "react";
-import AddMember from "../../modals/AddMember/AddMember";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createProject } from "../../services/projectApi";
 import { Project } from "../../types/project";
@@ -11,11 +10,17 @@ import FormTextarea from "../../ui/textArea/FormTextarea";
 import FormButtonSubmit from "../../ui/button/FormButtonSubmit";
 import CustomForm from "../../ui/form/CustomForm";
 import FormLayout from "../../layouts/formLayout/FormLayout";
-import { useTaskUsers } from "../../hooks/task/useTaskUsers";
 import { useNavigate } from "react-router-dom";
+import { useUserStore } from "../../store/userStore";
+import { useReservedUsers } from "../../hooks/users/useReservedUsers";
+import { User } from "../../types/user";
+import AddMemberTwo from "../../modals/AddMember/AddMemberTwo";
 
 const CreateProject = () => {
     const navigate = useNavigate();
+    const currentUser = useUserStore((state) => state.currentUser);
+    const { data: initiallyAsignedMembers } = useReservedUsers(currentUser?.reservedMembers || []);
+
     const [formData, setFormData] = useState<Omit<Project, "id">>({
         title: "",
         description: "",
@@ -25,7 +30,7 @@ const CreateProject = () => {
         status: "planned",
     });
     const [addMembersActive, setAddMembersActive] = useState<boolean>(false);
-    const [assignedMembers, setAssignedMembers] = useState<string[]>([]);
+    const [assignedMembers, setAssignedMembers] = useState<User[]>([]);
     
     const queryClient = useQueryClient();
     const mutation = useMutation({
@@ -34,8 +39,14 @@ const CreateProject = () => {
             queryClient.invalidateQueries({ queryKey: ["projects"] });
         }
     });
-    const { data: users } = useTaskUsers(assignedMembers);
-    
+
+    const handlerFilterUser = (chosenUser: User) => {
+        setAssignedMembers((prev) => 
+            prev.find((u) => u.id === chosenUser.id) 
+            ? prev.filter((u) => u.id !== currentUser?.id)
+            : [...prev, chosenUser]
+        )
+    }
     const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = event.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
@@ -43,13 +54,13 @@ const CreateProject = () => {
     
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        if ( !formData.title ) {
+        if ( !formData.title || !currentUser ) {
             alert("Please fill all the requered fields!");
             return;
         }
         mutation.mutate({
             ...formData,
-            assignedMembers: assignedMembers,
+            assignedMembers: [...assignedMembers.map((u) => u.id), currentUser.id],
         });
         navigate("/projects");
     };
@@ -69,13 +80,13 @@ const CreateProject = () => {
                 <label>End Date:
                     <FormDateInput name={"endDate"} value={formData.endDate} onChange={handleChange} />
                 </label>
-                <AsignMembers users={users || []} setAddMembersActive={setAddMembersActive} />
+                <AsignMembers users={assignedMembers} setAddMembersActive={setAddMembersActive} />
                 <label>Status:
                     <FormSelect name={"status"} value={formData.status} onChange={handleChange} options={["planned", "in_progress", "completed"]}/>
                 </label>
                 <FormButtonSubmit text={"Create Project"}/>
             </CustomForm>
-            { addMembersActive && <AddMember exitAction={() => setAddMembersActive(false)} assignedMembers={assignedMembers} setAssignedMembers={setAssignedMembers} /> }
+            { addMembersActive && <AddMemberTwo exitAction={() => setAddMembersActive(false)} selectedUsers={assignedMembers} handlerFilterUser={handlerFilterUser} initiallyAssignedMembers={initiallyAsignedMembers}/> }
         </FormLayout>
     )
 }
