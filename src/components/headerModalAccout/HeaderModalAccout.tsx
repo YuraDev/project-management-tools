@@ -39,17 +39,7 @@ const HeaderModalAccout = () => {
                 <LogOut size={20}/>
             </div>
             {hasCopied && (
-                <div style={{
-                    position: "absolute",
-                    top: "-30px",
-                    left: "50%",
-                    transform: "translateX(-50%)",
-                    background: "#333",
-                    color: "#fff",
-                    padding: "5px 10px",
-                    borderRadius: "5px",
-                    fontSize: "14px"
-                }}>
+                <div className={styles.copyAlert}>
                     Copied!
                 </div>
             )}

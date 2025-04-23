@@ -106,7 +106,7 @@ const People = () => {
                         <div className={styles.searchElement}>
                             <CustomUserIcon title={searchedUser.name}/>
                             <h3>{searchedUser.name}</h3>
-                            <UserPlus size={36} onClick={() => handleReserveUser(searchedUser.id)}/>
+                            <UserPlus size={30} onClick={() => handleReserveUser(searchedUser.id)}/>
                         </div>
                 }
             </div>
@@ -117,8 +117,8 @@ const People = () => {
                             <CustomUserIcon title={user.name}/>
                             <h3>{user.name}</h3>
                             <div style={{display: "flex", gap: 24}}>
-                                { currentUser?.role === "admin" && <UserPen size={36} onClick={() => navigate(`/edit/user/${user.id}`)}/> }
-                                <UserMinus size={36} onClick={() => handleRemoveReservedUser(user.id)}/>
+                                { currentUser?.role === "admin" && <UserPen size={30} onClick={() => navigate(`/edit/user/${user.id}`)}/> }
+                                <UserMinus size={30} onClick={() => handleRemoveReservedUser(user.id)}/>
                             </div>
                         </li>
                     )
