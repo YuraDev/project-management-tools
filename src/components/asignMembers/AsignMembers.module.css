@@ -1,20 +1,5 @@
-label {
-    display: flex;
-    flex-direction: column;
-    font-weight: 500;
-    color: #1f2937;
-  }
-  
-  /* .asignBlock{
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-  } */
-
-
-  .asignBlock{
+.asignBlock{
     display: grid;
-    /* grid-template-columns: repeat(2, 1fr); */
     grid-template-areas:
     "label label"
     "button icons";
@@ -27,7 +12,7 @@ label {
     width: 100%;
     grid-area: label;
   }
-
+  
   .assignedMembers button {
     margin-top: 4px;
     padding: 6px 20px;
@@ -36,9 +21,7 @@ label {
     border-radius: 6px;
     cursor: pointer;
     font-size: 14px;
-    /* color: #6b21a8; */
     color: purple;
-
     grid-area: button;
   }
   

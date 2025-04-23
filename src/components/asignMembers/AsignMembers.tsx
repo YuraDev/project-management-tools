@@ -5,7 +5,6 @@ import styles from "./AsignMembers.module.css";
 
 interface AsignMembersProps {
     users: User[],
-    // todo - possibly add this field to form zustand
     setAddMembersActive: (value: boolean) => void,
     uniqueText?: string,
     maxIcons?: number,

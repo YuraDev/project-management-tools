@@ -5,7 +5,7 @@ import KanbanCard from '../kanbanCard/KanbanCard';
 type Props = {
   task: Task;
   index: number;
-  handleOnTaskClick?: (task: Task) => void;
+  handleOnTaskClick: (task: Task) => void;
 };
 
 export const KanbanDraggableCard = ({ task, index, handleOnTaskClick }: Props) => {
@@ -17,9 +17,7 @@ export const KanbanDraggableCard = ({ task, index, handleOnTaskClick }: Props) =
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           className="w-full"
-          // style={{ width: '100%' }}
         >
-            {/* @ts-ignore */}
           <KanbanCard task={task} handleOnTaskClick={handleOnTaskClick} />
         </div>
       )}
