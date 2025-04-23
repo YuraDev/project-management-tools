@@ -36,16 +36,16 @@
     border-bottom-right-radius: 16px;
     border-bottom-left-radius: 16px;
     padding: 10px;
-    /* min-height: calc(100vh - 200px); */
     height: calc(100vh - 200px);
     display: flex;
     flex-direction: column;
     justify-content: start;
-    /* align-items: center; */
     gap: 0.5rem;
 
+
+    
     overflow-y: auto;
-    scrollbar-width: none; /* Firefox */
+    scrollbar-width: none;
     -ms-overflow-style: none; 
 
     width: 100%;

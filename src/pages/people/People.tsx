@@ -35,7 +35,7 @@ const People = () => {
         if ( debouncerTimer ) clearTimeout(debouncerTimer);
         const timer = setTimeout(() => {
             setShouldSearch(true);
-        }, 2000);
+        }, 1000);
         setDebouncerTimer(timer);
     }
 

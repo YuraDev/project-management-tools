@@ -34,7 +34,7 @@
         "2",
         "5",
         "8",
-        "7"
+        "6"
       ]
     },
     {
@@ -167,7 +167,7 @@
         "3",
         "2"
       ],
-      "status": "todo",
+      "status": "done",
       "startDate": "2025-04-20",
       "endDate": "2025-04-25",
       "priority": "low"
@@ -196,7 +196,7 @@
         "1",
         "9"
       ],
-      "status": "done",
+      "status": "in_progress",
       "startDate": "",
       "endDate": "",
       "priority": "low"
