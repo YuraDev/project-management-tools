@@ -1,7 +1,8 @@
 .main{
     position: fixed;
     right: 0;
-    top: 100px;
+    /* top: 100px; */
+    top: calc( ((100px - 36px) / 2) + 36px);
     /* padding: 20px; */
     display: flex;
     flex-direction: column;
@@ -28,7 +29,7 @@
 }
 
 .item{
-    width: 240px;
+    width: 140px;
     cursor: pointer;
     display: flex;
     justify-content: space-between;

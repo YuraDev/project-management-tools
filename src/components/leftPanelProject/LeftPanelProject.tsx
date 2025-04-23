@@ -5,7 +5,7 @@ import { useUserStore } from "../../store/userStore";
 import { lazy, Suspense } from "react";
 
 const LeftPanelInfoBlock = lazy(() => import("../leftPanelInfoBlock/LeftPanelInfoBlock"));
-const LeftPanelSettings = lazy(() => import("../leftPanelSettingsBlcok/LeftPanelSettingsBlock"));
+const LeftPanelSettings = lazy(() => import("../leftPanelSettingsBlock/LeftPanelSettingsBlock"));
 
 const LeftPanelProject = () => {
     const setIsLeftPanelActive = useProjectControlStore((state) => state.setIsLeftPanelActive);

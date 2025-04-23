@@ -11,7 +11,6 @@ import CreateUser from '../../pages/createUser/CreateUser';
 import EditUser from '../../pages/editUser/EditUser';
 
 const RouteLayout = () => {
-
   return (
         <Routes>
           {/* Non protected routes */}

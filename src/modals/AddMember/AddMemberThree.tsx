@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import styles from "./AddMember.module.css";
 import { useUsers } from "../../hooks/useUsers";
 import CustomUserIcon from "../../ui/icons/CustomUserIcon";
@@ -17,15 +17,15 @@ const AddMemberThree: React.FC<AddMemberThreeProps> = ({ initiallyAsignedMembers
     let { data: users, isLoading, isError } = useUsers();
 
     if (initiallyAsignedMembers) users = initiallyAsignedMembers;
-    // todo - change for getting initialValues only outside
+    // todo - change fo getting initialValues only outside
     
-    const handleOnClickMember = (chosenUser: User) => {
+    const handleOnClickMember = useCallback((chosenUser: User) => {
         setAssignedMembers( (prev) => {
             return prev.find((u) => u.id === chosenUser.id) 
                 ? prev.filter((u) => u.id !== chosenUser.id)
                 : [...prev, chosenUser];
         });
-    }
+    }, [setAssignedMembers]);
 
     useEffect(() => {
         document.body.style.overflow = "hidden";

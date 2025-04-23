@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import styles from "./AddMember.module.css";
 import { useUsers } from "../../hooks/useUsers";
 import CustomUserIcon from "../../ui/icons/CustomUserIcon";
@@ -6,26 +6,27 @@ import { SquarePlus } from "lucide-react";
 import { User } from "../../types/user";
 
 interface AddMemberProps {
-    initiallyAsignedMembers?: User[],
+// todo - change for initiallyAssignedMembers
+initiallyAssignedMembers?: User[],
     exitAction: () => void,
     assignedMembers: string[],
     setAssignedMembers: React.Dispatch<React.SetStateAction<string[]>>,
 }
 
-const AddMember: React.FC<AddMemberProps> = React.memo(({ initiallyAsignedMembers, exitAction, assignedMembers, setAssignedMembers }) => {
+const AddMember: React.FC<AddMemberProps> = React.memo(({ initiallyAssignedMembers, exitAction, assignedMembers, setAssignedMembers }) => {
 
     let { data: users, isLoading, isError } = useUsers();
 
-    if (initiallyAsignedMembers) users = initiallyAsignedMembers;
+    if (initiallyAssignedMembers) users = initiallyAssignedMembers;
     // todo - change for getting initialValues only outside
     
-    const handleOnClickMember = (id: string) => {
+    const handleOnClickMember = useCallback((id: string) => {
         setAssignedMembers( (prev) => 
             prev.includes(id)
             ? prev.filter((el) => el !== id)
             : [...prev, id]
         );
-    }
+    }, [setAssignedMembers]);
 
     useEffect(() => {
         document.body.style.overflow = "hidden";
@@ -35,7 +36,7 @@ const AddMember: React.FC<AddMemberProps> = React.memo(({ initiallyAsignedMember
     }, []);
 
     if (isLoading) return <div>Loading...</div>;
-    if (isError) return <div>Error: {isError}</div>;
+    if (isError) return <div>Problem during getting members!</div>;
 
     return(
         <div className={styles.mainOverlay} onClick={exitAction}>

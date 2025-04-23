@@ -8,7 +8,6 @@ interface AuthFormLayoutProps {
 }
 
 const AuthFormLayout = ({ handleSubmit, children, customStyles }: AuthFormLayoutProps) => {
-
     return <div className={styles.mainOverlay} style={customStyles}>
         <form onSubmit={handleSubmit} className={styles.formAuth}>
             { children }

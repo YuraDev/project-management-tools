@@ -1,18 +1,16 @@
 import React, { useEffect } from "react";
 import styles from "./AddMember.module.css";
-import { useUsers } from "../../hooks/useUsers";
 import CustomUserIcon from "../../ui/icons/CustomUserIcon";
 import { SquarePlus } from "lucide-react";
 import { User } from "../../types/user";
-import { useProjectControlStore } from "../../store/projectControlStore";
 
 interface AddMemberTwoProps {
-    initiallyAsignedMembers?: User[],
+    initiallyAssignedMembers?: User[],
     exitAction: () => void,
     selectedUsers: User[],
     handlerFilterUser: (value: User) => void,
 }
-const AddMemberTwo: React.FC<AddMemberTwoProps> = ({ initiallyAsignedMembers, exitAction, selectedUsers, handlerFilterUser }) => {
+const AddMemberTwo: React.FC<AddMemberTwoProps> = ({ initiallyAssignedMembers, exitAction, selectedUsers, handlerFilterUser }) => {
     useEffect(() => {
         document.body.style.overflow = "hidden";
         return () => {
@@ -24,7 +22,7 @@ const AddMemberTwo: React.FC<AddMemberTwoProps> = ({ initiallyAsignedMembers, ex
         <div className={styles.mainOverlay} onClick={exitAction}>
             <div className={styles.main} onClick={(event) => event.stopPropagation()}>
                 {
-                    initiallyAsignedMembers && initiallyAsignedMembers
+                    initiallyAssignedMembers && initiallyAssignedMembers
                         .map((user) =>  
                             <div className={styles.element} key={user.id}>
                                 <div className={styles.iconAndTitle}>

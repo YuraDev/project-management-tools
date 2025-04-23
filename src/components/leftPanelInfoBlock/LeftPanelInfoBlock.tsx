@@ -75,7 +75,7 @@ const LeftPanelInfoBlock = () => {
                 isAddMembersActive && (
                     <Suspense fallback={null}>
                         <AddMemberTwo 
-                            initiallyAsignedMembers={initiallyAsignedMembers} 
+                            initiallyAssignedMembers={initiallyAsignedMembers} 
                             exitAction={() => setIsAddMembersActive(false)} 
                             selectedUsers={usersFilter} 
                             handlerFilterUser={setUserFilter} 

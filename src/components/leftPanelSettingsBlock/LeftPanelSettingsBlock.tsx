@@ -114,7 +114,7 @@ const LeftPanelSettingsBlock = () => {
                 <CustomButton text={"Save changes"} onClick={() => handleEdit()} />
                 { currentUser?.role === "admin" && <CustomButton text={"Delete project"} onClick={() => handleDelete()} customStyles={{backgroundColor: "#D10000"}}/> }
             </div>
-            { isAddMembersActive && <AddMemberTwo initiallyAsignedMembers={users} exitAction={() => setIsAddMembersActive(false)} selectedUsers={asignedMembers} handlerFilterUser={handleAsignUserClick}/> }
+            { isAddMembersActive && <AddMemberTwo initiallyAssignedMembers={users} exitAction={() => setIsAddMembersActive(false)} selectedUsers={asignedMembers} handlerFilterUser={handleAsignUserClick}/> }
         </div>
     )
 }
