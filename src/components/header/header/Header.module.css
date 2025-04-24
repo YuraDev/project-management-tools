@@ -15,6 +15,7 @@ nav{
 nav a{
     color: black;
     font-size: 22px;
+    font-weight: bold;
 }
 
 .active{

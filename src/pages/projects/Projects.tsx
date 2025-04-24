@@ -4,6 +4,7 @@ import { useProjectControlStore } from "../../store/projectControlStore";
 import { Project } from "../../types/project";
 import { useUserProjects } from "../../hooks/users/useUserProjects";
 import { useUserStore } from "../../store/userStore";
+import { useUserThemeStore } from "../../store/userThemeStore";
 
 const Projects = () => {
     const currentUser = useUserStore((state) => state.currentUser);
@@ -19,6 +20,14 @@ const Projects = () => {
             clearFiltersAndSorts();
         setSelectedProject(chosenProject);
     }
+
+    const highlightMode = useUserThemeStore((state) => state.highlightMode);
+    const themeClassMap = {
+        purple: styles.purpleBlock,
+        green: styles.greenBlock,
+        blue: styles.blueBlock,
+        orange: styles.orangeBlock,
+    };
     
     if (isLoading) return <div>Loading...</div>;
     if (isError) return <div>Error: Something went wrong while fetching the projects!{isError}</div>;
@@ -29,7 +38,7 @@ const Projects = () => {
             {
                 projects?.map((project) => 
                     <NavLink to={`/projects/${project.id}`} key={project.id} onClick={() => handleChoseProject(project)}>
-                        <div className={styles.element}>
+                        <div className={`${styles.element} ${highlightMode && themeClassMap[highlightMode]}`}>
                             <div>
                                 <h3>{project.title}</h3>
                                 <p>{project.description}</p>

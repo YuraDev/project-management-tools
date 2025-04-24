@@ -10,6 +10,9 @@ import styles from "../leftPanelProject/LeftPanelProject.module.css"
 import { useCallback } from "react"
 import { lazy, Suspense } from "react"
 import { useProjectUsers } from "../../../hooks/project/useProjectUsers"
+import { useUserThemeStore } from "../../../store/userThemeStore"
+import { useUsersThemes } from "../../../hooks/usersThemes/useUserThemes"
+import { useProject } from "../../../hooks/project/useProject"
 
 const AddMemberTwo = lazy(() => import("../../../modals/AddMember/AddMemberTwo"));
 
@@ -34,6 +37,10 @@ const LeftPanelInfoBlock = () => {
     const setIsEditTaskActive = useProjectControlStore((state) => state.setIsEditTaskActive);
     const setIsAddTaskActive = useProjectControlStore((state) => state.setIsAddTaskActive);
     const setIsRightPanelActive = useProjectControlStore((state) => state.setIsRightPanelActive);
+    
+    const { data: project } = useProject(projectId || "");
+    const { data: projectMembers } = useProjectUsers(projectId || "");
+    const { data: usersThemes } = useUsersThemes(project?.assignedMembers || []);
         
     const handleAddTaskOpen = useCallback(() => {
         setIsEditTaskActive(false);
@@ -58,7 +65,8 @@ const LeftPanelInfoBlock = () => {
                         <CheckBoxStatus<TaskPriority>  status={"high"} checked={priorityFilter.includes("high")} setStatusFilter={setPriorityFilter}/>
                     </div>
                 </label>
-                <AsignMembers 
+                <AsignMembers
+                    usersThemes={usersThemes || []}
                     users={usersFilter} setAddMembersActive={setIsAddMembersActive} 
                     uniqueText={"Select members"} maxIcons={3} iconSize={24}
                 />
@@ -78,7 +86,8 @@ const LeftPanelInfoBlock = () => {
                             initiallyAssignedMembers={initiallyAsignedMembers} 
                             exitAction={() => setIsAddMembersActive(false)} 
                             selectedUsers={usersFilter} 
-                            handlerFilterUser={setUserFilter} 
+                            handlerFilterUser={setUserFilter}
+                            usersThemes={usersThemes}
                         />
                     </Suspense>
                 )

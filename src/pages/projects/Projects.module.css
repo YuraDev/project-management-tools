@@ -21,10 +21,30 @@
     align-items: center;
 }
 
-.element:hover{
+/* .purpleBlock */
+.purpleBlock:hover{
     background-color: #f5f3ff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
 }
+
+/* .greenBlock */
+.greenBlock:hover {
+    background-color: #dcfce7;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* .blueBlock */
+.blueBlock:hover {
+    background-color: #dbeafe;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* .orangeBlock */
+.orangeBlock:hover {
+    background-color: #ffedd5;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+}
+
 
 .element h3{
     font-size: 18px;
