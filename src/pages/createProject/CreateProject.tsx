@@ -15,6 +15,7 @@ import { useUserStore } from "../../store/userStore";
 import { useReservedUsers } from "../../hooks/users/useReservedUsers";
 import { User } from "../../types/user";
 import AddMemberTwo from "../../modals/AddMember/AddMemberTwo";
+import { useUsersThemes } from "../../hooks/usersThemes/useUserThemes";
 
 const CreateProject = () => {
     const navigate = useNavigate();
@@ -31,6 +32,7 @@ const CreateProject = () => {
     });
     const [addMembersActive, setAddMembersActive] = useState<boolean>(false);
     const [assignedMembers, setAssignedMembers] = useState<User[]>([]);
+    const { data: usersThemes } = useUsersThemes(currentUser?.reservedMembers || []);
     
     const queryClient = useQueryClient();
     const mutation = useMutation({
@@ -80,13 +82,13 @@ const CreateProject = () => {
                 <label>End Date:
                     <FormDateInput name={"endDate"} value={formData.endDate} onChange={handleChange} />
                 </label>
-                <AsignMembers users={assignedMembers} setAddMembersActive={setAddMembersActive} />
+                <AsignMembers usersThemes={usersThemes || []} users={assignedMembers} setAddMembersActive={setAddMembersActive} />
                 <label>Status:
                     <FormSelect name={"status"} value={formData.status} onChange={handleChange} options={["planned", "in_progress", "completed"]}/>
                 </label>
                 <FormButtonSubmit text={"Create Project"}/>
             </CustomForm>
-            { addMembersActive && <AddMemberTwo exitAction={() => setAddMembersActive(false)} selectedUsers={assignedMembers} handlerFilterUser={handlerFilterUser} initiallyAssignedMembers={initiallyAsignedMembers}/> }
+            { addMembersActive && <AddMemberTwo usersThemes={usersThemes} exitAction={() => setAddMembersActive(false)} selectedUsers={assignedMembers} handlerFilterUser={handlerFilterUser} initiallyAssignedMembers={initiallyAsignedMembers}/> }
         </FormLayout>
     )
 }

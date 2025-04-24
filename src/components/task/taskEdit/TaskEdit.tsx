@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styles from "./TaskEdit.module.css";
 import { useProjectControlStore } from "../../../store/projectControlStore";
 import { Task, TaskPriority } from "../../../types/task";
@@ -15,14 +15,25 @@ import FormDateInput from "../../../ui/input/FormDateInput";
 import FormButtonSubmit from "../../../ui/button/FormButtonSubmit";
 import CustomButton from "../../../ui/button/CustomButton";
 import AddMember from "../../../modals/AddMember/AddMember";
+import { useUsersThemes } from "../../../hooks/usersThemes/useUserThemes";
+import AddMemberTwo from "../../../modals/AddMember/AddMemberTwo";
+import { useReservedUsers } from "../../../hooks/users/useReservedUsers";
+import { User } from "../../../types/user";
+import { useParams } from "react-router-dom";
+import { useProject } from "../../../hooks/project/useProject";
 
 const TaskEdit = React.memo(() => {
+    const { projectId } = useParams();
+    const { data: project } = useProject(projectId || "");
+    
 
     const selectedTask = useProjectControlStore((state) => state.selectedTask);
     const setIsRightPanelActive = useProjectControlStore((state) => state.setIsRightPanelActive);
     const setIsEditTaskActive = useProjectControlStore((state) => state.setIsEditTaskActive);
     const clearSelectedTask = useProjectControlStore((state) => state.clearSelectedTask);
     
+    const { data: initiallyAsignedMembers } = useReservedUsers(selectedTask?.assignedMembers || []);
+
     const [formData, setFormData] = useState<Omit<Task, "id" | "projectId" | "assignedMembers">>({
         title: selectedTask?.title || "",
         description: selectedTask?.description || "",
@@ -31,8 +42,8 @@ const TaskEdit = React.memo(() => {
         endDate: selectedTask?.endDate || "", 
         priority: selectedTask?.priority || "none",
     });
-    const [assignedMembers, setAssignedMembers] = useState<string[]>(selectedTask?.assignedMembers || []);
     const [addMembersActive, setAddMembersActive] = useState<boolean>(false);
+    const [assignedMembers, setAssignedMembers] = useState<User[]>(initiallyAsignedMembers || []);
     
     const queryClient = useQueryClient();
     const editTaskMutation = useMutation({
@@ -48,7 +59,20 @@ const TaskEdit = React.memo(() => {
         }
     });
 
-    const { data: users } = useTaskUsers(assignedMembers);
+    // const { data: users } = useTaskUsers(assignedMembers);
+    const { data: usersThemes } = useUsersThemes(selectedTask?.assignedMembers || []);
+
+
+    const { data: projectAsignedMembers } = useReservedUsers(project?.assignedMembers || []);
+
+    const handleAsignUserClick = useCallback((chosenUser: User) => {
+            setAssignedMembers((prev) => {
+                const isAdded = prev.find((u) => u.id === chosenUser.id);
+                return isAdded
+                ? prev.filter((u) => u.id !== chosenUser.id)
+                : [...prev, chosenUser];
+            })
+    }, []);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = event.target;
@@ -64,7 +88,7 @@ const TaskEdit = React.memo(() => {
         editTaskMutation.mutate({
             id: selectedTask.id,
             projectId: selectedTask.projectId,
-            assignedMembers: assignedMembers,
+            assignedMembers: assignedMembers.map((am) => am.id),
             ...formData,
         });
     };
@@ -76,6 +100,11 @@ const TaskEdit = React.memo(() => {
         }
     }
 
+    useEffect(() => {
+        if (initiallyAsignedMembers)
+            setAssignedMembers(initiallyAsignedMembers);
+    }, [initiallyAsignedMembers]);
+
     return(
         <CustomForm onSubmit={handleSubmitEdit} customStyles={{ margin: 15, minHeight: "calc(100vh - 130px)", gap: 0 }}>
             <RightPanelHeader taskTitle={selectedTask?.title || ""} setIsEditTaskActive={setIsEditTaskActive} setIsRightPanelActive={setIsRightPanelActive}/>
@@ -86,7 +115,7 @@ const TaskEdit = React.memo(() => {
             <label>Description:
                 <FormTextarea name={"description"} value={formData.description} onChange={handleChange} />                
             </label>
-            <AsignMembers users={users || []} setAddMembersActive={setAddMembersActive} maxIcons={1}/>
+            <AsignMembers usersThemes={usersThemes || []} users={assignedMembers || []} setAddMembersActive={setAddMembersActive} maxIcons={1}/>
             <label>Status:
                 <FormSelect name={"status"} value={formData.status} onChange={handleChange} options={["todo", "in_progress", "done"]}/>
             </label>
@@ -100,7 +129,9 @@ const TaskEdit = React.memo(() => {
                 <FormSelect<TaskPriority> name={"priority"} value={formData.priority} onChange={handleChange} options={["low", "medium", "high", "none"]}/>
             </label>
             <FormButtonSubmit text={"Save chenges"} customStyles={{height: 40}}/>
-            <CustomButton text={"Delete task"} onClick={() => handleDelete()} customStyles={{backgroundColor: "#D10000", height: 40}}/> { addMembersActive && <AddMember exitAction={() => setAddMembersActive(false)} assignedMembers={assignedMembers} setAssignedMembers={setAssignedMembers} /> }
+            <CustomButton text={"Delete task"} onClick={() => handleDelete()} customStyles={{backgroundColor: "#D10000", height: 40}}/> 
+            {/* { addMembersActive && <AddMember exitAction={() => setAddMembersActive(false)} assignedMembers={assignedMembers} setAssignedMembers={setAssignedMembers} /> } */}
+            { addMembersActive && <AddMemberTwo usersThemes={usersThemes || []} initiallyAssignedMembers={projectAsignedMembers} exitAction={() => setAddMembersActive(false)} selectedUsers={assignedMembers} handlerFilterUser={handleAsignUserClick}/> }
             </div>
         </CustomForm>
     )

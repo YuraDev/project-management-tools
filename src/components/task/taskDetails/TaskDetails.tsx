@@ -1,5 +1,6 @@
 
 import { useTaskUsers } from "../../../hooks/task/useTaskUsers";
+import { useUsersThemes } from "../../../hooks/usersThemes/useUserThemes";
 import { useProjectControlStore } from "../../../store/projectControlStore";
 import StatusText from "../../../ui/statusText/StatusText";
 import RightPanelHeader from "../../rightPanel/rightPanelHeader/RightPanelHeader";
@@ -14,6 +15,8 @@ const TaskDetails = React.memo(() => {
     const setIsEditTaskActive = useProjectControlStore((state) => state.setIsEditTaskActive);
     const setIsAddTaskActive = useProjectControlStore((state) => state.setIsAddTaskActive);
     const { data: asignedTaskUsers } = useTaskUsers(selectedTask?.assignedMembers || []);
+    const { data: usersThemes } = useUsersThemes(selectedTask?.assignedMembers || []);
+
 
     const hanldleEditOpen = useCallback(() => {
         setIsAddTaskActive(false);
@@ -30,7 +33,7 @@ const TaskDetails = React.memo(() => {
             <h2><b>Start date:</b> {selectedTask.startDate}</h2>
             <h2><b>End date:</b> {selectedTask.endDate}</h2>
             <h2><b>Assigned members:</b></h2>
-            <UserIconCollection users={asignedTaskUsers || []} size={30} maxIcons={6}/>
+            <UserIconCollection usersThemes={usersThemes} users={asignedTaskUsers || []} size={30} maxIcons={6}/>
         </div>
     )
 });

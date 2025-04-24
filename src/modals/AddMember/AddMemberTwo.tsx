@@ -3,14 +3,16 @@ import styles from "./AddMember.module.css";
 import CustomUserIcon from "../../ui/icons/CustomUserIcon";
 import { SquarePlus } from "lucide-react";
 import { User } from "../../types/user";
+import { UserTheme } from "../../types/userTheme";
 
 interface AddMemberTwoProps {
     initiallyAssignedMembers?: User[],
     exitAction: () => void,
     selectedUsers: User[],
     handlerFilterUser: (value: User) => void,
+    usersThemes?: UserTheme[],
 }
-const AddMemberTwo: React.FC<AddMemberTwoProps> = ({ initiallyAssignedMembers, exitAction, selectedUsers, handlerFilterUser }) => {
+const AddMemberTwo: React.FC<AddMemberTwoProps> = ({ initiallyAssignedMembers, exitAction, selectedUsers, handlerFilterUser, usersThemes }) => {
     useEffect(() => {
         document.body.style.overflow = "hidden";
         return () => {
@@ -26,7 +28,7 @@ const AddMemberTwo: React.FC<AddMemberTwoProps> = ({ initiallyAssignedMembers, e
                         .map((user) =>  
                             <div className={styles.element} key={user.id}>
                                 <div className={styles.iconAndTitle}>
-                                    <CustomUserIcon title={user.name[0]} />
+                                    <CustomUserIcon title={user.name[0]} backgroundColor={usersThemes?.find((ut) => ut.userId === user.id)?.iconColor} />
                                     <h3>{user.name}</h3>
                                 </div>
                                 <div onClick={() => handlerFilterUser(user)}>

@@ -7,6 +7,7 @@ import { updateReservedMembers } from "../../services/userApi";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../hooks/users/useUser";
 import { useReservedUsers } from "../../hooks/users/useReservedUsers";
+import { useUsersThemes } from "../../hooks/usersThemes/useUserThemes";
 
 const People = () => {
     const navigate = useNavigate();
@@ -18,9 +19,9 @@ const People = () => {
     const currentUser = useUserStore((state) => state.currentUser);
     const setUser = useUserStore((state) => state.setLoggedInUser);
 
-    // change for reserved users of the user
     const { data: users, isLoading, isError } = useReservedUsers(currentUser?.reservedMembers ?? []);
     const { data: searchedUser, refetch } = useUser(searchTerm, { enabled: false }); // call manually
+    const { data: usersThemes } = useUsersThemes(currentUser?.reservedMembers || []);
 
     useEffect(() => {
         if ( shouldSearch && searchTerm !== "" ) {
@@ -50,6 +51,7 @@ const People = () => {
     const handleReserveUser = async (userId: string) => {
         if (!currentUser) return;
         if (currentUser.reservedMembers.includes(userId)) return;
+        if (currentUser.id === userId) return;
         try {
             const updatedUser = await updateReservedMembers({
                 id: currentUser.id,
@@ -114,7 +116,7 @@ const People = () => {
                 {
                     users && users.map((user) => 
                         <li key={user.id} className={styles.element}>
-                            <CustomUserIcon title={user.name}/>
+                            <CustomUserIcon backgroundColor={usersThemes?.find((ut) => ut.userId === user.id)?.iconColor} title={user.name}/>
                             <h3>{user.name}</h3>
                             <div style={{display: "flex", gap: 24}}>
                                 { currentUser?.role === "admin" && <UserPen size={30} onClick={() => navigate(`/edit/user/${user.id}`)}/> }

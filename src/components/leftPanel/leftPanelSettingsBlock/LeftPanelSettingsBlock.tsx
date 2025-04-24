@@ -17,6 +17,7 @@ import AsignMembers from "../../asignMembers/AsignMembers";
 import CustomButton from "../../../ui/button/CustomButton";
 import AddMemberTwo from "../../../modals/AddMember/AddMemberTwo";
 import { useReservedUsers } from "../../../hooks/users/useReservedUsers";
+import { useUsersThemes } from "../../../hooks/usersThemes/useUserThemes";
 
 const LeftPanelSettingsBlock = () => {
     const navigate = useNavigate();
@@ -29,6 +30,7 @@ const LeftPanelSettingsBlock = () => {
         ...project?.assignedMembers || [],
     ]);
     const { data: projectMembers } = useProjectUsers(projectId || "");
+    const { data: usersThemes } = useUsersThemes(project?.assignedMembers || []);
 
     const [formData, setFormData] = useState({
         title: project?.title || "",
@@ -107,12 +109,12 @@ const LeftPanelSettingsBlock = () => {
             <label>Status:
                 <FormSelect<ProjectStatus> name={"status"} value={formData.status} onChange={handleChange} options={["planned", "in_progress", "completed"]}/>
             </label>
-            <AsignMembers users={asignedMembers} setAddMembersActive={setIsAddMembersActive} maxIcons={2}/>
+            <AsignMembers usersThemes={usersThemes || []} users={asignedMembers} setAddMembersActive={setIsAddMembersActive} maxIcons={2}/>
             <div className={styles.buttonBlock}>
                 <CustomButton text={"Save changes"} onClick={() => handleEdit()} />
                 { currentUser?.role === "admin" && <CustomButton text={"Delete project"} onClick={() => handleDelete()} customStyles={{backgroundColor: "#D10000"}}/> }
             </div>
-            { isAddMembersActive && <AddMemberTwo initiallyAssignedMembers={initiallyAssignedMembers} exitAction={() => setIsAddMembersActive(false)} selectedUsers={asignedMembers} handlerFilterUser={handleAsignUserClick}/> }
+            { isAddMembersActive && <AddMemberTwo usersThemes={usersThemes} initiallyAssignedMembers={initiallyAssignedMembers} exitAction={() => setIsAddMembersActive(false)} selectedUsers={asignedMembers} handlerFilterUser={handleAsignUserClick}/> }
         </div>
     )
 }

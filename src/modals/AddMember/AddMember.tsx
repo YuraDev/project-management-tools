@@ -4,21 +4,21 @@ import CustomUserIcon from "../../ui/icons/CustomUserIcon";
 import { SquarePlus } from "lucide-react";
 import { User } from "../../types/user";
 import { useUsers } from "../../hooks/users/useUsers";
+import { UserTheme } from "../../types/userTheme";
 
 interface AddMemberProps {
-// todo - change for initiallyAssignedMembers
     initiallyAssignedMembers?: User[],
     exitAction: () => void,
     assignedMembers: string[],
     setAssignedMembers: React.Dispatch<React.SetStateAction<string[]>>,
+    usersThemes?: UserTheme[],
 }
 
-const AddMember: React.FC<AddMemberProps> = React.memo(({ initiallyAssignedMembers, exitAction, assignedMembers, setAssignedMembers }) => {
+const AddMember: React.FC<AddMemberProps> = React.memo(({ initiallyAssignedMembers, exitAction, assignedMembers, setAssignedMembers, usersThemes }) => {
 
     let { data: users, isLoading, isError } = useUsers();
 
     if (initiallyAssignedMembers) users = initiallyAssignedMembers;
-    // todo - change for getting initialValues only outside
     
     const handleOnClickMember = useCallback((id: string) => {
         setAssignedMembers( (prev) => 
@@ -46,7 +46,7 @@ const AddMember: React.FC<AddMemberProps> = React.memo(({ initiallyAssignedMembe
                         .map((user) =>  
                             <div className={styles.element} key={user.id}>
                                 <div className={styles.iconAndTitle}>
-                                    <CustomUserIcon title={user.name[0]} />
+                                    <CustomUserIcon title={user.name[0]} backgroundColor={usersThemes?.find((ut) => ut.userId === user.id)?.iconColor }/>
                                     <h3>{user.name}</h3>
                                 </div>
                                 <div onClick={() => handleOnClickMember(user.id)}>
