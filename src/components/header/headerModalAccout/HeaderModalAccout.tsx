@@ -1,4 +1,4 @@
-import { LogOut, X } from "lucide-react";
+import { LogOut, UserRoundCog, X } from "lucide-react";
 import styles from "./HeaderModalAcccout.module.css";
 import { useUserStore } from "../../../store/userStore";
 import { useNavigate } from "react-router-dom";
@@ -19,6 +19,11 @@ const HeaderModalAccout = () => {
         setTimeout(() => setHasCopied(false), 2000);
      }
 
+     const handleClickAccount = () => {
+        navigate("/account")        
+        setHeaderModalActive(false);
+    }
+
     const handleLogout = () => {
         setLogoutUser();
         navigate("/login");
@@ -34,6 +39,10 @@ const HeaderModalAccout = () => {
                 <div className={styles.item} onClick={() => handleCopy(currentUser?.id ?? "")}>
                     <h2>id:</h2>
                     <h2>{currentUser?.id}</h2>
+                </div>
+                <div className={styles.item} onClick={handleClickAccount}>
+                    <h2>Account</h2>
+                    <UserRoundCog size={20}/>
                 </div>
                 <div className={styles.item} onClick={handleLogout}>
                     <h2>Logout</h2>

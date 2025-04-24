@@ -167,7 +167,7 @@
         "3",
         "2"
       ],
-      "status": "in_progress",
+      "status": "todo",
       "startDate": "2025-04-20",
       "endDate": "2025-04-25",
       "priority": "low"
@@ -282,6 +282,29 @@
       "startDate": "",
       "endDate": "",
       "priority": "none"
+    }
+  ],
+  "userThemes": [
+    {
+      "id": "1",
+      "userId": "1",
+      "backgroundMode": "black",
+      "highlightMode": "green",
+      "iconColor": "orange"
+    },
+    {
+      "id": "2",
+      "userId": "2",
+      "backgroundMode": "black",
+      "highlightMode": "green",
+      "iconColor": "orange"
+    },
+    {
+      "id": "4",
+      "userId": "4",
+      "backgroundMode": "white",
+      "highlightMode": "green",
+      "iconColor": "blue"
     }
   ]
 }

@@ -1,4 +1,5 @@
 import { useTaskUsers } from "../../../hooks/task/useTaskUsers";
+import { useUsersThemes } from "../../../hooks/usersThemes/useUserThemes";
 import { useProjectControlStore } from "../../../store/projectControlStore";
 import { Task } from "../../../types/task";
 import UserIconCollection from "../../usersIconsCollection/UsersIconsCollection";
@@ -11,16 +12,16 @@ interface KanbanCardProps {
 
 const KanbanCard = ({ task, handleOnTaskClick }: KanbanCardProps) => {
     const { data: users } = useTaskUsers(task.assignedMembers);
+    const { data: usersThemes } = useUsersThemes(task.assignedMembers);
     const isLeftPanelActive = useProjectControlStore((state) => state.isLeftPanelActive);
     const isRightPanelActive = useProjectControlStore((state) => state.isRightPanelActive);
-    
     return(
         <div className={styles.cardMain  + " w-full"} onClick={() => handleOnTaskClick(task)}>
             <h3 className={`text-lg font-semibold ${styles.title}`}>{task.title}</h3>            
              <p className={`text-sm text-gray-600 ${styles.description}`}>
                 {task.description}
             </p>
-            { users && <UserIconCollection size={(isLeftPanelActive && isRightPanelActive) ? 20 : 24} users={users} fontSize={(isLeftPanelActive && isRightPanelActive) ? 14 : 18}/> }
+            { users && <UserIconCollection size={(isLeftPanelActive && isRightPanelActive) ? 20 : 24} users={users} usersThemes={usersThemes} fontSize={(isLeftPanelActive && isRightPanelActive) ? 14 : 18}/> }
         </div>
     )
 }

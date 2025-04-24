@@ -9,6 +9,7 @@ import Project from '../../pages/project/Project';
 import CreateProject from '../../pages/createProject/CreateProject';
 import CreateUser from '../../pages/createUser/CreateUser';
 import EditUser from '../../pages/editUser/EditUser';
+import Account from '../../pages/account/Accout';
 
 const RouteLayout = () => {
   return (
@@ -25,6 +26,9 @@ const RouteLayout = () => {
             <Route path="/create/project" element={<ProtectedRoute element={<CreateProject/>} allowedRoles={["admin", "manager"]}/>} />
             <Route path="/create/user" element={<ProtectedRoute element={<CreateUser/>} allowedRoles={["admin"]}/>} />
             <Route path="/edit/user/:userId" element={<ProtectedRoute element={<EditUser/>} allowedRoles={["admin"]}/>} />
+            
+            <Route path="/account" element={<ProtectedRoute element={<Account/>} allowedRoles={["admin", "manager", "member"]}/>} />
+
         </Routes>
   )
 }
