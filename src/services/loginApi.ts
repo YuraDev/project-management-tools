@@ -9,9 +9,7 @@ export const login = async (loginData: LoginData): Promise<AuthenticatedUser> =>
     if (!response.ok)
         throw new Error(`HTTP error! status: ${response.status}`);
     const users: User[] = await response.json();
-    const user = users.find(
-        (u) => u.username === loginData.username && u.password === loginData.password
-    );
+    const user = users.find( (u) => u.username === loginData.username && u.password === loginData.password );
     if ( !user )
         throw new Error('Invalid credentials');
     const token = nanoid();

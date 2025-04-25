@@ -20,9 +20,8 @@ export const createUser = async (user: Omit<User, "id">): Promise<User> => {
         },
         body: JSON.stringify(newUser),
     });
-    if ( !response.ok ) {
+    if ( !response.ok )
         throw new Error(`Error during creation of the user. Status: ${response.status}`);
-    }
     return response.json();
 }
 
@@ -34,9 +33,8 @@ export const updateUser = async (user: User): Promise<User> => {
         },
         body: JSON.stringify(user),
     });
-    if ( !response.ok ) {
+    if ( !response.ok )
         throw new Error(`Error during updating of the user. Status: ${response.status}`);
-    }
     return response.json();
 }
 
@@ -44,18 +42,14 @@ export const deleteUser = async (id: string): Promise<void> => {
     const response = await fetch(`http://localhost:3001/users/${id}`, {
         method: "DELETE",
     });
-    if ( !response.ok ) {
+    if ( !response.ok )
         throw new Error(`Error during updating of the user. Status: ${response.status}`);
-    }
 }
 
-export const updateReservedMembers = async ({
-    id,
-    reservedMembers,
-}: {
-    id: string;
-    reservedMembers: string[];
-}): Promise<User> => {
+export const updateReservedMembers = async (
+    { id, reservedMembers }: 
+    { id: string, reservedMembers: string[] }
+): Promise<User> => {
     const response = await fetch(`http://localhost:3001/users/${id}`, {
         method: "PATCH",
         headers: {
@@ -63,8 +57,7 @@ export const updateReservedMembers = async ({
         },
         body: JSON.stringify({ reservedMembers }),
     });
-    if (!response.ok) {
+    if (!response.ok)
         throw new Error(`Error during updating reserved members. Status: ${response.status}`);
-    }
     return await response.json();
 };

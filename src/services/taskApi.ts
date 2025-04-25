@@ -20,9 +20,8 @@ export const createTask = async (task: Omit<Task, "id">): Promise<Task> => {
         },
         body: JSON.stringify(newTask),
     });
-    if ( !response.ok ) {
+    if ( !response.ok )
         throw new Error(`Error during creation of the task. Status: ${response.status}`);
-    }
     return response.json();
 }
 
@@ -34,9 +33,8 @@ export const updateTask = async (task: Task): Promise<Task> => {
         },
         body: JSON.stringify(task),
     });
-    if ( !response.ok ) {
+    if ( !response.ok )
         throw new Error(`Error during updating of the user. Status: ${response.status}`);
-    }
     return response.json();
 }
 
@@ -44,7 +42,6 @@ export const deleteTask = async (id: string): Promise<void> => {
     const response = await fetch(`http://localhost:3001/tasks/${id}`, {
         method: "DELETE",
     });
-    if ( !response.ok ) {
+    if ( !response.ok )
         throw new Error(`Error during updating of the user. Status: ${response.status}`);
-    }
 }

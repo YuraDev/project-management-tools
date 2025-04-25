@@ -20,9 +20,8 @@ export const createProject = async (project: Omit<Project, "id">): Promise<Proje
         },
         body: JSON.stringify(newProject),
     });
-    if ( !response.ok ) {
+    if ( !response.ok )
         throw new Error(`Error during creation of the project. Status: ${response.status}`);
-    }
     return response.json();
 }
 
@@ -34,9 +33,8 @@ export const updateProject = async (project: Project): Promise<Project> => {
         },
         body: JSON.stringify(project),
     });
-    if ( !response.ok ) {
+    if ( !response.ok )
         throw new Error(`Error during updating of the user. Status: ${response.status}`);
-    }
     return response.json();
 }
 
@@ -44,7 +42,6 @@ export const deleteProject = async (id: string): Promise<void> => {
     const response = await fetch(`http://localhost:3001/projects/${id}`, {
         method: "DELETE",
     });
-    if ( !response.ok ) {
+    if ( !response.ok )
         throw new Error(`Error during updating of the user. Status: ${response.status}`);
-    }
 }
