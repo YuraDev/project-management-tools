@@ -27,7 +27,6 @@ const RouteLayout = () => {
             <Route path="/create/user" element={<ProtectedRoute element={<CreateUser/>} allowedRoles={["admin"]}/>} />
             <Route path="/edit/user/:userId" element={<ProtectedRoute element={<EditUser/>} allowedRoles={["admin"]}/>} />
             <Route path="/personalisation" element={<ProtectedRoute element={<Personalisation/>} allowedRoles={["admin", "manager", "member"]}/>} />
-
         </Routes>
   )
 }

@@ -8,7 +8,13 @@ interface FormLayoutProps {
 
 const FormLayout = ({ children }: FormLayoutProps) => {
     const backgroundMode = useUserThemeStore((state) => state.backgroundMode);
-    return <div className={styles.formLayout}  style={{backgroundColor: backgroundMode === "black" ? "black" : "#f9f9fb", color: "black"}}>
+    return <div 
+        className={styles.formLayout}  
+        style={{
+            backgroundColor: backgroundMode === "black" ? "black" : "#f9f9fb", 
+            color: "black",
+        }}
+    >
         { children }
     </div>
 }
