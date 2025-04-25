@@ -18,7 +18,7 @@ const KanbanCard = ({ task, handleOnTaskClick }: KanbanCardProps) => {
     const isRightPanelActive = useProjectControlStore((state) => state.isRightPanelActive);
     const backgroundMode = useUserThemeStore((state) => state.backgroundMode);
     return(
-        <div className={styles.cardMain  + " w-full"} onClick={() => handleOnTaskClick(task)} style={{backgroundColor: backgroundMode, color: backgroundMode === "black" ? "white" : "black"}}>
+        <div className={styles.cardMain  + " w-full"} onClick={() => handleOnTaskClick(task)} style={{backgroundColor: backgroundMode, color: backgroundMode === "black" ? "white" : "black"}} >
             <h3 className={`text-lg font-semibold ${styles.title}`}>{task.title}</h3>            
              <p className={`text-sm text-gray-600 ${styles.description}`}>
                 {task.description}

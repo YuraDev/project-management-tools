@@ -8,10 +8,10 @@
     font-weight: bold;
     text-transform: capitalize;
     cursor: pointer;
+    z-index: 0;
 }
 
 .smallerText {
   font-size: 16px;
   background-color: gray;
 }
-
