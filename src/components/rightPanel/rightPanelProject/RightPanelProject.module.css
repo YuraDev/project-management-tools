@@ -3,7 +3,7 @@
     width: 340px;
     height: 100%;
     /* border-left: 2px solid #f3f4f6; */
-    background-color: #f3f4f6;
+    /* background-color: #f3f4f6; */
     min-height: calc(100vh - 100px);
 }
 

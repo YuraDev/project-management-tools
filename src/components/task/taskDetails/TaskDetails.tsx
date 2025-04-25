@@ -2,6 +2,7 @@
 import { useTaskUsers } from "../../../hooks/task/useTaskUsers";
 import { useUsersThemes } from "../../../hooks/usersThemes/useUserThemes";
 import { useProjectControlStore } from "../../../store/projectControlStore";
+import { useUserThemeStore } from "../../../store/userThemeStore";
 import StatusText from "../../../ui/statusText/StatusText";
 import RightPanelHeader from "../../rightPanel/rightPanelHeader/RightPanelHeader";
 import UserIconCollection from "../../usersIconsCollection/UsersIconsCollection";
@@ -14,6 +15,8 @@ const TaskDetails = React.memo(() => {
     const setIsRightPanelActive = useProjectControlStore((state) => state.setIsRightPanelActive);
     const setIsEditTaskActive = useProjectControlStore((state) => state.setIsEditTaskActive);
     const setIsAddTaskActive = useProjectControlStore((state) => state.setIsAddTaskActive);
+    const backgroundMode = useUserThemeStore((state) => state.backgroundMode);
+    
     const { data: asignedTaskUsers } = useTaskUsers(selectedTask?.assignedMembers || []);
     const { data: usersThemes } = useUsersThemes(selectedTask?.assignedMembers || []);
 
@@ -25,7 +28,7 @@ const TaskDetails = React.memo(() => {
 
     if (!selectedTask) return null;
     return(
-        <div className={styles.main}>
+        <div className={styles.main} style={{backgroundColor: backgroundMode}}>
             <RightPanelHeader taskTitle={selectedTask.title} setIsEditTaskActive={hanldleEditOpen} setIsRightPanelActive={setIsRightPanelActive}/>
             <h2><b>Id:</b> {selectedTask.id}</h2>
             <h2 className={styles.description}><b>Description:</b> {selectedTask.description}</h2>

@@ -18,6 +18,7 @@ import CustomButton from "../../../ui/button/CustomButton";
 import AddMemberTwo from "../../../modals/AddMember/AddMemberTwo";
 import { useReservedUsers } from "../../../hooks/users/useReservedUsers";
 import { useUsersThemes } from "../../../hooks/usersThemes/useUserThemes";
+import { useUserThemeStore } from "../../../store/userThemeStore";
 
 const LeftPanelSettingsBlock = () => {
     const navigate = useNavigate();
@@ -43,6 +44,7 @@ const LeftPanelSettingsBlock = () => {
 
     const isAddMembersActive = useProjectControlStore((state) => state.isAddMembersActive);
     const setIsAddMembersActive = useProjectControlStore((state) => state.setIsAddMembersActive);
+    const backgroundMode = useUserThemeStore((state) => state.backgroundMode);
 
     const queryClient = useQueryClient();
     const editProjectMutation = useMutation({
@@ -90,7 +92,7 @@ const LeftPanelSettingsBlock = () => {
 
     
     return(
-        <div className={styles.leftPanelChildSettings}>
+        <div className={`${styles.leftPanelChildSettings} ${backgroundMode === "black" ? styles.dark : styles.light}`} >
             <label>ID: 
                 <div className={styles.displayInputLike}>{project?.id}</div>
             </label>

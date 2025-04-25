@@ -37,6 +37,7 @@ const LeftPanelInfoBlock = () => {
     const setIsEditTaskActive = useProjectControlStore((state) => state.setIsEditTaskActive);
     const setIsAddTaskActive = useProjectControlStore((state) => state.setIsAddTaskActive);
     const setIsRightPanelActive = useProjectControlStore((state) => state.setIsRightPanelActive);
+    const backgroundMode = useUserThemeStore((state) => state.backgroundMode);
     
     const { data: project } = useProject(projectId || "");
     const { data: projectMembers } = useProjectUsers(projectId || "");
@@ -49,7 +50,7 @@ const LeftPanelInfoBlock = () => {
     }, [setIsEditTaskActive, setIsAddTaskActive, setIsRightPanelActive]);
 
     return(
-        <div className={styles.leftPanelChild}>
+        <div className={`${styles.leftPanelChild} ${backgroundMode === "black" ? styles.dark : styles.light}`}>
         <CustomButton text={"Add task"} onClick={() => handleAddTaskOpen()} customStyles={{width: "100%"}}/>
                 <label>Status
                     <div style={{display: "flex", justifyContent: "space-between", marginTop: 5}}>

@@ -39,3 +39,13 @@
 .leftPanelChild label{
     margin-top: 16px;
 }
+
+
+
+.light label{
+    color: #1f2937;
+}
+
+.dark label{
+    color: white;
+}

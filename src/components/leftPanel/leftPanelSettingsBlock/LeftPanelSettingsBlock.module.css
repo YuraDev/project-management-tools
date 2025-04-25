@@ -130,3 +130,12 @@
 .leftPanelChildSettings label{
     margin: 0 0 20px;
 }
+
+
+.light label{
+    color: #1f2937;
+}
+
+.dark label{
+    color: white;
+}

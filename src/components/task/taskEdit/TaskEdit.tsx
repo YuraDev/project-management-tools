@@ -21,6 +21,7 @@ import { useReservedUsers } from "../../../hooks/users/useReservedUsers";
 import { User } from "../../../types/user";
 import { useParams } from "react-router-dom";
 import { useProject } from "../../../hooks/project/useProject";
+import { useUserThemeStore } from "../../../store/userThemeStore";
 
 const TaskEdit = React.memo(() => {
     const { projectId } = useParams();
@@ -31,6 +32,7 @@ const TaskEdit = React.memo(() => {
     const setIsRightPanelActive = useProjectControlStore((state) => state.setIsRightPanelActive);
     const setIsEditTaskActive = useProjectControlStore((state) => state.setIsEditTaskActive);
     const clearSelectedTask = useProjectControlStore((state) => state.clearSelectedTask);
+    const backgroundMode = useUserThemeStore((state) => state.backgroundMode);
     
     const { data: initiallyAsignedMembers } = useReservedUsers(selectedTask?.assignedMembers || []);
 
@@ -106,7 +108,7 @@ const TaskEdit = React.memo(() => {
     }, [initiallyAsignedMembers]);
 
     return(
-        <CustomForm onSubmit={handleSubmitEdit} customStyles={{ margin: 15, minHeight: "calc(100vh - 130px)", gap: 0 }}>
+        <CustomForm onSubmit={handleSubmitEdit} customStyles={{ margin: 15, minHeight: "calc(100vh - 130px)", gap: 0, backgroundColor: backgroundMode }}>
             <RightPanelHeader taskTitle={selectedTask?.title || ""} setIsEditTaskActive={setIsEditTaskActive} setIsRightPanelActive={setIsRightPanelActive}/>
             <div className={styles.rightPanelChildEdit}>
             <label>Title

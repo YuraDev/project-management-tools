@@ -4,6 +4,7 @@ import CustomUserIcon from "../../ui/icons/CustomUserIcon";
 import { SquarePlus } from "lucide-react";
 import { User } from "../../types/user";
 import { UserTheme } from "../../types/userTheme";
+import { useUserThemeStore } from "../../store/userThemeStore";
 
 interface AddMemberTwoProps {
     initiallyAssignedMembers?: User[],
@@ -13,6 +14,7 @@ interface AddMemberTwoProps {
     usersThemes?: UserTheme[],
 }
 const AddMemberTwo: React.FC<AddMemberTwoProps> = ({ initiallyAssignedMembers, exitAction, selectedUsers, handlerFilterUser, usersThemes }) => {
+    const backgroundMode = useUserThemeStore((state) => state.backgroundMode);
     useEffect(() => {
         document.body.style.overflow = "hidden";
         return () => {
@@ -22,7 +24,7 @@ const AddMemberTwo: React.FC<AddMemberTwoProps> = ({ initiallyAssignedMembers, e
 
     return(
         <div className={styles.mainOverlay} onClick={exitAction}>
-            <div className={styles.main} onClick={(event) => event.stopPropagation()}>
+            <div className={styles.main} onClick={(event) => event.stopPropagation()} style={{backgroundColor: backgroundMode}}>
                 {
                     initiallyAssignedMembers && initiallyAssignedMembers
                         .map((user) =>  
@@ -32,7 +34,7 @@ const AddMemberTwo: React.FC<AddMemberTwoProps> = ({ initiallyAssignedMembers, e
                                     <h3>{user.name}</h3>
                                 </div>
                                 <div onClick={() => handlerFilterUser(user)}>
-                                    <SquarePlus size={30} color={ selectedUsers.find((u) => u.id === user.id) ? "green" : "black" }/>
+                                    <SquarePlus size={30} color={ selectedUsers.find((u) => u.id === user.id) ? "green" : backgroundMode === "black" ? "white" : "black" }/>
                                 </div>
                             </div> 
                         )
