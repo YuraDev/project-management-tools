@@ -68,7 +68,7 @@ const CreateProject = () => {
     };
 
     return (
-        <FormLayout>
+        <FormLayout >
             <CustomForm onSubmit={handleSubmit}>
                 <label>Title:
                     <FormTextInput  name={"title"} value={formData.title} onChange={handleChange} required/>

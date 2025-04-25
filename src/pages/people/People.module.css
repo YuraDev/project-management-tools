@@ -22,8 +22,7 @@ ul{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #f9f9fb;
-    border-bottom: 1px purple solid;
+    border-bottom: 1px solid;
     margin-bottom: 75px;
 }
 

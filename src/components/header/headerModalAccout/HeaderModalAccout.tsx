@@ -3,6 +3,7 @@ import styles from "./HeaderModalAcccout.module.css";
 import { useUserStore } from "../../../store/userStore";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useUserThemeStore } from "../../../store/userThemeStore";
 
 const HeaderModalAccout = () => {
     const navigate = useNavigate();
@@ -10,6 +11,7 @@ const HeaderModalAccout = () => {
     const headerModalActive = useUserStore((state) => state.headerModalActive);
     const setHeaderModalActive = useUserStore((state) => state.setHeaderModalActive);
     const currentUser = useUserStore((state) => state.currentUser);
+    const backgroundMode = useUserThemeStore((state) => state.backgroundMode);
 
     const [hasCopied, setHasCopied] = useState<boolean>(false);
 
@@ -29,22 +31,31 @@ const HeaderModalAccout = () => {
         navigate("/login");
         setHeaderModalActive(!headerModalActive);
     }
+
+    const highlightMode = useUserThemeStore((state) => state.highlightMode);
+    const themeClassMap = {
+        purple: styles.purpleBlock,
+        green: styles.greenBlock,
+        blue: styles.blueBlock,
+        orange: styles.orangeBlock,
+    };
+    const item = `${styles.item} ${highlightMode && themeClassMap[highlightMode]}`;
     
     return (
         <div className={styles.overlay}  onClick={() => setHeaderModalActive(false)}>
-            <div className={styles.main} onClick={(event) => event.stopPropagation()}>
+            <div className={styles.main} onClick={(event) => event.stopPropagation()} style={{backgroundColor: backgroundMode === "black" ? "black" : "wihte"}}>
                 <div className={styles.exitBlock} style={{justifyContent: "end"}} onClick={() => setHeaderModalActive(!headerModalActive)}>
                     <X size={24}/>
                 </div>
-                <div className={styles.item} onClick={() => handleCopy(currentUser?.id ?? "")}>
+                <div className={item} onClick={() => handleCopy(currentUser?.id ?? "")}>
                     <h2>id:</h2>
                     <h2>{currentUser?.id}</h2>
                 </div>
-                <div className={styles.item} onClick={handleClickAccount}>
+                <div className={item} onClick={handleClickAccount}>
                     <h2>Account</h2>
                     <UserRoundCog size={20}/>
                 </div>
-                <div className={styles.item} onClick={handleLogout}>
+                <div className={item} onClick={handleLogout}>
                     <h2>Logout</h2>
                     <LogOut size={20}/>
                 </div>

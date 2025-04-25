@@ -13,8 +13,10 @@ const Create = () => {
         blue: styles.blueBlock,
         orange: styles.orangeBlock,
     };
+    const backgroundMode = useUserThemeStore((state) => state.backgroundMode);
+    
     return(
-        <div className={styles.main}>
+        <div className={styles.main} style={{backgroundColor: backgroundMode === "black" ? "black" : "#f9f9fb", color: "black"}}>
             <NavLink to={"/create/project"}>
                 <article className={`${styles.card} ${highlightMode && themeClassMap[highlightMode]}`}>
                     <h3>New project</h3>

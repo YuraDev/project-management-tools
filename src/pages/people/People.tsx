@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../../hooks/users/useUser";
 import { useReservedUsers } from "../../hooks/users/useReservedUsers";
 import { useUsersThemes } from "../../hooks/usersThemes/useUserThemes";
+import { useUserThemeStore } from "../../store/userThemeStore";
 
 const People = () => {
     const navigate = useNavigate();
@@ -22,6 +23,7 @@ const People = () => {
     const { data: users, isLoading, isError } = useReservedUsers(currentUser?.reservedMembers ?? []);
     const { data: searchedUser, refetch } = useUser(searchTerm, { enabled: false }); // call manually
     const { data: usersThemes } = useUsersThemes(currentUser?.reservedMembers || []);
+    const highlightMode = useUserThemeStore((state) => state.highlightMode);
 
     useEffect(() => {
         if ( shouldSearch && searchTerm !== "" ) {
@@ -105,7 +107,7 @@ const People = () => {
                 />
                 {
                     searchedUser &&
-                        <div className={styles.searchElement}>
+                        <div className={styles.searchElement} style={{borderColor: highlightMode}}>
                             <CustomUserIcon title={searchedUser.name}/>
                             <h3>{searchedUser.name}</h3>
                             <UserPlus size={30} onClick={() => handleReserveUser(searchedUser.id)}/>

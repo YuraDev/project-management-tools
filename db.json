@@ -306,7 +306,7 @@
       "id": "1",
       "userId": "1",
       "backgroundMode": "black",
-      "highlightMode": "green",
+      "highlightMode": "purple",
       "iconColor": "orange"
     },
     {
@@ -321,7 +321,7 @@
       "userId": "4",
       "backgroundMode": "white",
       "highlightMode": "green",
-      "iconColor": "blue"
+      "iconColor": "green"
     }
   ]
 }

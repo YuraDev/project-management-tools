@@ -14,6 +14,7 @@ const Projects = () => {
     const selectedProject = useProjectControlStore((state) => state.selectedProject);
     const clearFiltersAndSorts = useProjectControlStore((state) => state.clearFiltersAndSorts);
     const setSelectedProject = useProjectControlStore((state) => state.setSelectedProject);
+    const backgroundMode = useUserThemeStore((state) => state.backgroundMode);
 
     const handleChoseProject = (chosenProject: Project) => {
         if (chosenProject.id !== selectedProject?.id)
@@ -34,7 +35,7 @@ const Projects = () => {
     if (projects?.length === 0) return <div>No projects found.</div>;
     
     return(
-        <div className={styles.main}>
+        <div className={styles.main} style={{backgroundColor: backgroundMode === "black" ? "black" : "#f9f9fb", color: "black"}}>
             {
                 projects?.map((project) => 
                     <NavLink to={`/projects/${project.id}`} key={project.id} onClick={() => handleChoseProject(project)}>

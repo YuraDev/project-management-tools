@@ -4,6 +4,7 @@ import HeaderModalAccout from "../headerModalAccout/HeaderModalAccout";
 import { useUserStore } from "../../../store/userStore";
 import CustomUserIcon from "../../../ui/icons/CustomUserIcon";
 import { useUserThemeStore } from "../../../store/userThemeStore";
+import CustomNavLink from "../../../ui/link/CustomNavLink";
 
 const Header = () => {
     const currentUser = useUserStore((state) => state.currentUser);
@@ -11,13 +12,23 @@ const Header = () => {
     const setHeaderModalActive = useUserStore((state) => state.setHeaderModalActive);
     const iconColor = useUserThemeStore((state) => state.iconColor);
     const highlightMode = useUserThemeStore((state) => state.highlightMode);
+    const backgroundMode = useUserThemeStore((state) => state.backgroundMode);
+
+    const linkColorStyle = ({isActive}: {isActive: boolean}) => ({
+        color: isActive 
+        ? highlightMode 
+        : backgroundMode === "black" ? "white" : "black"
+    })
 
     return(
-        <div className={styles.main}>
+        <div className={styles.main} style={{backgroundColor: backgroundMode}}>
             <nav>
-                <NavLink to="/projects" style={({ isActive }) => ({color: isActive ? highlightMode : "black"})}>Projects</NavLink>
-                <NavLink to="/people"  style={({ isActive }) => ({color: isActive ? highlightMode : "black"})}>People</NavLink>
-                { currentUser?.role !== "member" && <NavLink to="/create"  style={({ isActive }) => ({color: isActive ? highlightMode : "black"})}>Create</NavLink> }
+                <CustomNavLink to="/projects">Projects</CustomNavLink>
+                <CustomNavLink to="/people">Projects</CustomNavLink>
+                { currentUser?.role !== "member" && 
+                <CustomNavLink to="/create">Projects</CustomNavLink>
+
+                }
             </nav>
             <CustomUserIcon title={currentUser ? currentUser.name : "User"} size={36} onClick={() => setHeaderModalActive(!headerModalActive)} backgroundColor={iconColor} />
             { headerModalActive && <HeaderModalAccout/> }

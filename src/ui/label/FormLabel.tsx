@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import styles from "./FormLabel.module.css";
+import { useUserThemeStore } from "../../store/userThemeStore";
 
 interface FormLabel{
     text: string, 
@@ -7,7 +8,8 @@ interface FormLabel{
 }
 
 const FormLabel = ({ text, children }: FormLabel) => {
-    return <label className={styles.customLabel}>
+    const backgroundMode = useUserThemeStore((state) => state.backgroundMode);
+    return <label className={styles.customLabel} style={{color: backgroundMode === "black" ? "white" : "#1f2937"}}>
         {text}
         {children}
     </label>

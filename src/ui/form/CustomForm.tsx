@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
 import styles from "./CustomForm.module.css";
+import { useUserThemeStore } from "../../store/userThemeStore";
 
 interface CustomFormProps {
     children: ReactNode,
@@ -8,7 +9,8 @@ interface CustomFormProps {
 }
 
 const CustomForm = ({ children, onSubmit, customStyles }: CustomFormProps) => {
-    return <form className={styles.customForm} onSubmit={onSubmit} style={customStyles}>
+    const backgroundMode = useUserThemeStore((state) => state.backgroundMode);
+    return <form className={`${styles.customForm} ${backgroundMode === "black" ? styles.dark : styles.light}`} onSubmit={onSubmit} style={customStyles}>
         { children }
     </form>
 }
