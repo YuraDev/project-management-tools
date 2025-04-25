@@ -9,9 +9,12 @@ import { DropResult } from "@hello-pangea/dnd";
 import { updateTask } from "../../services/taskApi";
 import KanbanBoard from "../../components/kanban/kanbanBoard/KanbanbBoard";
 import RightPanelProject from "../../components/rightPanel/rightPanelProject/RightPanelProject";
+import { useUserStore } from "../../store/userStore";
+import { useProject } from "../../hooks/project/useProject";
 
 const Project = () => {
     const { projectId } = useParams();
+    const { data: currentProject } = useProject(projectId || "");
     const { data: projectTasks } = useProjectTasks(projectId || "");
 
     const selectedTask = useProjectControlStore((state) => state.selectedTask);
@@ -29,6 +32,7 @@ const Project = () => {
     const endDateFilter = useProjectControlStore((state) => state.endDateFilter);
     const priorityFilter = useProjectControlStore((state) => state.priorityFilter);
     const sortValue = useProjectControlStore((state) => state.sortValue);
+    const currentUser = useUserStore((state) => state.currentUser);
 
     const queryClient = useQueryClient();
     const mutation = useMutation({
@@ -99,6 +103,9 @@ const Project = () => {
     const gridTemplateColumns =  `repeat(${visibleColumnsCount}, 1fr)`;
 
     
+    if ( !currentUser || !currentProject?.assignedMembers.includes(currentUser?.id) )
+      return <div>You have no access to this project!</div>
+
     return(
         <div style={{display: "flex"}}>
           {
@@ -115,9 +122,7 @@ const Project = () => {
             inProgressTasks={inProgressTasks}
             doneTasks={doneTasks}
           />
-          {
-            isRightPanelActive && ( isAddTaskActive || selectedTask !== null ) && <RightPanelProject/>
-          }
+          { isRightPanelActive && ( isAddTaskActive || selectedTask !== null ) && <RightPanelProject/> }
         </div>
     )
 }

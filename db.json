@@ -154,6 +154,19 @@
         "4"
       ],
       "status": "in_progress"
+    },
+    {
+      "id": "5",
+      "title": "pm",
+      "description": "",
+      "startDate": "2025-04-25",
+      "endDate": "2025-04-30",
+      "assignedMembers": [
+        "5",
+        "1",
+        "4"
+      ],
+      "status": "in_progress"
     }
   ],
   "tasks": [
@@ -197,7 +210,7 @@
         "1",
         "9"
       ],
-      "status": "in_progress",
+      "status": "done",
       "startDate": "",
       "endDate": "",
       "priority": "low"
@@ -295,10 +308,23 @@
       ],
       "title": "task #5",
       "description": "task #5",
-      "status": "done",
+      "status": "in_progress",
       "startDate": "",
       "endDate": "",
       "priority": "none"
+    },
+    {
+      "id": "13",
+      "projectId": "5",
+      "assignedMembers": [
+        "1"
+      ],
+      "title": "imploy the team",
+      "description": "have to find necessary  members",
+      "status": "todo",
+      "startDate": "",
+      "endDate": "",
+      "priority": "high"
     }
   ],
   "userThemes": [
@@ -320,7 +346,14 @@
       "id": "4",
       "userId": "4",
       "backgroundMode": "black",
-      "highlightMode": "green",
+      "highlightMode": "orange",
+      "iconColor": "orange"
+    },
+    {
+      "id": "3",
+      "userId": "3",
+      "backgroundMode": "white",
+      "highlightMode": "purple",
       "iconColor": "green"
     }
   ]

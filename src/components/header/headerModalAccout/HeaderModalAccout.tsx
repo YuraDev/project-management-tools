@@ -1,4 +1,4 @@
-import { LogOut, UserRoundCog, X } from "lucide-react";
+import { LogOut, Paintbrush, UserRoundCog, X } from "lucide-react";
 import styles from "./HeaderModalAcccout.module.css";
 import { useUserStore } from "../../../store/userStore";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,7 @@ const HeaderModalAccout = () => {
     const setHeaderModalActive = useUserStore((state) => state.setHeaderModalActive);
     const currentUser = useUserStore((state) => state.currentUser);
     const backgroundMode = useUserThemeStore((state) => state.backgroundMode);
+    const clearTheme = useUserThemeStore((state) => state.clearTheme);
 
     const [hasCopied, setHasCopied] = useState<boolean>(false);
 
@@ -21,15 +22,20 @@ const HeaderModalAccout = () => {
         setTimeout(() => setHasCopied(false), 2000);
      }
 
-     const handleClickAccount = () => {
-        navigate("/account")        
+     const handleClickPesonalisation = () => {
+        navigate("/personalisation");
+        setHeaderModalActive(false);
+    }
+    const handleClickAccount = () => {
+        navigate(`/edit/user/${currentUser?.id}`);
         setHeaderModalActive(false);
     }
 
     const handleLogout = () => {
         setLogoutUser();
-        navigate("/login");
         setHeaderModalActive(!headerModalActive);
+        clearTheme();
+        navigate("/login");
     }
 
     const highlightMode = useUserThemeStore((state) => state.highlightMode);
@@ -49,21 +55,24 @@ const HeaderModalAccout = () => {
                 </div>
                 <div className={item} onClick={() => handleCopy(currentUser?.id ?? "")}>
                     <h2>id:</h2>
-                    <h2>{currentUser?.id}</h2>
+                    <h2 style={{paddingRight: 7}}>{currentUser?.id}</h2>
                 </div>
+                {
+                currentUser?.role === "admin" &&
                 <div className={item} onClick={handleClickAccount}>
                     <h2>Account</h2>
                     <UserRoundCog size={20}/>
+                </div>
+                }
+                <div className={item} onClick={handleClickPesonalisation}>
+                    <h2>Personalisation</h2>
+                    <Paintbrush size={20}/>
                 </div>
                 <div className={item} onClick={handleLogout}>
                     <h2>Logout</h2>
                     <LogOut size={20}/>
                 </div>
-                {hasCopied && (
-                    <div className={styles.copyAlert}>
-                        Copied!
-                    </div>
-                )}
+                { hasCopied && <div className={styles.copyAlert}>Copied!</div> }
             </div>
         </div>
     )

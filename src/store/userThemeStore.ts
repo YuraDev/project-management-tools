@@ -9,6 +9,7 @@ interface UserThemeState {
     setBackgroundMode: (mode: BackgroundModeType) => void;
     setHighlightMode: (mode: HighlightModeType) => void;
     setIconColor: (mode: IconColorType) => void;
+    clearTheme: () => void;
 }
 
 export const useUserThemeStore = create<UserThemeState>()(
@@ -20,6 +21,11 @@ export const useUserThemeStore = create<UserThemeState>()(
             setBackgroundMode: (mode) => set({ backgroundMode: mode }),
             setHighlightMode: (mode) => set({ highlightMode: mode }),
             setIconColor: (mode) => set({ iconColor: mode }),
+            clearTheme: () => set({ 
+                backgroundMode: "white",
+                highlightMode: "purple",
+                iconColor: "purple",
+             })
         }),
         {
             name: "theme-storage", // save data to localStorage

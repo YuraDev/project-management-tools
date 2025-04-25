@@ -9,7 +9,7 @@ import Project from '../../pages/project/Project';
 import CreateProject from '../../pages/createProject/CreateProject';
 import CreateUser from '../../pages/createUser/CreateUser';
 import EditUser from '../../pages/editUser/EditUser';
-import Account from '../../pages/account/Accout';
+import Personalisation from '../../pages/personalisation/Personalisation';
 
 const RouteLayout = () => {
   return (
@@ -18,16 +18,15 @@ const RouteLayout = () => {
             <Route path="/login" element={<Login/>}/>
             <Route path="/register" element={<Register/>}/>
           {/* Protected routes */}
-            <Route path="/" element={<ProtectedRoute element={<Projects/>}/>} />
-            <Route path="/people" element={<ProtectedRoute element={<People/>}/>} />
-            <Route path="/projects" element={<ProtectedRoute element={<Projects/>}/>} />
-            <Route path="/projects/:projectId" element={<ProtectedRoute element={<Project/>}/>} />
+            <Route path="/" element={<ProtectedRoute element={<Projects/>}  allowedRoles={["admin", "manager", "member"]} />} />
+            <Route path="/people" element={<ProtectedRoute element={<People/>}  allowedRoles={["admin", "manager", "member"]} />} />
+            <Route path="/projects" element={<ProtectedRoute element={<Projects/>} allowedRoles={["admin", "manager", "member"]} />} />
+            <Route path="/projects/:projectId" element={<ProtectedRoute element={<ProtectedRoute element={<Project/>}/>} allowedRoles={["admin", "manager", "member"]}/>} />
             <Route path="/create" element={<ProtectedRoute element={<Create/>} allowedRoles={["admin", "manager"]}/>} />
             <Route path="/create/project" element={<ProtectedRoute element={<CreateProject/>} allowedRoles={["admin", "manager"]}/>} />
             <Route path="/create/user" element={<ProtectedRoute element={<CreateUser/>} allowedRoles={["admin"]}/>} />
             <Route path="/edit/user/:userId" element={<ProtectedRoute element={<EditUser/>} allowedRoles={["admin"]}/>} />
-            
-            <Route path="/account" element={<ProtectedRoute element={<Account/>} allowedRoles={["admin", "manager", "member"]}/>} />
+            <Route path="/personalisation" element={<ProtectedRoute element={<Personalisation/>} allowedRoles={["admin", "manager", "member"]}/>} />
 
         </Routes>
   )

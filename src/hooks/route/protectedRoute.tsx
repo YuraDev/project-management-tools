@@ -14,10 +14,12 @@ const ProtectedRoute = ({ element, allowedRoles }: ProtectedRouteProps) => {
     const { role } = useUserAccess();
   
     if (!isAuthenticated) return <Navigate to="/login" replace />;
-  
-    if (allowedRoles && (!role || !allowedRoles.includes(role))) {
+
+    if (!role)
+      return <Navigate to="/login" replace />;
+
+    if (allowedRoles && (!allowedRoles.includes(role)))
       return <Navigate to="/" replace />;
-    }
   
     return element;
 };

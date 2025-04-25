@@ -10,12 +10,15 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteUser, updateUser } from "../../services/userApi";
 import FormSelect from "../../ui/select/FormSelect";
 import { useUser } from "../../hooks/users/useUser";
+import { useUserThemeStore } from "../../store/userThemeStore";
 
 const EditUser = () => {
     const { userId } = useParams();
     const navigate = useNavigate();
 
     const {data: user} = useUser(userId || "");
+    const backgroundMode = useUserThemeStore((state) => state.backgroundMode);
+    const highlightMode = useUserThemeStore((state) => state.highlightMode);
 
     const [formData, setFormData] = useState({
         name: "",
@@ -78,7 +81,7 @@ const EditUser = () => {
 
     return (
         <div className={styles.editUserOverlay}>
-            <form className={styles.formEditUser}>
+            <form className={`${styles.formEditUser} ${backgroundMode === "black" ? styles.dark : styles.light}`} style={{borderColor: highlightMode}}>
                 <div className={styles.headerBlock}>
                     <CustomUserIcon title={user?.name || ""} size={54} fontSize={28}/>
                     <h1>{user?.name}</h1>
