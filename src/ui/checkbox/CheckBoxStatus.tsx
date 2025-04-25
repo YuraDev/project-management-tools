@@ -15,7 +15,8 @@ const CheckBoxStatus = <T extends AvaibleTypes,>({ status, setStatusFilter, chec
             <input 
                 checked={checked}
                 type={"checkbox"} 
-                name="status" value={status} 
+                name={"status"} 
+                value={status} 
                 style={{marginRight: 4}} 
                 onChange={() => setStatusFilter(status)}
             />

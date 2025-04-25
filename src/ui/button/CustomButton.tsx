@@ -4,7 +4,6 @@ import { useUserThemeStore } from "../../store/userThemeStore";
 
 interface CustomButtonProps {
     text: string,
-    // todo - mb parse generic to extract type of value
     onClick: (value: any) => void,
     customStyles?: React.CSSProperties
 }

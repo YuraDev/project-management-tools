@@ -14,7 +14,13 @@ const CustomColorIcon = <T extends string>({ backgroundColor, size=36, onClick, 
     return(
         <div 
             className={`${styles.iconBlock}`} 
-            style={{ width: size, height: size, backgroundColor: backgroundColor, color: backgroundColor === "white" ? "black" : "white", borderColor: backgroundMode === "black" ? "white" :"black" }} 
+            style={{ 
+                width: size, 
+                height: size, 
+                backgroundColor: backgroundColor, 
+                color: backgroundColor === "white" ? "black" : "white", 
+                borderColor: backgroundMode === "black" ? "white" :"black" 
+            }} 
             onClick={() => onClick(backgroundColor)}
         >
             { currentColor === backgroundColor && <Check/> }

@@ -5,7 +5,6 @@ import styles from "./StatusText.module.css";
 interface StatusTextProps {
     status: TaskStatus | ProjectStatus | TaskPriority
 }
-
 const statusLabels: { [key in TaskStatus | ProjectStatus | TaskPriority ]: string } = {
     todo: "Todo",
     in_progress: "In progress",

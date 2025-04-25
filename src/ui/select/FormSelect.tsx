@@ -13,7 +13,12 @@ interface FormSelectProps<T extends SelectOption> {
 }
 
 const FormSelect = <T extends SelectOption,>({ name, value, onChange, options }: FormSelectProps<T>) => {
-    return <select name={name} value={value} onChange={onChange} className={styles.customSelect}>
+    return <select 
+        name={name} 
+        value={value} 
+        onChange={onChange} 
+        className={styles.customSelect}
+    >
         { options.map((option) => <option value={option} key={option}>{option}</option>) }
     </select>
 }

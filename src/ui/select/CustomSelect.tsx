@@ -10,7 +10,11 @@ interface CustomSelectProps {
 }
 
 const CustomSelect = ({ value, onChange, options }: CustomSelectProps) => {
-    return <select value={value} onChange={(event) => onChange(event.target.value as SortOption)} className={styles.customSelect}>
+    return <select 
+        value={value} 
+        onChange={(event) => onChange(event.target.value as SortOption)} 
+        className={styles.customSelect}
+    >
             { options.map((option) => <option value={option} key={option}>{option}</option>) }
     </select>
 }
