@@ -291,9 +291,9 @@
       "id": "11",
       "projectId": "1",
       "assignedMembers": [],
-      "title": "ts",
-      "description": "ddsds",
-      "status": "todo",
+      "title": "tsx",
+      "description": "ts-x",
+      "status": "in_progress",
       "startDate": "",
       "endDate": "",
       "priority": "none"

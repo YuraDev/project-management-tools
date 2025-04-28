@@ -20,7 +20,6 @@ const LeftPanelProject = () => {
                 <div onClick={() => setIsLeftPanelActive(false)}><AlignJustify size={28}/></div>
                 { currentUser?.role !== "member" && <div onClick={setIsProjectSettingsActive}><Settings size={28}/></div> }
             </div>
-            {/* todo - not sure is necessary lazy loading */}
             <Suspense> 
             {
                 isProjectSettingsActive

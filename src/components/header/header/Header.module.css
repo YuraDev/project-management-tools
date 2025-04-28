@@ -11,7 +11,6 @@ nav{
     display: flex;
     gap: 40px;
 }
-
 nav a{
     color: black;
     font-size: 22px;

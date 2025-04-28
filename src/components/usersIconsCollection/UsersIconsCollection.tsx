@@ -14,7 +14,6 @@ interface UserIconCollectionProps {
 const UserIconCollection = ({ users, size=34, maxIcons=4, fontSize, usersThemes }: UserIconCollectionProps) => {
     const visibleUsers = users.slice(0, maxIcons);
     const hiddenUsers = (users?.length || 0) - maxIcons;
-
     return(
         <div className={styles.iconsBlock}>
             {

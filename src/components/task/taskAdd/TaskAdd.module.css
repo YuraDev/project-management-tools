@@ -1,28 +1,14 @@
 .main{
-    min-height: calc(100vh - 130px);
-    margin: 15px;
-    box-sizing: border-box;
-    border-radius: 16px;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 22px 15px;
+  min-height: calc(100vh - 130px);
+  margin: 15px;
+  box-sizing: border-box;
+  border-radius: 16px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 22px 15px;
 }
-
-.titleBlock{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 30px;
-}
-
-.controlIcons{
-    display: flex;
-    align-items: center;
-    gap: 2px;
-}
-
 
 .rightPanelChild{
   height: calc(100vh - 100px - 30px - 50px - 45px);
@@ -34,97 +20,13 @@
   flex-direction: column;
   gap: 10px;
 }
-
 .rightPanelChild::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Edge */
 }
 
-
-
-
-
-
-.main{
-    background-color: #f9f9fb;
-    min-height: calc(100vh - 100px);
-    padding: 30px 36px 130px;
+label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  color: #1f2937;
 }
-
-.form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 24px;
-    background-color: white;
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  }
-  
-  label {
-    display: flex;
-    flex-direction: column;
-    font-weight: 500;
-    color: #1f2937;
-  }
-  
-  input,
-  textarea,
-  select {
-    margin-top: 4px;
-    padding: 8px;
-    border-radius: 8px;
-    border: 1px solid #cbd5e1;
-    font-size: 14px;
-  }
-  
-  textarea {
-    resize: vertical;
-    min-height: 80px;
-  }
-  
-  .asignBlock{
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-  }
-  .asignBlock label{
-    width: 100%;
-  }
-
-  .assignedMembers button {
-    margin-top: 4px;
-    padding: 6px 20px;
-    background-color: #f3e8ff;
-    border: 1px solid #d8b4fe;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    /* color: #6b21a8; */
-    color: purple;
-  }
-  
-  .assignedMembers button:hover {
-    background-color: #ede9fe;
-  }
-  
-  button[type="submit"] {
-
-    padding: 10px 16px;
-    /* background-color: #7c3aed; */
-    background-color: purple;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-  
-  button[type="submit"]:hover {
-    /* background-color: #6d28d9; */
-    background-color: rgba(128, 0, 128, 0.832);
-  }
-  

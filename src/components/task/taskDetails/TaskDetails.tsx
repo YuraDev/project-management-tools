@@ -20,7 +20,6 @@ const TaskDetails = React.memo(() => {
     const { data: asignedTaskUsers } = useTaskUsers(selectedTask?.assignedMembers || []);
     const { data: usersThemes } = useUsersThemes(selectedTask?.assignedMembers || []);
 
-
     const hanldleEditOpen = useCallback(() => {
         setIsAddTaskActive(false);
         setIsEditTaskActive(true);

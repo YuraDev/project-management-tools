@@ -14,8 +14,9 @@ const Login = () => {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
 
-    const { login: authLogin } = useAuth();
     const setUser = useUserStore((state) => state.setLoggedInUser);
+
+    const { login: authLogin } = useAuth();
     const mutation = useMutation({
         mutationFn: login,
         onSuccess: (data) => {
@@ -40,7 +41,6 @@ const Login = () => {
 
     const [formData, setFormData] = useState({ username: "", password: "" });
     const [showPassword, setShowPassword] = useState<boolean>(false);
-
 
     const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = event.target;

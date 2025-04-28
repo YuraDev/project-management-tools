@@ -21,6 +21,7 @@ const CreateProject = () => {
     const navigate = useNavigate();
     const currentUser = useUserStore((state) => state.currentUser);
     const { data: initiallyAsignedMembers } = useReservedUsers(currentUser?.reservedMembers || []);
+    const { data: usersThemes } = useUsersThemes(currentUser?.reservedMembers || []);
 
     const [formData, setFormData] = useState<Omit<Project, "id">>({
         title: "",
@@ -32,7 +33,6 @@ const CreateProject = () => {
     });
     const [addMembersActive, setAddMembersActive] = useState<boolean>(false);
     const [assignedMembers, setAssignedMembers] = useState<User[]>([]);
-    const { data: usersThemes } = useUsersThemes(currentUser?.reservedMembers || []);
     
     const queryClient = useQueryClient();
     const mutation = useMutation({
@@ -49,6 +49,7 @@ const CreateProject = () => {
             : [...prev, chosenUser]
         )
     }
+    
     const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = event.target;
         setFormData((prev) => ({ ...prev, [name]: value }));

@@ -19,19 +19,11 @@ const People = () => {
 
     const currentUser = useUserStore((state) => state.currentUser);
     const setUser = useUserStore((state) => state.setLoggedInUser);
-
-    const { data: users } = useReservedUsers(currentUser?.reservedMembers ?? []);
-    const { data: searchedUser, refetch, isLoading, isError} = useUser(searchTerm, { enabled: false }); // call manually
-    const { data: usersThemes } = useUsersThemes(currentUser?.reservedMembers || []);
     const highlightMode = useUserThemeStore((state) => state.highlightMode);
 
-    useEffect(() => {
-        if ( shouldSearch && searchTerm !== "" ) {
-            refetch();
-            setShouldSearch(false);
-        }
-    }, [shouldSearch, searchTerm, refetch]);
-
+    const { data: users } = useReservedUsers(currentUser?.reservedMembers ?? []);
+    const { data: searchedUser, refetch, isLoading, isError} = useUser(searchTerm, { enabled: false });
+    const { data: usersThemes } = useUsersThemes(currentUser?.reservedMembers || []);
 
     const handleSearchInput = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(event.target.value);
@@ -90,6 +82,13 @@ const People = () => {
             console.error("Error reserving user:", error);
         }
     }
+
+    useEffect(() => {
+        if ( shouldSearch && searchTerm !== "" ) {
+            refetch();
+            setShouldSearch(false);
+        }
+    }, [shouldSearch, searchTerm, refetch]);
 
     return(
         <div className={styles.main}>

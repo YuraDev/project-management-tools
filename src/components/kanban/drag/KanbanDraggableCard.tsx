@@ -16,7 +16,7 @@ export const KanbanDraggableCard = ({ task, index, handleOnTaskClick }: Props) =
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          className="w-full"
+          className={"w-full"}
         >
           <KanbanCard task={task} handleOnTaskClick={handleOnTaskClick} />
         </div>

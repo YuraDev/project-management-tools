@@ -40,7 +40,6 @@ const LeftPanelInfoBlock = () => {
     const backgroundMode = useUserThemeStore((state) => state.backgroundMode);
     
     const { data: project } = useProject(projectId || "");
-    const { data: projectMembers } = useProjectUsers(projectId || "");
     const { data: usersThemes } = useUsersThemes(project?.assignedMembers || []);
         
     const handleAddTaskOpen = useCallback(() => {

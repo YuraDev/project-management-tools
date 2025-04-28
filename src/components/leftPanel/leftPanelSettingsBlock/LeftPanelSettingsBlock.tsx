@@ -25,6 +25,10 @@ const LeftPanelSettingsBlock = () => {
     const { projectId } = useParams();
 
     const currentUser = useUserStore((state) => state.currentUser);
+    const isAddMembersActive = useProjectControlStore((state) => state.isAddMembersActive);
+    const setIsAddMembersActive = useProjectControlStore((state) => state.setIsAddMembersActive);
+    const backgroundMode = useUserThemeStore((state) => state.backgroundMode);
+
     const { data: project } = useProject(projectId || "");
     const { data: initiallyAssignedMembers } = useReservedUsers([
         ...currentUser?.reservedMembers || [], 
@@ -41,10 +45,6 @@ const LeftPanelSettingsBlock = () => {
         status: project?.status || "planned",
     });
     const [asignedMembers, setAsignedMembers] = useState<User[]>(projectMembers || []);
-
-    const isAddMembersActive = useProjectControlStore((state) => state.isAddMembersActive);
-    const setIsAddMembersActive = useProjectControlStore((state) => state.setIsAddMembersActive);
-    const backgroundMode = useUserThemeStore((state) => state.backgroundMode);
 
     const queryClient = useQueryClient();
     const editProjectMutation = useMutation({
@@ -83,6 +83,7 @@ const LeftPanelSettingsBlock = () => {
         };
         editProjectMutation.mutate(data);
     }
+
     const handleDelete = async () => {
         if (window.confirm("Ви впевнені, що хочете видалити даний проект?")) {
             deleteProjectMutation.mutate(projectId || "");

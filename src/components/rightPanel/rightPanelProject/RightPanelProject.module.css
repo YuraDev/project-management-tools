@@ -1,31 +1,15 @@
 .main{
-    /* width: 400px; */
     width: 340px;
     height: 100%;
-    /* border-left: 2px solid #f3f4f6; */
-    /* background-color: #f3f4f6; */
     min-height: calc(100vh - 100px);
 }
 
-/* .main:first-child{
-    min-height: calc(100vh - 120px);
-
-    width: 100%;
-    height: 100%;
-    margin: 10px;
-    box-sizing: border-box;
-    flex: 1;
-} */
-
 .rightPanelChild{
-    /* height: calc(100vh - 100px - 70px - 30px - 20px - 100px); */
     height: calc(100vh - 100px - 30px - 50px - 45px);
     overflow-y: auto;
-    /* margin-top: 20px; */
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
 }
-
 .rightPanelChild::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Edge */
 }

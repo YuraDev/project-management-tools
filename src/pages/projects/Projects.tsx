@@ -10,11 +10,11 @@ const Projects = () => {
     const currentUser = useUserStore((state) => state.currentUser);
     const { data: projects, isLoading, isError } = useUserProjects(currentUser?.id || "");
 
-
     const selectedProject = useProjectControlStore((state) => state.selectedProject);
     const clearFiltersAndSorts = useProjectControlStore((state) => state.clearFiltersAndSorts);
     const setSelectedProject = useProjectControlStore((state) => state.setSelectedProject);
     const backgroundMode = useUserThemeStore((state) => state.backgroundMode);
+    const highlightMode = useUserThemeStore((state) => state.highlightMode);
 
     const handleChoseProject = (chosenProject: Project) => {
         if (chosenProject.id !== selectedProject?.id)
@@ -22,7 +22,6 @@ const Projects = () => {
         setSelectedProject(chosenProject);
     }
 
-    const highlightMode = useUserThemeStore((state) => state.highlightMode);
     const themeClassMap = {
         purple: styles.purpleBlock,
         green: styles.greenBlock,

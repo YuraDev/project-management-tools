@@ -40,29 +40,23 @@ const Personalisation = () => {
             editUserThemeMutation.mutate(data);
     }
 
-    if ( !currentUser ) return <div>No user`s data!</div>
+    if ( !currentUser ) return <h1>No user`s data!</h1>
 
     return(
         <div className={`${styles.main} ${backgroundMode === "black" ? styles.dark : styles.light}`}>
             <label>Your icon color
             <div className={styles.palleteBlock}>
-                {
-                    colorSet.map((color) => <CustomColorIcon key={color} backgroundColor={color} onClick={setIconColor} currentColor={iconColor}/> )
-                }
+                { colorSet.map((color) => <CustomColorIcon key={color} backgroundColor={color} onClick={setIconColor} currentColor={iconColor}/> ) }
             </div>
             </label>
             <label>Highlight color
             <div className={styles.palleteBlock}>
-                {
-                    colorSet.map((color) => <CustomColorIcon key={color} backgroundColor={color} onClick={setHighlightMode} currentColor={highlightMode}/> )
-                }
+                { colorSet.map((color) => <CustomColorIcon key={color} backgroundColor={color} onClick={setHighlightMode} currentColor={highlightMode}/> ) }
             </div>
             </label>
             <label>Theme color
             <div className={styles.palleteBlock}>
-                {
-                    backgrounColorSet.map((color) => <CustomColorIcon key={color} backgroundColor={color} onClick={setBackgroundMode} currentColor={backgroundMode}/> )
-                }
+                { backgrounColorSet.map((color) => <CustomColorIcon key={color} backgroundColor={color} onClick={setBackgroundMode} currentColor={backgroundMode}/> ) }
             </div>
             </label>
             <CustomButton text={"Save changes"} onClick={handleUpdateTheme} customStyles={{width: 200}}/>
