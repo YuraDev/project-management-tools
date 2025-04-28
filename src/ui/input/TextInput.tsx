@@ -1,5 +1,3 @@
-import styles from "./Input.module.css";
-
 interface TextInputProps {
     name: string, 
     value: string,
@@ -14,7 +12,7 @@ const TextInput = ({ name, value , onChange, required }: TextInputProps) => {
         onChange={(event) => onChange(event.target.value)} 
         required={required}
         type="text" 
-        className={styles.cunstomInput}
+        className="mt-1 px-2 py-1.5 rounded-lg border border-[#cbd5e1] text-sm bg-white text-black focus:outline-none"
     />
 }
 

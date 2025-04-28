@@ -1,5 +1,3 @@
-import styles from "./Input.module.css";
-
 interface FormTextInputProps {
     name: string, 
     value: string,
@@ -15,7 +13,7 @@ const FormTextInput = ({ name, value , onChange, required, placeholder}: FormTex
         onChange={onChange} 
         required={required}
         type="text" 
-        className={styles.cunstomInput}
+        className="mt-1 px-2 py-1.5 rounded-lg border border-[#cbd5e1] text-sm bg-white text-black focus:outline-none"
         placeholder={placeholder}
     />
 }

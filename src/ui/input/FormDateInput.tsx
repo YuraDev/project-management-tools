@@ -1,5 +1,3 @@
-import styles from "./Input.module.css";
-
 interface FormDateInputProps {
     name: string, 
     value: string,
@@ -14,7 +12,7 @@ const FormDateInput = ({ name, value , onChange, required = false }: FormDateInp
         onChange={onChange} 
         required={required}
         type="date" 
-        className={styles.cunstomInput}
+        className="mt-1 px-2 py-1.5 rounded-lg border border-[#cbd5e1] text-sm bg-white text-black focus:outline-none"
     />
 }
 

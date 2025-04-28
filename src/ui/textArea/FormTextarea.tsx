@@ -1,5 +1,3 @@
-import styles from "./FormTextarea.module.css";
-
 interface FormTextareaProps {
     name: string,
     value: string,
@@ -11,7 +9,7 @@ const FormTextarea = ({ name, value, onChange }: FormTextareaProps) => {
         name={name}
         value={value} 
         onChange={onChange}
-        className={styles.customTextarea}
+        className="mt-1 p-2 rounded-lg border border-slate-300 text-sm resize-vertical min-h-[80px] bg-white text-black focus:outline-none"
     />
 }
 

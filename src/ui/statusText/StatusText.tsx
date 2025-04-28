@@ -1,6 +1,5 @@
 import { ProjectStatus } from "../../types/project";
 import { TaskPriority, TaskStatus } from "../../types/task";
-import styles from "./StatusText.module.css";
 
 interface StatusTextProps {
     status: TaskStatus | ProjectStatus | TaskPriority
@@ -17,20 +16,20 @@ const statusLabels: { [key in TaskStatus | ProjectStatus | TaskPriority ]: strin
     none: "None",
 }
 const statusClasses: { [key in TaskStatus | ProjectStatus | TaskPriority]: string } = {
-    todo: styles.blue,
-    planned: styles.blue,
-    in_progress: styles.yellow,
-    completed: styles.green,
-    done: styles.green,
-    low: styles.green,
-    medium: styles.yellow,
-    high: styles.red,
-    none: styles.gray,
+    todo: "bg-[#3b82f6]",
+    planned: "bg-[#3b82f6]",
+    in_progress: "bg-[#facc15]",
+    completed: "bg-[#10b981]",
+    done: "bg-[#10b981]",
+    low: "bg-[#10b981]",
+    medium: "bg-[#facc15]",
+    high: "bg-[rgba(255,0,0,0.844)]",
+    none: "bg-[rgba(128,128,128,0.751)]",
 }
 
 const StatusText = ({ status }: StatusTextProps) => {
     return(
-        <span className={`${styles.textBlock} ${statusClasses[status]}`}>
+        <span className={`px-2 py-1 rounded-md text-white ${statusClasses[status]}`} >
             {statusLabels[status]}
         </span>
     )

@@ -1,7 +1,6 @@
 import { ProjectStatus } from "../../types/project";
 import { TaskPriority, TaskStatus } from "../../types/task";
 import { Role } from "../../types/user";
-import styles from "./FormSelect.module.css";
 
 type SelectOption = Role | ProjectStatus | TaskStatus | TaskPriority;
 
@@ -17,7 +16,7 @@ const FormSelect = <T extends SelectOption,>({ name, value, onChange, options }:
         name={name} 
         value={value} 
         onChange={onChange} 
-        className={styles.customSelect}
+        className="mt-1 px-2 py-1 h-9 rounded-lg border border-[#cbd5e1] text-sm bg-white text-black focus:outline-none"
     >
         { options.map((option) => <option value={option} key={option}>{option}</option>) }
     </select>

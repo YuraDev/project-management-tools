@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import styles from "./FormLabel.module.css";
 import { useUserThemeStore } from "../../store/userThemeStore";
 
 interface FormLabel{
@@ -9,7 +8,7 @@ interface FormLabel{
 
 const FormLabel = ({ text, children }: FormLabel) => {
     const backgroundMode = useUserThemeStore((state) => state.backgroundMode);
-    return <label className={styles.customLabel} style={{color: backgroundMode === "black" ? "white" : "#1f2937"}}>
+    return <label className="flex flex-col font-medium" style={{color: backgroundMode === "black" ? "white" : "#1f2937"}}>
         {text}
         {children}
     </label>
