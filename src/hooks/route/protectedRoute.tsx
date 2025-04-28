@@ -12,15 +12,10 @@ interface ProtectedRouteProps {
 const ProtectedRoute = ({ element, allowedRoles }: ProtectedRouteProps) => {
     const { isAuthenticated } = useAuth();
     const { role } = useUserAccess();
-  
-    if (!isAuthenticated) return <Navigate to="/login" replace />;
-
-    if (!role)
+    if (!isAuthenticated || !role) 
       return <Navigate to="/login" replace />;
-
     if (allowedRoles && (!allowedRoles.includes(role)))
       return <Navigate to="/" replace />;
-  
     return element;
 };
   

@@ -3,9 +3,8 @@ import { Task } from "../../types/task";
 
 const fetchTask = async (id: string): Promise<Task> => {
     const response = await fetch(`http://localhost:3001/tasks/${id}`);
-    if ( !response.ok ) {
+    if ( !response.ok )
         throw new Error(`HTTP Error during fetching user. Status: ${response.status}`);
-    }
     return await response.json();
 }
 

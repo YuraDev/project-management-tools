@@ -7,9 +7,10 @@ export function useDebouncedSearch(
 ) {
     useEffect(() => {
         const handler = setTimeout(() => {
-            if (value.trim() !== "") callback();
+            if (value.trim() !== "") 
+                callback();
         }, delay);
-
+        
         return () => {
             clearTimeout(handler);
         };
