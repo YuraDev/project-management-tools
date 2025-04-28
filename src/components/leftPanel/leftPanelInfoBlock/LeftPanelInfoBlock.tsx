@@ -14,7 +14,7 @@ import { useUserThemeStore } from "../../../store/userThemeStore"
 import { useUsersThemes } from "../../../hooks/usersThemes/useUserThemes"
 import { useProject } from "../../../hooks/project/useProject"
 
-const AddMemberTwo = lazy(() => import("../../../modals/AddMember/AddMemberTwo"));
+const AddMember = lazy(() => import("../../../modals/AddMember/AddMember"));
 
 const LeftPanelInfoBlock = () => {
     const { projectId } = useParams();
@@ -83,7 +83,7 @@ const LeftPanelInfoBlock = () => {
             {      
                 isAddMembersActive && (
                     <Suspense fallback={null}>
-                        <AddMemberTwo 
+                        <AddMember 
                             initiallyAssignedMembers={initiallyAsignedMembers} 
                             exitAction={() => setIsAddMembersActive(false)} 
                             selectedUsers={usersFilter} 

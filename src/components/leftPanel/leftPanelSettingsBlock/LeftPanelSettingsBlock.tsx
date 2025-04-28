@@ -15,7 +15,7 @@ import FormSelect from "../../../ui/select/FormSelect";
 import { ProjectStatus } from "../../../types/project";
 import AsignMembers from "../../asignMembers/AsignMembers";
 import CustomButton from "../../../ui/button/CustomButton";
-import AddMemberTwo from "../../../modals/AddMember/AddMemberTwo";
+import AddMember from "../../../modals/AddMember/AddMember";
 import { useReservedUsers } from "../../../hooks/users/useReservedUsers";
 import { useUsersThemes } from "../../../hooks/usersThemes/useUserThemes";
 import { useUserThemeStore } from "../../../store/userThemeStore";
@@ -116,7 +116,7 @@ const LeftPanelSettingsBlock = () => {
                 <CustomButton text={"Save changes"} onClick={() => handleEdit()} />
                 { currentUser?.role === "admin" && <CustomButton text={"Delete project"} onClick={() => handleDelete()} customStyles={{backgroundColor: "#D10000"}}/> }
             </div>
-            { isAddMembersActive && <AddMemberTwo usersThemes={usersThemes} initiallyAssignedMembers={initiallyAssignedMembers} exitAction={() => setIsAddMembersActive(false)} selectedUsers={asignedMembers} handlerFilterUser={handleAsignUserClick}/> }
+            { isAddMembersActive && <AddMember usersThemes={usersThemes} initiallyAssignedMembers={initiallyAssignedMembers} exitAction={() => setIsAddMembersActive(false)} selectedUsers={asignedMembers} handlerFilterUser={handleAsignUserClick}/> }
         </div>
     )
 }

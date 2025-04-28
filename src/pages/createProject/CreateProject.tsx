@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { useUserStore } from "../../store/userStore";
 import { useReservedUsers } from "../../hooks/users/useReservedUsers";
 import { User } from "../../types/user";
-import AddMemberTwo from "../../modals/AddMember/AddMemberTwo";
+import AddMember from "../../modals/AddMember/AddMember";
 import { useUsersThemes } from "../../hooks/usersThemes/useUserThemes";
 
 const CreateProject = () => {
@@ -88,7 +88,7 @@ const CreateProject = () => {
                 </label>
                 <FormButtonSubmit text={"Create Project"}/>
             </CustomForm>
-            { addMembersActive && <AddMemberTwo usersThemes={usersThemes} exitAction={() => setAddMembersActive(false)} selectedUsers={assignedMembers} handlerFilterUser={handlerFilterUser} initiallyAssignedMembers={initiallyAsignedMembers}/> }
+            { addMembersActive && <AddMember usersThemes={usersThemes} exitAction={() => setAddMembersActive(false)} selectedUsers={assignedMembers} handlerFilterUser={handlerFilterUser} initiallyAssignedMembers={initiallyAsignedMembers}/> }
         </FormLayout>
     )
 }

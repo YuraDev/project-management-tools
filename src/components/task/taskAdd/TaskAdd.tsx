@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from "react";
 import { Task } from "../../../types/task";
-import AddMember from "../../../modals/AddMember/AddMember";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createTask } from "../../../services/taskApi";
 import { useParams } from "react-router-dom";
@@ -13,12 +12,11 @@ import AsignMembers from "../../asignMembers/AsignMembers";
 import FormSelect from "../../../ui/select/FormSelect";
 import FormButtonSubmit from "../../../ui/button/FormButtonSubmit";
 import styles from "./TaskAdd.module.css";
-import { useTaskUsers } from "../../../hooks/task/useTaskUsers";
 import FormDateInput from "../../../ui/input/FormDateInput";
 import { useReservedUsers } from "../../../hooks/users/useReservedUsers";
 import { useUsersThemes } from "../../../hooks/usersThemes/useUserThemes";
 import { useProject } from "../../../hooks/project/useProject";
-import AddMemberTwo from "../../../modals/AddMember/AddMemberTwo";
+import AddMember from "../../../modals/AddMember/AddMember";
 import { User } from "../../../types/user";
 
 const TaskAdd = React.memo(() => {
@@ -103,8 +101,7 @@ const TaskAdd = React.memo(() => {
                 <FormDateInput name={"endDate"} value={formData.endDate || ""} onChange={handleChange}/>
             </label>
             <FormButtonSubmit text={"Save changes"} customStyles={{width: "100%", marginTop: 16}}/>
-            {/* { addMembersActive && <AddMember initiallyAssignedMembers={users} usersThemes={usersThemes} exitAction={() => setAddMembersActive(false)} assignedMembers={assignedMembers} setAssignedMembers={setAssignedMembers} /> } */}
-            { addMembersActive && <AddMemberTwo usersThemes={usersThemes || []} initiallyAssignedMembers={initiallyAsignedMembers} exitAction={() => setAddMembersActive(false)} selectedUsers={assignedMembers} handlerFilterUser={handleAsignUserClick}/> }
+            { addMembersActive && <AddMember usersThemes={usersThemes || []} initiallyAssignedMembers={initiallyAsignedMembers} exitAction={() => setAddMembersActive(false)} selectedUsers={assignedMembers} handlerFilterUser={handleAsignUserClick}/> }
             </div>
         </CustomForm>
     )

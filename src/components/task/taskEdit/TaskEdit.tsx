@@ -4,7 +4,6 @@ import { useProjectControlStore } from "../../../store/projectControlStore";
 import { Task, TaskPriority } from "../../../types/task";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteTask, updateTask } from "../../../services/taskApi";
-import { useTaskUsers } from "../../../hooks/task/useTaskUsers";
 import CustomForm from "../../../ui/form/CustomForm";
 import RightPanelHeader from "../../rightPanel/rightPanelHeader/RightPanelHeader";
 import FormTextInput from "../../../ui/input/FormTextInput";
@@ -14,9 +13,8 @@ import FormSelect from "../../../ui/select/FormSelect";
 import FormDateInput from "../../../ui/input/FormDateInput";
 import FormButtonSubmit from "../../../ui/button/FormButtonSubmit";
 import CustomButton from "../../../ui/button/CustomButton";
-import AddMember from "../../../modals/AddMember/AddMember";
 import { useUsersThemes } from "../../../hooks/usersThemes/useUserThemes";
-import AddMemberTwo from "../../../modals/AddMember/AddMemberTwo";
+import AddMember from "../../../modals/AddMember/AddMember";
 import { useReservedUsers } from "../../../hooks/users/useReservedUsers";
 import { User } from "../../../types/user";
 import { useParams } from "react-router-dom";
@@ -132,8 +130,7 @@ const TaskEdit = React.memo(() => {
             </label>
             <FormButtonSubmit text={"Save chenges"} customStyles={{height: 40}}/>
             <CustomButton text={"Delete task"} onClick={() => handleDelete()} customStyles={{backgroundColor: "#D10000", height: 40}}/> 
-            {/* { addMembersActive && <AddMember exitAction={() => setAddMembersActive(false)} assignedMembers={assignedMembers} setAssignedMembers={setAssignedMembers} /> } */}
-            { addMembersActive && <AddMemberTwo usersThemes={usersThemes || []} initiallyAssignedMembers={projectAsignedMembers} exitAction={() => setAddMembersActive(false)} selectedUsers={assignedMembers} handlerFilterUser={handleAsignUserClick}/> }
+            { addMembersActive && <AddMember usersThemes={usersThemes || []} initiallyAssignedMembers={projectAsignedMembers} exitAction={() => setAddMembersActive(false)} selectedUsers={assignedMembers} handlerFilterUser={handleAsignUserClick}/> }
             </div>
         </CustomForm>
     )
