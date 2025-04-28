@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./AuthFormLayout.module.css";
 
 interface AuthFormLayoutProps {
     handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void,
@@ -8,11 +7,17 @@ interface AuthFormLayoutProps {
 }
 
 const AuthFormLayout = ({ handleSubmit, children, customStyles }: AuthFormLayoutProps) => {
-    return <div className={styles.mainOverlay} style={customStyles}>
-        <form onSubmit={handleSubmit} className={styles.formAuth}>
-            { children }
-        </form>
-    </div>
+    return (
+        <div className="flex justify-center items-center h-screen" style={customStyles}>
+            <form 
+                onSubmit={handleSubmit} 
+                className="flex flex-col gap-4 w-[400px] p-8 border-3 border-purple-500 rounded-lg"
+            >
+                { children }
+            </form>
+        </div>
+    );
 }
+
 
 export default AuthFormLayout;

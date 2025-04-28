@@ -14,22 +14,23 @@ interface UserIconProps {
 
 const CustomUserIcon: React.FC<UserIconProps> = ({ title, icon, backgroundColor, totaly, size=36, fontSize = 18, onClick }) => {
     const highlightMode = useUserThemeStore((state) => state.highlightMode);
-    return(
+    return (
         <div className="flex items-center justify-center" title={title}>
-            <div 
-                style={{ 
-                    width: size, 
-                    height: size, 
-                    fontSize: fontSize, 
-                    backgroundColor: backgroundColor ?? highlightMode 
-                }} 
+            <div
+                style={{
+                    width: size,
+                    height: size,
+                    fontSize: fontSize,
+                    backgroundColor: backgroundColor ?? highlightMode,
+                }}
                 className={`
-                    flex items-center justify-center rounded-full font-bold capitalize cursor-pointer z-0
-                    ${totaly ? "text-[16px] bg-gray-500" : ""}
+                    flex items-center justify-center rounded-full font-bold capitalize cursor-pointer text-[16px] 
+                    bg-gray-500 text-white
                 `}
+                // ${totaly ? "text-[16px] bg-gray-500" : "text-white"}
                 onClick={() => onClick && onClick((prev) => !prev)}
             >
-                { totaly ? title : title[0] } 
+                {totaly ? title : title[0]}
             </div>
         </div>
     )

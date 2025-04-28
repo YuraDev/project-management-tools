@@ -346,7 +346,7 @@
     {
       "id": "4",
       "userId": "4",
-      "backgroundMode": "black",
+      "backgroundMode": "white",
       "highlightMode": "purple",
       "iconColor": "purple"
     },
