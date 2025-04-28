@@ -36,12 +36,8 @@ const TaskAdd = React.memo(() => {
     const setIsRightPanelActive = useProjectControlStore((state) => state.setIsRightPanelActive);
 
     const { data: project } = useProject(projectId || "");
-    // const selectedProject = useProjectControlStore((state) => state.selectedProject);
-
-    // const { data: users } = useTaskUsers(assignedMembers);
     const { data: initiallyAsignedMembers } = useReservedUsers(project?.assignedMembers || []);
     const { data: usersThemes } = useUsersThemes(project?.assignedMembers || []);
-    console.log("TaskAdd usersThemes", usersThemes, initiallyAsignedMembers);
     const queryClient = useQueryClient();
     const mutation = useMutation({
         mutationFn: createTask,

@@ -11,7 +11,6 @@ const Header = () => {
     const setHeaderModalActive = useUserStore((state) => state.setHeaderModalActive);
     const iconColor = useUserThemeStore((state) => state.iconColor);
     const backgroundMode = useUserThemeStore((state) => state.backgroundMode);
-console.log("currentUser", currentUser?.role)
     return(
         <div className={styles.main} style={{backgroundColor: backgroundMode}}>
             <nav>

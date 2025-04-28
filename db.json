@@ -309,7 +309,7 @@
       ],
       "title": "task #5",
       "description": "task #5",
-      "status": "in_progress",
+      "status": "todo",
       "startDate": "",
       "endDate": "",
       "priority": "none"
@@ -346,9 +346,9 @@
     {
       "id": "4",
       "userId": "4",
-      "backgroundMode": "white",
-      "highlightMode": "purple",
-      "iconColor": "purple"
+      "backgroundMode": "black",
+      "highlightMode": "green",
+      "iconColor": "green"
     },
     {
       "id": "3",
