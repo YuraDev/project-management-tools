@@ -346,9 +346,9 @@
     {
       "id": "4",
       "userId": "4",
-      "backgroundMode": "white",
-      "highlightMode": "purple",
-      "iconColor": "purple"
+      "backgroundMode": "black",
+      "highlightMode": "green",
+      "iconColor": "green"
     },
     {
       "id": "3",

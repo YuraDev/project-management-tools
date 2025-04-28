@@ -1,6 +1,5 @@
 import { UserMinus, UserPen, UserPlus } from "lucide-react";
 import CustomUserIcon from "../../ui/icons/CustomUserIcon";
-import styles from "./People.module.css";
 import React, { useEffect, useState } from "react";
 import { useUserStore } from "../../store/userStore";
 import { updateReservedMembers } from "../../services/userApi";
@@ -90,46 +89,48 @@ const People = () => {
         }
     }, [shouldSearch, searchTerm, refetch]);
 
-    return(
-        <div className={styles.main}>
-            <div>
+    return (
+        <div className="p-10">
+            <>
                 <input 
-                    type={"text"}
+                    type="text"
                     value={searchTerm}
-                    className={styles.searchInput}
-                    placeholder={"Add user by ID..."}
+                    className="p-2.5 px-3 border border-gray-300 rounded-lg mb-4 w-full text-lg"
+                    placeholder="Add user by ID..."
                     onChange={handleSearchInput}
                     onKeyDown={handleKeyDown}
                 />
-                {   isLoading && <h1 className={styles.searchElement}>Loading...</h1> }
-                {   isError && <h1 className={styles.searchElement}>No search results</h1> }
-                {
-                    !isLoading && !isError && searchedUser &&
-                        <div className={styles.searchElement} style={{borderColor: highlightMode}}>
-                            <CustomUserIcon title={searchedUser.name}/>
-                            <h3>{searchedUser.name}</h3>
-                            <div style={{ width: 84 }}>
-                                <UserPlus size={30} onClick={() => handleReserveUser(searchedUser.id)} style={{ justifySelf: "end" }}/>
-                            </div>
+                { isLoading && <h1 className="p-2.5 px-1 border-b border-gray-400 mb-11 flex justify-between items-center">Loading...</h1> }
+                { isError && <h1 className="p-2.5 px-1 border-b border-gray-400 mb-11 flex justify-between items-center">No search results</h1> }
+                { !isLoading && !isError && searchedUser &&
+                    <div
+                        className="p-2.5 px-1 border-b mb-11 flex justify-between items-center"
+                        style={{ borderColor: highlightMode }}
+                    >
+                        <CustomUserIcon title={searchedUser.name} />
+                        <h3>{searchedUser.name}</h3>
+                        <div style={{ width: 84 }}>
+                            <UserPlus size={30} onClick={() => handleReserveUser(searchedUser.id)} className="justify-self-end" />
                         </div>
+                    </div>
                 }
-            </div>
-            <ul className={styles.list}>
-                {
-                    users && users.map((user) => 
-                        <li key={user.id} className={styles.element}>
-                            <CustomUserIcon backgroundColor={usersThemes?.find((ut) => ut.userId === user.id)?.iconColor} title={user.name}/>
+            </>
+            <ul className="flex flex-col">
+                { users && users.map((user) => (
+                        <li key={user.id} className="my-1 py-2 px-1 flex justify-between items-center border-b border-gray-400">
+                            <CustomUserIcon backgroundColor={ usersThemes?.find((ut) => ut.userId === user.id)?.iconColor } title={user.name} />
                             <h3>{user.name}</h3>
-                            <div style={{display: "flex", gap: 24}}>
-                                { currentUser?.role === "admin" && <UserPen size={30} onClick={() => navigate(`/edit/user/${user.id}`)}/> }
-                                <UserMinus size={30} onClick={() => handleRemoveReservedUser(user.id)}/>
+                            <div className="flex gap-6">
+                                {currentUser?.role === "admin" && (
+                                    <UserPen size={30} onClick={() => navigate(`/edit/user/${user.id}`)} />
+                                )}
+                                <UserMinus size={30} onClick={() => handleRemoveReservedUser(user.id)} />
                             </div>
                         </li>
-                    )
-                }
+                    ))}
             </ul>
         </div>
-    )
+    );
 }
 
 export default People;

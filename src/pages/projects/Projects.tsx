@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom";
-import styles from "./Projects.module.css";
 import { useProjectControlStore } from "../../store/projectControlStore";
 import { Project } from "../../types/project";
 import { useUserProjects } from "../../hooks/users/useUserProjects";
@@ -23,32 +22,38 @@ const Projects = () => {
     }
 
     const themeClassMap = {
-        purple: styles.purpleBlock,
-        green: styles.greenBlock,
-        blue: styles.blueBlock,
-        orange: styles.orangeBlock,
+        purple: "hover:bg-[#f5f3ff] hover:shadow-lg",
+        green: "hover:bg-[#dcfce7] hover:shadow-lg",
+        blue: "hover:bg-[#dbeafe] hover:shadow-lg",
+        orange: "hover:bg-[#ffedd5] hover:shadow-lg",
     };
-    
+
     if (isLoading) return <div>Loading...</div>;
     if (isError) return <div>Error: Something went wrong while fetching the projects!{isError}</div>;
     if (projects?.length === 0) return <div>No projects found.</div>;
     
-    return(
-        <div className={styles.main} style={{backgroundColor: backgroundMode === "black" ? "black" : "#f9f9fb", color: "black"}}>
-            {
-                projects?.map((project) => 
-                    <NavLink to={`/projects/${project.id}`} key={project.id} onClick={() => handleChoseProject(project)}>
-                        <div className={`${styles.element} ${highlightMode && themeClassMap[highlightMode]}`}>
-                            <div>
-                                <h3>{project.title}</h3>
-                                <p>{project.description}</p>
-                            </div>
-                        </div>
-                    </NavLink>
-                )
-            }
+    return (
+        <div
+          className={`min-h-[calc(100vh-100px)] px-9 py-7 flex flex-col gap-3 ${
+            backgroundMode === "black" ? "bg-black text-white" : "bg-[#f9f9fb] text-black"
+          }`}
+        >
+          {projects?.map((project) => (
+            <NavLink to={`/projects/${project.id}`} key={project.id} onClick={() => handleChoseProject(project)}>
+              <div
+                className={`border border-[#E2E8F0] rounded-xl p-4 bg-white shadow-sm cursor-pointer transition-all ease-in-out duration-200 flex justify-between items-center ${
+                  highlightMode && themeClassMap[highlightMode]
+                }`}
+              >
+                <div>
+                  <h3 className="text-lg font-semibold text-[#1A202C] mb-1">{project.title}</h3>
+                  <p className="text-sm text-[#4A5568]">{project.description}</p>
+                </div>
+              </div>
+            </NavLink>
+          ))}
         </div>
-    )
+      );
 }
 
 export default Projects;
