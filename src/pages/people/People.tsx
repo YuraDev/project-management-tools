@@ -20,8 +20,8 @@ const People = () => {
     const currentUser = useUserStore((state) => state.currentUser);
     const setUser = useUserStore((state) => state.setLoggedInUser);
 
-    const { data: users, isLoading, isError } = useReservedUsers(currentUser?.reservedMembers ?? []);
-    const { data: searchedUser, refetch } = useUser(searchTerm, { enabled: false }); // call manually
+    const { data: users } = useReservedUsers(currentUser?.reservedMembers ?? []);
+    const { data: searchedUser, refetch, isLoading, isError} = useUser(searchTerm, { enabled: false }); // call manually
     const { data: usersThemes } = useUsersThemes(currentUser?.reservedMembers || []);
     const highlightMode = useUserThemeStore((state) => state.highlightMode);
 
@@ -91,26 +91,27 @@ const People = () => {
         }
     }
 
-    if ( isLoading ) return <h3>Loading...</h3>
-    if ( isError ) return <h3>Failed to fetch users!</h3>
-    
     return(
         <div className={styles.main}>
             <div>
                 <input 
-                    type="text"
+                    type={"text"}
                     value={searchTerm}
                     className={styles.searchInput}
-                    placeholder="Add user by ID..."
+                    placeholder={"Add user by ID..."}
                     onChange={handleSearchInput}
                     onKeyDown={handleKeyDown}
                 />
+                {   isLoading && <h1 className={styles.searchElement}>Loading...</h1> }
+                {   isError && <h1 className={styles.searchElement}>No search results</h1> }
                 {
-                    searchedUser &&
+                    !isLoading && !isError && searchedUser &&
                         <div className={styles.searchElement} style={{borderColor: highlightMode}}>
                             <CustomUserIcon title={searchedUser.name}/>
                             <h3>{searchedUser.name}</h3>
-                            <UserPlus size={30} onClick={() => handleReserveUser(searchedUser.id)}/>
+                            <div style={{ width: 84 }}>
+                                <UserPlus size={30} onClick={() => handleReserveUser(searchedUser.id)} style={{ justifySelf: "end" }}/>
+                            </div>
                         </div>
                 }
             </div>
