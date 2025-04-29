@@ -5,7 +5,6 @@ import { useUserThemeStore } from "../../store/userThemeStore";
 
 interface UserIconProps {
     title: string,
-    icon?: string,
     backgroundColor?: IconColorType,
     totaly?: boolean,
     size?: number,
@@ -13,7 +12,7 @@ interface UserIconProps {
     onClick?: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
-const CustomUserIcon: React.FC<UserIconProps> = ({ title, icon, backgroundColor, totaly, size=36, fontSize = 18, onClick }) => {
+const CustomUserIcon: React.FC<UserIconProps> = ({ title, backgroundColor, totaly, size=36, fontSize = 18, onClick }) => {
     const highlightMode = useUserThemeStore((state) => state.highlightMode);
     return(
         <div className={styles.iconWrapper} title={title}>
