@@ -6,7 +6,6 @@ import DateInput from "../../../ui/input/DateInput"
 import CustomSelect, { sortOptions } from "../../../ui/select/CustomSelect"
 import AsignMembers from "../../asignMembers/AsignMembers"
 import { useProjectControlStore } from "../../../store/projectControlStore"
-import styles from "../leftPanelProject/LeftPanelProject.module.css"
 import { useCallback } from "react"
 import { lazy, Suspense } from "react"
 import { useProjectUsers } from "../../../hooks/project/useProjectUsers"
@@ -48,52 +47,54 @@ const LeftPanelInfoBlock = () => {
         setIsRightPanelActive(true);
     }, [setIsEditTaskActive, setIsAddTaskActive, setIsRightPanelActive]);
 
-    return(
-        <div className={`${styles.leftPanelChild} ${backgroundMode === "black" ? styles.dark : styles.light}`}>
-        <CustomButton text={"Add task"} onClick={() => handleAddTaskOpen()} customStyles={{width: "100%"}}/>
-                <label>Status
-                    <div style={{display: "flex", justifyContent: "space-between", marginTop: 5}}>
-                        <CheckBoxStatus<TaskStatus> status={"todo"} checked={statusFilter.includes("todo")} setStatusFilter={setStatusFilter}/>
-                        <CheckBoxStatus<TaskStatus> status={"in_progress"} checked={statusFilter.includes("in_progress")} setStatusFilter={setStatusFilter}/>
-                        <CheckBoxStatus<TaskStatus> status={"done"} checked={statusFilter.includes("done")} setStatusFilter={setStatusFilter}/>
-                    </div>
-                </label>
-                <label>Priority
-                    <div style={{display: "flex", justifyContent: "space-between", marginTop: 5}}>
-                        <CheckBoxStatus<TaskPriority> status={"low"}  checked={priorityFilter.includes("low")} setStatusFilter={setPriorityFilter}/>
-                        <CheckBoxStatus<TaskPriority>  status={"medium"} checked={priorityFilter.includes("medium")} setStatusFilter={setPriorityFilter}/>
-                        <CheckBoxStatus<TaskPriority>  status={"high"} checked={priorityFilter.includes("high")} setStatusFilter={setPriorityFilter}/>
-                    </div>
-                </label>
-                <AsignMembers
-                    usersThemes={usersThemes || []}
-                    users={usersFilter} setAddMembersActive={setIsAddMembersActive} 
-                    uniqueText={"Select members"} maxIcons={3} iconSize={24}
-                />
-                <label>From
-                    <DateInput value={startDateFilter} onChange={setStartDateFilter} />
-                </label>
-                <label>To
-                    <DateInput value={endDateFilter} onChange={setEndDateFilterr} />
-                </label>
-                <label>Sort by
-                    <CustomSelect value={sortValue} onChange={setSortValue} options={sortOptions}/>
-                </label>
-            {      
-                isAddMembersActive && (
-                    <Suspense fallback={null}>
-                        <AddMember 
-                            initiallyAssignedMembers={initiallyAsignedMembers} 
-                            exitAction={() => setIsAddMembersActive(false)} 
-                            selectedUsers={usersFilter} 
-                            handlerFilterUser={setUserFilter}
-                            usersThemes={usersThemes}
-                        />
-                    </Suspense>
-                )
-            }
+    return (
+        <div className={`mt-5 overflow-y-auto h-[calc(100vh-100px-70px-30px-20px)] no-scrollbar ${backgroundMode === "black" ? "text-white" : "text-gray-900"}`}>
+          <CustomButton text={"Add task"} onClick={() => handleAddTaskOpen()} customStyles={{ width: "100%", marginBottom: 20}} />
+          <label className="block mb-5">Status
+            <div className="flex justify-between mt-1.5">
+              <CheckBoxStatus<TaskStatus> status={"todo"} checked={statusFilter.includes("todo")} setStatusFilter={setStatusFilter} />
+              <CheckBoxStatus<TaskStatus> status={"in_progress"} checked={statusFilter.includes("in_progress")} setStatusFilter={setStatusFilter} />
+              <CheckBoxStatus<TaskStatus> status={"done"} checked={statusFilter.includes("done")} setStatusFilter={setStatusFilter} />
+            </div>
+          </label>
+          <label className="block mb-5">Priority
+            <div className="flex justify-between mt-1.5">
+              <CheckBoxStatus<TaskPriority> status={"low"} checked={priorityFilter.includes("low")} setStatusFilter={setPriorityFilter} />
+              <CheckBoxStatus<TaskPriority> status={"medium"} checked={priorityFilter.includes("medium")} setStatusFilter={setPriorityFilter} />
+              <CheckBoxStatus<TaskPriority> status={"high"} checked={priorityFilter.includes("high")} setStatusFilter={setPriorityFilter} />
+            </div>
+          </label>
+          <AsignMembers
+            usersThemes={usersThemes || []}
+            users={usersFilter}
+            setAddMembersActive={setIsAddMembersActive}
+            uniqueText={"Select members"}
+            maxIcons={3}
+            iconSize={24}
+          />
+          <label className="block mb-5">From
+            <DateInput value={startDateFilter} onChange={setStartDateFilter} />
+          </label>
+          <label className="block mb-5">To
+            <DateInput value={endDateFilter} onChange={setEndDateFilterr} />
+          </label>
+          <label className="block">Sort by
+            <CustomSelect value={sortValue} onChange={setSortValue} options={sortOptions} />
+          </label>
+          {isAddMembersActive && (
+            <Suspense fallback={null}>
+              <AddMember
+                initiallyAssignedMembers={initiallyAsignedMembers}
+                exitAction={() => setIsAddMembersActive(false)}
+                selectedUsers={usersFilter}
+                handlerFilterUser={setUserFilter}
+                usersThemes={usersThemes}
+              />
+            </Suspense>
+          )}
         </div>
-    )
+      );
+      
 }
 
 export default LeftPanelInfoBlock;

@@ -1,5 +1,4 @@
 import { memo } from "react";
-import styles from "./RightPanelProject.module.css";
 import { useProjectControlStore } from "../../../store/projectControlStore";
 import TaskAdd from "../../task/taskAdd/TaskAdd";
 import TaskEdit from "../../task/taskEdit/TaskEdit";
@@ -12,19 +11,18 @@ const RightPanelProject = memo(() => {
     const isAddTaskActive = useProjectControlStore((state) => state.isAddTaskActive);
     const backgroundMode = useUserThemeStore((state) => state.backgroundMode);
 
-    return(
-        <div className={styles.main} style={{backgroundColor: backgroundMode === "black" ? "black" : "#f3f4f6"}}>
-            {
-                isAddTaskActive 
-                    ? <TaskAdd/>
-                    : selectedTask && (
-                        isEditTaskActive
-                            ? <TaskEdit/>
-                            : <TaskDetails/>
-                    )
-            }
+    return (
+        <div
+          className="w-[340px] h-full min-h-[calc(100vh-100px)]"
+          style={{ backgroundColor: backgroundMode === "black" ? "black" : "#f3f4f6" }}
+        >
+          {isAddTaskActive 
+          ? <TaskAdd /> 
+          : selectedTask &&
+            (isEditTaskActive ? <TaskEdit /> : <TaskDetails />)
+          }
         </div>
-    )
+      );
 })
 
 export default RightPanelProject;

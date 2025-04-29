@@ -11,7 +11,6 @@ import { useProjectControlStore } from "../../../store/projectControlStore";
 import AsignMembers from "../../asignMembers/AsignMembers";
 import FormSelect from "../../../ui/select/FormSelect";
 import FormButtonSubmit from "../../../ui/button/FormButtonSubmit";
-import styles from "./TaskAdd.module.css";
 import FormDateInput from "../../../ui/input/FormDateInput";
 import { useReservedUsers } from "../../../hooks/users/useReservedUsers";
 import { useUsersThemes } from "../../../hooks/usersThemes/useUserThemes";
@@ -75,29 +74,31 @@ const TaskAdd = React.memo(() => {
 
     return(
         <CustomForm onSubmit={handleSubmit} customStyles={{ margin: 15, height: "calc(100vh - 130px)" }}>
-            <RightPanelHeader taskTitle={"Add task"} setIsRightPanelActive={setIsRightPanelActive}/>
-            <div className={styles.rightPanelChild}>
-            <label>Title
-                <FormTextInput name="title"  value={formData.title} onChange={handleChange} required />
-            </label>
-            <label>Description:
-                <FormTextarea name="description" value={formData.description} onChange={handleChange}/>
-            </label>
-            <AsignMembers usersThemes={usersThemes || []} users={assignedMembers} setAddMembersActive={setAddMembersActive} maxIcons={1} />
-            <label>Status:
-                <FormSelect name="status" value={formData.status} onChange={handleChange} options={["todo", "in_progress", "done"]}/>
-            </label>
-            <label>Priority:
-                <FormSelect name="priority" value={formData.priority} onChange={handleChange} options={["low", "medium", "high", "none"]}/>
-            </label>
-            <label>Start date:
-                <FormDateInput name={"startDate"} value={formData.startDate || ""} onChange={handleChange}/>
-            </label>
-            <label>End date:
-                <FormDateInput name={"endDate"} value={formData.endDate || ""} onChange={handleChange}/>
-            </label>
-            <FormButtonSubmit text={"Save changes"} customStyles={{width: "100%", marginTop: 16}}/>
-            { addMembersActive && <AddMember usersThemes={usersThemes || []} initiallyAssignedMembers={initiallyAsignedMembers} exitAction={() => setAddMembersActive(false)} selectedUsers={assignedMembers} handlerFilterUser={handleAsignUserClick}/> }
+            <RightPanelHeader taskTitle={"Add task"} setIsRightPanelActive={setIsRightPanelActive} />
+            <div className="h-[calc(100vh-100px-30px-50px-45px)] overflow-y-auto pt-2 flex flex-col gap-2">
+                <label>Title
+                    <FormTextInput name="title" value={formData.title} onChange={handleChange} required />
+                </label>
+                <label>Description:
+                    <FormTextarea name="description" value={formData.description} onChange={handleChange} />
+                </label>
+                <AsignMembers usersThemes={usersThemes || []} users={assignedMembers} setAddMembersActive={setAddMembersActive} maxIcons={1} />
+                <label>Status:
+                    <FormSelect name="status" value={formData.status} onChange={handleChange} options={["todo", "in_progress", "done"]} />
+                </label>
+                <label>Priority:
+                    <FormSelect name="priority" value={formData.priority} onChange={handleChange} options={["low", "medium", "high", "none"]} />
+                </label>
+                <label>Start date:
+                    <FormDateInput name="startDate" value={formData.startDate || ""} onChange={handleChange} />
+                </label>
+                <label>End date:
+                    <FormDateInput name="endDate" value={formData.endDate || ""} onChange={handleChange} />
+                </label>
+                <FormButtonSubmit text={"Save changes"} />
+                {addMembersActive &&
+                <AddMember usersThemes={usersThemes || []} initiallyAssignedMembers={initiallyAsignedMembers} exitAction={() => setAddMembersActive(false)} selectedUsers={assignedMembers} handlerFilterUser={handleAsignUserClick} />
+                }
             </div>
         </CustomForm>
     )

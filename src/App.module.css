@@ -13,3 +13,10 @@ header{
 main{
     width: 100%;
 }
+
+label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 500;
+    color: #1f2937;
+}

@@ -103,8 +103,8 @@ const TaskEdit = React.memo(() => {
     return(
         <CustomForm onSubmit={handleSubmitEdit} customStyles={{ margin: 15, minHeight: "calc(100vh - 130px)", gap: 0, backgroundColor: backgroundMode }}>
             <RightPanelHeader taskTitle={selectedTask?.title || ""} setIsEditTaskActive={setIsEditTaskActive} setIsRightPanelActive={setIsRightPanelActive}/>
-            <div className={styles.rightPanelChildEdit}>
-                <label>Title
+            <div className="h-[calc(100vh-100px-30px-50px-45px)] overflow-y-auto pt-[10px] scrollbar-none flex flex-col gap-[10px]">
+            <label>Title
                     <FormTextInput name={"title"} value={formData.title} onChange={handleChange} required/>
                 </label>
                 <label>Description:
