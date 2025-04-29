@@ -66,7 +66,7 @@ const HeaderModalAccout = () => {
             </div>
             {currentUser?.role === "admin" && (
               <div
-                className={`w-[240px] cursor-pointer flex justify-between items-center p-[12px_8px] rounded-[8px] text-black ${themeClassMap[highlightMode ?? "purple"]}`}
+                className={`w-[240px] cursor-pointer flex justify-between items-center p-[12px_8px] rounded-[8px] ${backgroundMode === "black" ? "text-white hover:text-black" : "text-black"} ${themeClassMap[highlightMode ?? "purple"]}`}
                 onClick={handleClickAccount}
               >
                 <h2 className="text-[18px]">Account</h2>
@@ -74,14 +74,14 @@ const HeaderModalAccout = () => {
               </div>
             )}
             <div
-              className={`w-[240px] cursor-pointer flex justify-between items-center p-[12px_8px] rounded-[8px] text-black ${themeClassMap[highlightMode ?? "purple"]}`}
+              className={`w-[240px] cursor-pointer flex justify-between items-center p-[12px_8px] rounded-[8px] ${backgroundMode === "black" ? "text-white hover:text-black" : "text-black"} ${themeClassMap[highlightMode ?? "purple"]}`}
               onClick={handleClickPesonalisation}
             >
               <h2 className="text-[18px]">Personalisation</h2>
               <Paintbrush size={20} />
             </div>
             <div
-              className={`w-[240px] cursor-pointer flex justify-between items-center p-[12px_8px] rounded-[8px] text-black ${themeClassMap[highlightMode ?? "purple"]}`}
+              className={`w-[240px] cursor-pointer flex justify-between items-center p-[12px_8px] rounded-[8px] ${backgroundMode === "black" ? "text-white hover:text-black" : "text-black"} ${themeClassMap[highlightMode ?? "purple"]}`}
               onClick={handleLogout}
             >
               <h2 className="text-[18px]">Logout</h2>

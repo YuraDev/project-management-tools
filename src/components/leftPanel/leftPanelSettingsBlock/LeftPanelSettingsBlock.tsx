@@ -18,6 +18,7 @@ import AddMember from "../../../modals/AddMember/AddMember";
 import { useReservedUsers } from "../../../hooks/users/useReservedUsers";
 import { useUsersThemes } from "../../../hooks/usersThemes/useUserThemes";
 import { useUserThemeStore } from "../../../store/userThemeStore";
+import "../../../styles/ScrollNoVisible.css";
 
 const LeftPanelSettingsBlock = () => {
     const navigate = useNavigate();
@@ -91,37 +92,38 @@ const LeftPanelSettingsBlock = () => {
     }
 
     return (
-        <div className={`mt-5 h-[calc(100vh-100px-70px-30px-20px)] overflow-y-auto no-scrollbar ${backgroundMode === "black" ? "text-white" : "text-gray-900"}`}>
-            <label className="block mb-5">ID:
-                <div className="mt-1 px-2 py-2 rounded-md border border-slate-300 text-sm bg-gray-100 text-gray-600">{project?.id}</div>
-            </label>
-            <label className="block mb-5">Name:
-                <FormTextInput name="title" value={formData.title} onChange={handleChange} placeholder="title"/>
-            </label>
-            <label className="block mb-5">Description:
-                <FormTextarea name="description" value={formData.description} onChange={handleChange}/>
-            </label>
-            <label className="block mb-5">Start date:
-                <FormDateInput name="startDate" value={formData.startDate} onChange={handleChange}/>
-            </label>
-            <label className="block mb-5">End date:
-                <FormDateInput name="endDate" value={formData.endDate} onChange={handleChange}/>
-            </label>
-            <label className="block mb-5">Status:
-                <FormSelect<ProjectStatus> name="status" value={formData.status} onChange={handleChange} options={["planned", "in_progress", "completed"]}/>
-            </label>
-            <AsignMembers usersThemes={usersThemes || []} users={asignedMembers} setAddMembersActive={setIsAddMembersActive} maxIcons={2} />
-            <div className="mt-[30px] flex flex-col items-center gap-5 w-full">
-                <CustomButton text="Save changes" onClick={() => handleEdit()} customStyles={{ width: "100%" }}/>
-                {currentUser?.role === "admin" &&
-                <CustomButton text="Delete project" onClick={() => handleDelete()} customStyles={{ width: "100%", backgroundColor: "#D10000" }} />
-                }
-            </div>
-            {isAddMembersActive &&
-            <AddMember usersThemes={usersThemes} initiallyAssignedMembers={initiallyAssignedMembers} exitAction={() => setIsAddMembersActive(false)} selectedUsers={asignedMembers} handlerFilterUser={handleAsignUserClick} />
+        <div className={`scrollNoVisible sc mt-5 h-[calc(100vh-100px-70px-30px-20px)] overflow-y-auto no-scrollbar ${backgroundMode === "black" ? "text-white" : "text-gray-900"}`}>
+          <label className="block mb-5">ID:
+            <div className="mt-1 px-2 py-2 rounded-md border border-slate-300 text-sm bg-gray-100 text-gray-600">{project?.id}</div>
+          </label>
+          <label className="block mb-5">Name:
+            <FormTextInput name="title" value={formData.title} onChange={handleChange} placeholder="title"/>
+          </label>
+          <label className="block mb-5">Description:
+            <FormTextarea name="description" value={formData.description} onChange={handleChange}/>
+          </label>
+          <label className="block mb-5">Start date:
+            <FormDateInput name="startDate" value={formData.startDate} onChange={handleChange}/>
+          </label>
+          <label className="block mb-5">End date:
+            <FormDateInput name="endDate" value={formData.endDate} onChange={handleChange}/>
+          </label>
+          <label className="block mb-5">Status:
+            <FormSelect<ProjectStatus> name="status" value={formData.status} onChange={handleChange} options={["planned", "in_progress", "completed"]}/>
+          </label>
+          <AsignMembers usersThemes={usersThemes || []} users={asignedMembers} setAddMembersActive={setIsAddMembersActive} maxIcons={2} />
+          <div className="mt-[30px] flex flex-col items-center gap-5 w-full">
+            <CustomButton text="Save changes" onClick={() => handleEdit()} customStyles={{ width: "100%" }}/>
+            {currentUser?.role === "admin" &&
+            <CustomButton text="Delete project" onClick={() => handleDelete()} customStyles={{ width: "100%", backgroundColor: "#D10000" }} />
             }
+          </div>
+          {isAddMembersActive &&
+          <AddMember usersThemes={usersThemes} initiallyAssignedMembers={initiallyAssignedMembers} exitAction={() => setIsAddMembersActive(false)} selectedUsers={asignedMembers} handlerFilterUser={handleAsignUserClick} />
+          }
         </div>
       );
+      
 }
 
 export default LeftPanelSettingsBlock;

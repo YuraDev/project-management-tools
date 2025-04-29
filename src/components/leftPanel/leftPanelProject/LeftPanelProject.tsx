@@ -28,7 +28,6 @@ const LeftPanelProject = () => {
               </div>
             )}
           </div>
-      
           <Suspense>
             {isProjectSettingsActive ? <LeftPanelSettings /> : <LeftPanelInfoBlock />}
           </Suspense>

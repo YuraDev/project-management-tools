@@ -24,44 +24,28 @@ const AsignMembers = React.memo(({ users, setAddMembersActive, maxIcons, iconSiz
     };
 
     return (
-        <div
-            className="
-                grid 
-                [grid-template-areas:'label_label''button_icons'] 
-                auto-rows-auto 
-                items-center 
-                gap-y-0
-            "
-        >
+        <div className="grid [grid-template-areas:'label_label''button_icons'] auto-rows-auto items-center gap-y-0">
             <label className="w-full [grid-area:label]">Assigned Members:</label>
-
             <div className="[grid-area:button]">
                 <button
                     type="button"
                     onClick={() => setAddMembersActive(true)}
-                    className={`
-                        mt-[4px] 
-                        px-[20px] 
-                        py-[6px] 
-                        rounded 
-                        cursor-pointer 
-                        text-[14px] 
+                    className={`mt-[4px] px-[20px] py-[6px] rounded cursor-pointer text-[14px] 
                         ${highlightMode ? themeClassMap[highlightMode] : ""}
                     `}
                 >
                     {uniqueText ? uniqueText : "＋ Add Member"}
                 </button>
             </div>
-
             {users && (
-                <div className="[grid-area:icons]">
-                    <UserIconCollection
-                        usersThemes={usersThemes}
-                        users={users}
-                        maxIcons={maxIcons}
-                        size={iconSize}
-                    />
-                </div>
+            <div className="[grid-area:icons]">
+                <UserIconCollection
+                    usersThemes={usersThemes}
+                    users={users}
+                    maxIcons={maxIcons}
+                    size={iconSize}
+                />
+            </div>
             )}
         </div>
     );

@@ -40,6 +40,7 @@ const Personalisation = () => {
             editUserThemeMutation.mutate(data);
     }
 
+    
     if ( !currentUser ) return <h1>No user`s data!</h1>
 
     return (
@@ -80,11 +81,7 @@ const Personalisation = () => {
                     ))}
                 </div>
             </FormLabel>
-            <CustomButton
-                text={"Save changes"}
-                onClick={handleUpdateTheme}
-                customStyles={{ width: 200 }}
-            />
+            <CustomButton text={"Save changes"} onClick={handleUpdateTheme} customStyles={{ width: 200 }} />
         </div>
       );
       
