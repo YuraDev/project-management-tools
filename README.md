@@ -52,3 +52,62 @@ export default tseslint.config({
   },
 })
 ```
+
+
+
+
+## 🚀 Project Launch Instructions
+
+1. Clone the Repository
+Open your terminal and run:
+```bash
+git clone https://github.com/YuraDev/project-management-tools.git
+```
+
+2. Navigate to the Project Directory
+```bash
+cd project-management-tools
+```
+
+3. Install Dependencies
+```bash
+npm install
+```
+
+💡 Note: If Node.js is not installed, check your version with:
+```bash
+node -v
+```
+💡...and install it from https://nodejs.org/
+
+4. (Optional) Switch to the Tailwind Branch
+If you want to use the version with Tailwind CSS:
+```bash
+git checkout feature/tailwind-implementation
+```
+
+5. Start the Frontend
+In the root of the project, run:
+```bash
+npm run dev
+```
+
+6. Start the Backend (Mock Server)
+In a new terminal window (also at the project root), run:
+```bash
+npx json-server --watch db.json --port 3001
+```
+
+7. Open the App in Your Browser
+http://localhost:5173/
+
+8. Login Credentials
+Use one of the following login options:
+
+| Role    | Username | Password |
+|---------|----------|----------|
+| Admin   | admin    | password |
+| Manager | yurii    | 1111     |
+| Member  | member   | password |
+
+You can also register with your own credentials, but your role will be set to **member**.
