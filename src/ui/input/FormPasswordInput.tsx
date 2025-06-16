@@ -20,11 +20,11 @@ const FormPasswordInput = ({ name, value , onChange, required, placeholder, show
             placeholder={placeholder}
             required={required}
             type={showPassword ? "text" : "password"}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm pr-10"
+            className="w-full mt-1 px-2 py-1.5 rounded-lg border border-[#cbd5e1] text-sm bg-white text-black focus:outline-none pr-10"
         />
         <button
             onClick={() => setShowPassword((prev) => !prev)}
-            className="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-gray-700"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
         >
             {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
         </button>

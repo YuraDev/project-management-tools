@@ -81,8 +81,10 @@ const EditUser = () => {
     return (
         <div className="flex justify-center mt-12 h-[calc(100%-100px)]">
             <form 
-                className={`flex flex-col gap-5 w-[600px] p-8 rounded-lg border-3 ${highlightMode ? "border-purple-500" : ""} 
-                            ${backgroundMode === "black" ? "bg-gray-800" : "bg-white"}`}
+                className={`flex flex-col gap-5 w-[600px] p-8 rounded-lg border-3 
+                    ${backgroundMode === "black" ? "bg-gray-800" : "bg-white"}
+                `}
+                style={{ borderColor: highlightMode || "purple" }}
             >
                 <div className="flex items-center gap-5">
                     <CustomUserIcon title={user?.name || ""} size={54} fontSize={28} />
@@ -102,6 +104,7 @@ const EditUser = () => {
                         Role
                         <FormSelect<Role> name="role" value={formData.role} onChange={handleChange} options={["member", "manager", "admin"]} />
                     </label>
+                    <br/>
                     <label>
                         Name:
                         <FormTextInput name="name" value={formData.name} onChange={handleChange} placeholder="name" />
@@ -121,8 +124,8 @@ const EditUser = () => {
                 </div>
     
                 <div className="mt-5 flex flex-col items-center gap-5">
-                    <CustomButton text="Save changes" onClick={() => handleEdit()} />
-                    <CustomButton text="Delete user" onClick={() => handleDelete()} customStyles={{ backgroundColor: "#D10000" }} />
+                    <CustomButton text="Save changes" onClick={() => handleEdit()} customStyles={{ width: "200px" }}/>
+                    <CustomButton text="Delete user" onClick={() => handleDelete()} customStyles={{ width: "200px", backgroundColor: "#D10000" }} />
                 </div>
             </form>
         </div>
